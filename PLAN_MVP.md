@@ -39,7 +39,7 @@ Android Studio/SDK, sincronización, compilación, arranque base en un teléfono
 
 - [x] Instalar Android Studio y Android SDK 36. Aceptación: el IDE abre el proyecto y localiza el SDK.
 - [x] Sincronizar Gradle y compilar la base. Aceptación: build de depuración completado e instalado al ejecutar app.
-- [x] Ejecutar en teléfono real (Moto G35). Aceptación: app base abierta sin cierre inesperado, según confirmación del estudiante el 14-10-2026. Captura y versión Android no registradas.
+- [x] Ejecutar en teléfono real (Moto G35). Aceptación: app base abierta sin cierre inesperado, según confirmación del estudiante el 14-10-2026. Captura guardada en [docs/evidencia_hito0_moto_g35.png](docs/evidencia_hito0_moto_g35.png); la versión Android sigue sin registrarse.
 - [x] Configurar autor Git y registrar el commit del hito. Aceptación: aparece en git log con la identidad GitHub configurada.
 - [x] Crear/publicar repositorio GitHub. Aceptación: el estudiante comprueba el código en el enlace real.
 
@@ -107,7 +107,7 @@ Ver [PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md). P1–P7 están PENDIENTES
 
 ## 7. Riesgos y decisiones pendientes
 
-- Falta registrar captura y versión Android del primer arranque en Moto G35. El arranque base fue confirmado verbalmente por el estudiante.
+- La captura del primer arranque en Moto G35 está en `docs/evidencia_hito0_moto_g35.png`; falta registrar la versión Android. La imagen documenta solo la bienvenida del Hito 0.
 - Falta revisión docente: detención antes de Hito 3.
 - Red con aislamiento de clientes: comprobar router propio/hotspot durante P1.
 - TCP puede tardar en detectar un corte silencioso: al implementar debe resolverse detección en ambos extremos sin dejar DISPENSANDO ni alterar el protocolo sin consulta.

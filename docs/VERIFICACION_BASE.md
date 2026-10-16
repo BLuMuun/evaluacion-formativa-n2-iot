@@ -8,7 +8,7 @@ Actualizado: 16 de octubre de 2026 (hora de Santiago).
 
 El intento inicial de `:app:assembleDebug` terminó con error al no encontrar el Android SDK. Después de instalar/configurar Android Studio y elegir el JDK 21, Android Studio mostró «Gradle build finished in 6 s 303 ms». El estudiante seleccionó su Moto G35 y confirmó que la app abrió en ese teléfono. Esto confirma que el IDE pudo compilar, instalar y abrir la app base en dicho dispositivo.
 
-La confirmación del estudiante no incluye captura de pantalla ni versión Android, por lo que no se inventan esos datos. La prueba se limita al arranque de la bienvenida base; no verifica conexión entre teléfonos ni funciones IoT.
+Se adjunta [captura del arranque en el Moto G35](evidencia_hito0_moto_g35.png). La imagen muestra la bienvenida base y el aviso de que la revisión docente sigue pendiente; sirve como evidencia visual de que la app abrió, pero no verifica conexión entre teléfonos ni funciones IoT. La versión de Android no quedó registrada.
 
 El error inicial fue:
 
@@ -52,7 +52,7 @@ El repositorio remoto privado `BLuMuun/evaluacion-formativa-n2-iot` contiene los
 
 ## Verificaciones que NO se realizaron
 
-- Captura de pantalla y versión Android del primer arranque en Moto G35.
+- Versión Android del Moto G35; no quedó visible ni registrada en la evidencia.
 - Repetición del arranque base en un segundo teléfono.
 - Revisión/aprobación del profesor de Hitos 1 y 2.
 - P1–P7, pruebas de ventana fija o pruebas de criptografía.

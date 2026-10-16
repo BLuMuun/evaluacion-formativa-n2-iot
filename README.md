@@ -4,7 +4,7 @@
 
 La app actual solo muestra una bienvenida en Kotlin + Compose + Material 3. Hitos 3 y 4 **no implementados**, por instrucción del estudiante de respetar la revisión docente previa. No hay login, Firebase, base de datos, historial, MQTT, HiveMQ ni FCM. Las funcionalidades descritas a continuación son el diseño para la Formativa, no capacidades ya verificadas. Según la guía, Hitos 0–4 forman parte de la Formativa; este repositorio se prepara para revisión de Hitos 1 y 2 y no es todavía el prototipo funcional final.
 
-No se declara completa la Formativa. El Hito 0 fue verificado parcialmente: la app base compiló y abrió en el Moto G35, según confirmó el estudiante. Falta registrar captura y versión Android; P1–P7 y revisión docente siguen pendientes. Ver [verificación de la base](docs/VERIFICACION_BASE.md).
+No se declara completa la Formativa. El Hito 0 fue verificado parcialmente: la app base compiló y abrió en el Moto G35, según confirmó el estudiante. La captura de la bienvenida en Moto G35 está en [docs/evidencia_hito0_moto_g35.png](docs/evidencia_hito0_moto_g35.png); la versión Android no quedó registrada. P1–P7 y revisión docente siguen pendientes. Ver [verificación de la base](docs/VERIFICACION_BASE.md).
 
 ## Problemática
 
