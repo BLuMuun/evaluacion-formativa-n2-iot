@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Comedero IoT</string>
+    <string name="base_title">Comedero IoT</string>
+    <string name="base_subtitle">Unidad 2 · Formativa</string>
+    <string name="base_description">Proyecto Android base — Hito 0</string>
+    <string name="base_pending">Revisión docente pendiente. Las pantallas de conexión, Nodo y Panel se implementarán después de la aprobación.</string>
+</resources>
