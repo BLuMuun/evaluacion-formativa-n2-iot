@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="860" viewBox="0 0 1200 860" role="img" aria-labelledby="title desc">
+  <title id="title">Comedero IoT — mockup de tres pantallas</title>
+  <desc id="desc">Diseño pendiente de revisión docente. Conexión con alternativas Nodo y Panel, Nodo con simulación de rasguños y Panel con control de comida. No son pantallas implementadas.</desc>
+  <style>
+    text { font-family: Arial, sans-serif; fill: #263a32; }
+    .title { font-size: 23px; font-weight: 700; }
+    .label { font-size: 16px; }
+    .small { font-size: 13px; fill: #56685f; }
+    .button { font-size: 14px; font-weight: 700; fill: #fff; }
+    .outline { font-size: 14px; font-weight: 700; fill: #356a57; }
+    .big { font-size: 58px; font-weight: 700; }
+  </style>
+  <rect width="1200" height="860" fill="#edf2ee"/>
+  <text x="40" y="44" class="title">Comedero IoT · Unidad 2 Formativa</text>
+  <text x="40" y="72" class="label">Hito 2 · Diseño preparado · Revisión docente PENDIENTE · Sin implementar</text>
+
+  <rect x="40" y="106" width="352" height="668" rx="28" fill="#fcfdf9" stroke="#c3d0c7"/>
+  <text x="64" y="148" class="title">Conexión</text>
+  <text x="64" y="177" class="label">Comedero IoT</text>
+  <text x="64" y="212" class="small">ROL</text>
+  <rect x="64" y="225" width="146" height="43" rx="21" fill="#356a57"/>
+  <text x="117" y="252" class="button">Nodo</text>
+  <rect x="220" y="225" width="148" height="43" rx="21" fill="#e3ece5"/>
+  <text x="270" y="252" class="outline">Panel</text>
+  <text x="64" y="303" class="label">Medio: Wi-Fi</text>
+  <text x="64" y="339" class="small">CÓDIGO DE VINCULACIÓN · 6 DÍGITOS</text>
+  <rect x="64" y="351" width="304" height="48" rx="8" fill="none" stroke="#7c9084"/>
+  <text x="83" y="383" class="title" letter-spacing="10">______</text>
+  <text x="64" y="433" class="small">SI ELIGES NODO</text>
+  <text x="64" y="458" class="label">IP de este teléfono:</text>
+  <text x="64" y="481" class="label">xxx.xxx.xxx.xxx</text>
+  <rect x="64" y="498" width="304" height="44" rx="22" fill="#356a57"/>
+  <text x="159" y="526" class="button">INICIAR NODO</text>
+  <line x1="64" y1="562" x2="368" y2="562" stroke="#c3d0c7"/>
+  <text x="64" y="588" class="small">ALTERNATIVA: SI ELIGES PANEL</text>
+  <rect x="64" y="602" width="304" height="46" rx="8" fill="none" stroke="#7c9084"/>
+  <text x="80" y="631" class="label">IP del Nodo</text>
+  <rect x="64" y="663" width="304" height="44" rx="22" fill="#356a57"/>
+  <text x="175" y="691" class="button">CONECTAR</text>
+  <text x="64" y="739" class="small">Solo se muestra el bloque del rol elegido.</text>
+
+  <rect x="424" y="106" width="352" height="668" rx="28" fill="#fcfdf9" stroke="#c3d0c7"/>
+  <text x="448" y="148" class="title">Nodo IoT</text>
+  <rect x="448" y="174" width="304" height="39" rx="19" fill="#dcefe1"/>
+  <text x="466" y="199" class="label">Enlace: CONECTADO</text>
+  <text x="448" y="267" class="label">Rasguños</text>
+  <text x="532" y="346" class="big">2 / 3</text>
+  <rect x="448" y="382" width="304" height="50" rx="25" fill="#356a57"/>
+  <text x="523" y="413" class="button">SIMULAR RASGUÑO</text>
+  <text x="448" y="483" class="small">COMEDERO</text>
+  <text x="448" y="519" class="title">CERRADO</text>
+  <text x="448" y="568" class="small">3 en 5 s → solicitud pendiente.</text>
+  <text x="448" y="590" class="small">Esperar la decisión del Panel.</text>
+  <rect x="448" y="686" width="304" height="48" rx="24" fill="none" stroke="#356a57"/>
+  <text x="548" y="716" class="outline">DESCONECTAR</text>
+
+  <rect x="808" y="106" width="352" height="668" rx="28" fill="#fcfdf9" stroke="#c3d0c7"/>
+  <text x="832" y="148" class="title">Panel de control</text>
+  <rect x="832" y="174" width="304" height="39" rx="19" fill="#dcefe1"/>
+  <text x="850" y="199" class="label">Enlace: CONECTADO</text>
+  <text x="832" y="267" class="label">Rasguños</text>
+  <text x="916" y="346" class="big">2 / 3</text>
+  <text x="832" y="395" class="small">COMEDERO</text>
+  <text x="832" y="431" class="title">CERRADO</text>
+  <rect x="832" y="468" width="304" height="50" rx="25" fill="#356a57"/>
+  <text x="907" y="499" class="button">DISPENSAR COMIDA</text>
+  <text x="832" y="568" class="small">ÚLTIMA ENTREGA</text>
+  <text x="832" y="607" class="title">—</text>
+  <rect x="832" y="686" width="304" height="48" rx="24" fill="none" stroke="#356a57"/>
+  <text x="932" y="716" class="outline">DESCONECTAR</text>
+
+  <text x="40" y="814" class="label">Conexión → rol elegido · Desconectar → Conexión · Sin login, historial ni hardware real</text>
+  <text x="40" y="839" class="small">Los valores mostrados son ejemplos de diseño; no constituyen resultados de pruebas.</text>
+</svg>
