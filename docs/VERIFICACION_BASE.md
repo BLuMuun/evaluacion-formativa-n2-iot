@@ -1,61 +1,52 @@
-# Verificación del proyecto base — Hito 0
+# Verificación de la app — Hitos 0–4
 
-Actualizado: 16 de octubre de 2026 (hora de Santiago).
+Actualizado: 18 de octubre de 2026 (hora de Santiago).
 
-## Resultado de compilación
+## Hito 0: antecedente confirmado por el estudiante
 
-**Compilación y arranque base confirmados parcialmente en un teléfono físico.**
+Android Studio compiló, instaló y abrió la bienvenida inicial en el Moto G35. La [captura del Hito 0](evidencia_hito0_moto_g35.png) muestra solo esa versión base; no demuestra las funciones IoT actuales. No se registró la versión Android del teléfono.
 
-El intento inicial de `:app:assembleDebug` terminó con error al no encontrar el Android SDK. Después de instalar/configurar Android Studio y elegir el JDK 21, Android Studio mostró «Gradle build finished in 6 s 303 ms». El estudiante seleccionó su Moto G35 y confirmó que la app abrió en ese teléfono. Esto confirma que el IDE pudo compilar, instalar y abrir la app base en dicho dispositivo.
+La primera compilación local falló porque no encontraba el SDK; el estudiante instaló Android Studio/SDK y posteriormente confirmó el arranque base. En la configuración de Gradle del IDE se usó JDK 21; la versión `java` de PATH corresponde a Java 8 y no se debe utilizar para este proyecto.
 
-Se adjunta [captura del arranque en el Moto G35](evidencia_hito0_moto_g35.png). La imagen muestra la bienvenida base y el aviso de que la revisión docente sigue pendiente; sirve como evidencia visual de que la app abrió, pero no verifica conexión entre teléfonos ni funciones IoT. La versión de Android no quedó registrada.
+## Hitos 3–4: validación de la implementación actual
 
-El error inicial fue:
+La primera compilación automatizada detectó que `androidx.core:core-ktx:1.19.1` requiere compileSdk 37 y AGP 9.1. Se fijó Core 1.17.0 para conservar compileSdk 36 y AGP 8.13.2, según las notas oficiales de AndroidX Core: https://developer.android.com/jetpack/androidx/releases/core.
 
-```text
-Could not determine the dependencies of task ':app:compileDebugJavaWithJavac'.
-> SDK location not found. Define a valid SDK location with an ANDROID_HOME
-  environment variable or by setting the sdk.dir path in your project's
-  local properties file.
-BUILD FAILED in 45s
+El siguiente intento hizo que Gradle agotara la memoria nativa en un equipo con 3 GB de RAM, configurado inicialmente con heap de 2 GB. Se bajó Gradle a 1 GB, dos trabajadores y compilador Kotlin en proceso para adaptarse a la memoria disponible. Después de corregir imports de `SecretKey` y `KeyboardOptions`, la construcción y las pruebas terminaron correctamente.
+
+Comando final:
+
+```powershell
+.\gradlew.bat --no-daemon --max-workers=2 testDebugUnitTest assembleDebug
 ```
 
-En ese momento, el estudiante aún no había instalado Android Studio ni SDK. La situación cambió: ambos ya están configurados y la app base abrió en el dispositivo físico.
+**Prueba física de esta implementación:** `adb devices` no muestra teléfonos conectados durante esta revisión. No se han ejecutado P1–P7 ni se declara que la app actual funcione entre dos teléfonos.
 
-Un intento anterior encontró una restricción de escritura en la carpeta `.android` del perfil. Tras autorizar el acceso, el intento final alcanzó el diagnóstico de SDK ausente. El JDK usado explícitamente fue 21; el `java` de PATH corresponde a Java 8 y no debe usarse para este build.
-
-Gradle también emitió una advertencia de deprecación de `kotlinOptions.jvmTarget`; es una configuración admitida por Kotlin 2.2.21, no la causa del fallo. El bytecode está configurado en 17.
-
-La advertencia de deprecación de `kotlinOptions.jvmTarget` sigue presente; no impidió que esta versión abriera en el Moto G35. Mantener el JDK de Gradle en 21 para este proyecto.
-
-## Controles realmente ejecutados
+## Controles automatizados
 
 | Control | Resultado |
 |---|---|
-| Inspección inicial de carpeta y Git | Solo .git; rama master sin commits; sin código previo que preservar |
-| Wrapper oficial de Gradle 8.13 | Descargados gradlew, gradlew.bat y gradle-wrapper.jar |
-| Integridad SHA-256 del JAR | Coincide con checksum oficial: 81a82aaea5abcc8ff68b3dfcb58b3c3c429378efd98e7433460610fecd7ae45f |
-| Checksum de distribución | Fijado en gradle-wrapper.properties: 20f1b1176237254a6fc204d8434196fa11a4cfb387567519c61556e8710aed78 |
-| Parseo XML | AndroidManifest.xml, strings.xml y themes.xml válidos sintácticamente |
-| Parseo SVG | mockup.svg válido sintácticamente; no es validación de UI Android |
-| minSdk | 26 presente en configuración |
-| Permisos de la base | Ninguno: la bienvenida no usa red/notificaciones; permisos previstos solo en Hito 3 |
-| Checkboxes | Se marcaron como completados instalación de SDK, compilación y primer arranque en Moto G35, confirmados por el estudiante |
-| git diff --check / --cached --check | Sin errores de espacios en los archivos examinados |
-| git check-ignore | Excluye local.properties, .gradle, app/build, .gradle-user-home, secrets.properties y google-services.json |
+| Hito 0: compilación/arranque inicial | Confirmado por el estudiante en Moto G35; captura en el repositorio |
+| `testDebugUnitTest` de la implementación actual | Correcto: 7 pruebas, 0 errores y 0 fallos (parser, cifrado y ventana fija) |
+| `assembleDebug` de la implementación actual | `BUILD SUCCESSFUL`; APK generado en `app/build/outputs/apk/debug/app-debug.apk` (11.028.807 bytes) |
+| Repetición después del último cambio criptográfico | `BUILD SUCCESSFUL` en 1 min 1 s; 8 tareas ejecutadas y 35 UP-TO-DATE |
+| `git diff --check` | Ejecutado después de los últimos cambios; sin errores de whitespace |
+| `minSdk` | 26 en `app/build.gradle.kts` |
+| Permisos | INTERNET, ACCESS_NETWORK_STATE y POST_NOTIFICATIONS; los dos primeros son normales, el último se solicita desde Android 13 |
+| `allowBackup` / tráfico claro | `false` / `false` en AndroidManifest.xml |
+| Git ignore | Excluye `local.properties`, `.gradle/`, `app/build/`, secretos, configuración Firebase y volcados de JVM |
 
-El SHA-256 del Wrapper se contrastó con `https://services.gradle.org/distributions/gradle-8.13-wrapper.jar.sha256`; los archivos proceden del repositorio oficial Gradle, etiqueta v8.13.0. Los enlaces locales Markdown se verificaron al terminar la documentación.
+El SDK Android emitió una advertencia de que el archivo de métricas `C:\Users\Warlo\.android\analytics.settings` no se puede escribir en este entorno; no impidió compilar, ejecutar los tests ni generar el APK. El SHA-256 del APK más reciente es `E06AAA81076E2851B87CD851D1B964638A02868F986AB15F0BE9F0EB8AC5FFE2`.
 
-## Git
+## Pruebas físicas pendientes
 
-El repositorio remoto privado `BLuMuun/evaluacion-formativa-n2-iot` contiene los commits de preparación de Hitos 0–2. No se ha entregado nada al AAI. P1–P7 y la revisión docente siguen pendientes.
+- Conectar Nodo y Panel mediante Wi-Fi TCP 5050.
+- Probar ventana fija, notificación única, DISPENSAR, cierre, ACK y segundo ciclo.
+- Cambiar el código para verificar descarte criptográfico.
+- Cortar Wi-Fi o detener la app del Panel y observar el estado seguro CERRADO.
+- Negar POST_NOTIFICATIONS en Android 13+ y repetir conexión/control.
+- Registrar modelos, versiones Android, red, tiempo y evidencia en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md).
 
-## Verificaciones que NO se realizaron
+## Revisiones y publicación
 
-- Versión Android del Moto G35; no quedó visible ni registrada en la evidencia.
-- Repetición del arranque base en un segundo teléfono.
-- Revisión/aprobación del profesor de Hitos 1 y 2.
-- P1–P7, pruebas de ventana fija o pruebas de criptografía.
-- Conexión entre teléfonos, notificaciones, dispensación o ACK.
-
-Las últimas funciones todavía no existen en el código. Hitos 3–4 permanecen detenidos por la condición establecida por el estudiante.
+El comentario docente «está perfecto Marcelo» fue compartido por el estudiante y se registra como aprobación previa a Hito 3. No se conserva la captura de mensajería en el repositorio porque incluye un teléfono personal. Los commits Hitos 0–2 están en el repositorio GitHub privado; no se afirma que la entrega se haya subido al AAI.

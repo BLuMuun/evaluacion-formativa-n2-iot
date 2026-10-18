@@ -1,10 +1,12 @@
 # Comedero IoT — Unidad 2 Formativa
 
-**Estado: base del Hito 0 compilada y abierta en Moto G35 (confirmado por el estudiante); contenido de Hitos 0–2 publicado en el repositorio GitHub privado; revisión docente PENDIENTE.**
+**Estado: implementación de Hitos 3–4 preparada; revisión docente de Hitos 1–2 aprobada según el comentario compartido por el estudiante; pruebas físicas P1–P7 pendientes.**
 
-La app actual solo muestra una bienvenida en Kotlin + Compose + Material 3. Hitos 3 y 4 **no implementados**, por instrucción del estudiante de respetar la revisión docente previa. No hay login, Firebase, base de datos, historial, MQTT, HiveMQ ni FCM. Las funcionalidades descritas a continuación son el diseño para la Formativa, no capacidades ya verificadas. Según la guía, Hitos 0–4 forman parte de la Formativa; este repositorio se prepara para revisión de Hitos 1 y 2 y no es todavía el prototipo funcional final.
+La app contiene las pantallas Conexión, Nodo IoT y Panel de control, comunicación Wi-Fi TCP, cifrado AES-GCM, lógica de rasguños y entrega, y notificaciones locales. La guía considera Hitos 0–4 parte de la Formativa. El profesor aprobó la revisión previa a Hito 3 con el comentario «está perfecto Marcelo», según la captura compartida por el estudiante. La aprobación se registra sin incluir su captura de WhatsApp ni datos personales.
 
-No se declara completa la Formativa. El Hito 0 fue verificado parcialmente: la app base compiló y abrió en el Moto G35, según confirmó el estudiante. La captura de la bienvenida en Moto G35 está en [docs/evidencia_hito0_moto_g35.png](docs/evidencia_hito0_moto_g35.png); la versión Android no quedó registrada. P1–P7 y revisión docente siguen pendientes. Ver [verificación de la base](docs/VERIFICACION_BASE.md).
+La implementación aún requiere instalar y probar la versión actualizada en dos teléfonos. P1–P7 siguen pendientes y no se declara verificada la interconexión física. El arranque anterior del Hito 0 en el Moto G35 se conserva como antecedente, no como prueba de las funciones actuales. Ver [verificación](docs/VERIFICACION_BASE.md) y [pruebas pendientes](docs/PRUEBAS_FORMATIVA.md).
+
+La versión actual compila con `assembleDebug` y pasan las 7 pruebas unitarias de ventana, protocolo y cifrado. En esta sesión no había teléfonos conectados al PC; estas comprobaciones automáticas no sustituyen la ejecución física P1–P7.
 
 ## Problemática
 
@@ -32,11 +34,11 @@ Unidad 2 Formativa: **Teléfono Nodo ↔ Wi-Fi TCP ↔ Teléfono Panel**. El Nod
 
 Base: package `cl.inacap.comederoiot`, minSdk 26, compileSdk/targetSdk 36, AGP 8.13.2, Gradle 8.13, Kotlin 2.2.21, Compose BOM 2025.12.00 y Activity Compose 1.12.2. Se utiliza el plugin Compose de la misma versión que Kotlin. La elección de API 36 sigue el ejemplo de la guía; el mínimo permanece en 26. [Compatibilidad oficial de AGP](https://developer.android.com/build/releases/agp-8-13-0-release-notes).
 
-Las herramientas previstas para Hitos 3–4 son sockets nativos `java.net`, corrutinas, `javax.crypto` y NotificationCompat. No están implementadas en la bienvenida base.
+La conexión usa sockets nativos `java.net`; corrutinas mantienen la interfaz disponible durante lectura y entrega; `javax.crypto` implementa el cifrado; NotificationCompat entrega avisos locales.
 
 ## Medio inalámbrico
 
-Wi-Fi local mediante TCP, puerto **5050**. El Nodo será servidor y el Panel cliente.
+Wi-Fi local mediante TCP, puerto **5050**. El Nodo funciona como servidor y el Panel como cliente.
 
 - Distancia: cama y comedero pueden estar en habitaciones distintas.
 - Red: ambos teléfonos compartirán un router o hotspot, sin broker externo.
@@ -48,13 +50,13 @@ No se implementará un segundo medio inalámbrico.
 
 ## Funcionalidades de la Formativa
 
-| ID | Funcionalidad prevista | Estado |
+| ID | Funcionalidad | Estado |
 |---|---|---|
-| F1 | Simular rasguños, aplicar ventana fija de 5 s y comunicar cada cambio. | Hito 3 pendiente |
-| F2 | Monitorear X/3, enlace y comedero en Panel. | Hito 3 pendiente |
-| F3 | Orden DISPENSAR, entrega no bloqueante de unos 1,5 s, cierre y ACK. | Hito 3 pendiente |
-| F4 | Notificación única de solicitud en Panel y de comando recibido en Nodo. | Hito 3 pendiente |
-| F5 | Ante pérdida: aviso, CERRADO, cancelar dispensación y reiniciar contador/solicitud. | Hito 3 pendiente |
+| F1 | Simular rasguños, aplicar ventana fija de 5 s y comunicar cada cambio. | Implementado; prueba física pendiente |
+| F2 | Monitorear X/3, enlace y comedero en Panel. | Implementado; prueba física pendiente |
+| F3 | Orden DISPENSAR, entrega no bloqueante de unos 1,5 s, cierre y ACK. | Implementado; prueba física pendiente |
+| F4 | Notificación única de solicitud en Panel y de comando recibido en Nodo. | Implementado; prueba física pendiente |
+| F5 | Ante pérdida: aviso, CERRADO, cancelar dispensación y reiniciar contador/solicitud. | Implementado; probar especialmente corte de Wi-Fi |
 
 El primer rasguño inicia la ventana fija; si al vencer no hay tres, vuelve a cero. Al llegar a tres, permanece en 3/3, ignora nuevos rasguños y espera la decisión del Panel. Se reinicia tras entrega correcta y ACK; una desconexión también lo reinicia por seguridad. [Reglas completas e inalterables sin consulta](docs/HITO_2_DISENO.md).
 
@@ -73,7 +75,7 @@ LECTURA;comedero;CERRADO
 LECTURA;comedero;DISPENSANDO
 ```
 
-LECTURA y ACK viajan del Nodo al Panel; CMD del Panel al Nodo. Se descartarán tipos, claves, combinaciones, valores o cantidades de campos no permitidos. El diseño usa el límite de 16 caracteres para clave/valor del ejemplo de la guía, junto con una lista estricta de valores válidos. [Diseño del protocolo](docs/HITO_2_DISENO.md).
+LECTURA y ACK viajan del Nodo al Panel; CMD del Panel al Nodo. El Nodo reutiliza `LECTURA;rasgunos;X` cada 2 s como latido; si el Panel no recibe un mensaje válido durante 6 s, cierra la sesión por seguridad. No se agregan tipos ni claves. Se descartan campos y combinaciones no permitidas. [Diseño del protocolo](docs/HITO_2_DISENO.md).
 
 ## Mockup
 
@@ -83,16 +85,16 @@ Conexión permite elegir Nodo/Panel, muestra Wi-Fi y pide código de seis dígit
 
 ## Seguridad
 
-Diseñada para implementar y verificar después de la revisión docente:
+Implementada para esta Formativa:
 
-- Código de seis dígitos del que se derivará una clave AES-256.
+- Código de seis dígitos; PBKDF2-HMAC-SHA256 deriva la clave AES-256.
 - AES-GCM, IV aleatorio por mensaje y etiqueta de autenticidad/integridad; Base64 para transportar el resultado.
 - Código distinto o datos alterados: descarte sin ejecutar órdenes ni cerrar la app.
 - Validación estricta del protocolo y dirección por rol.
-- Permisos mínimos en Hito 3: INTERNET y POST_NOTIFICATIONS; pedir este último solo desde Android 13. Negarlo no impedirá operar.
+- Permisos mínimos: INTERNET y ACCESS_NETWORK_STATE para TCP y detectar pérdida Wi-Fi; POST_NOTIFICATIONS se solicita solo desde Android 13. Negar notificaciones no impide operar.
 - Estado seguro CERRADO, cancelar entrega y contador a 0 al perder el enlace.
 
-La base ya declara `allowBackup="false"` y `usesCleartextTraffic="false"`; todavía no pide permisos porque no utiliza red ni notificaciones. `usesCleartextTraffic` no cifra sockets TCP: esa protección deberá aportarla AES-GCM. Un código de seis dígitos no ofrece seguridad suficiente para producción; no se afirma certificación ISO ni cifrado implementado en esta versión.
+El manifiesto declara `allowBackup="false"` y `usesCleartextTraffic="false"`. Este último atributo no cifra sockets TCP; la protección del contenido la aporta AES-GCM. Un código de seis dígitos tiene entropía limitada y no ofrece seguridad suficiente para producción. Se implementan medidas formativas básicas; no se afirma certificación ISO/IEC ni conformidad auditada.
 
 ## Pruebas
 
@@ -110,19 +112,17 @@ La base ya declara `allowBackup="false"` y `usesCleartextTraffic="false"`; todav
 
 ## Ejecutar en dos teléfonos
 
-Seguir [INSTALACION.md](docs/INSTALACION.md): abrir esta carpeta y ejecutar en cada teléfono mediante USB. El arranque base ya se confirmó en un Moto G35. En el segundo teléfono se debe repetir la prueba. Ambos mostrarán **solo la bienvenida del Hito 0**; aún no hay elección de roles ni comunicación.
-
-Tras aprobación docente e implementación de Hitos 3–4, reinstalar la misma app en ambos y ejecutar la preparación [Nodo/Panel y P1–P7](docs/PRUEBAS_FORMATIVA.md).
+Seguir [INSTALACION.md](docs/INSTALACION.md) para compilar e instalar el APK actualizado en ambos teléfonos. Luego seguir la preparación [Nodo/Panel y P1–P7](docs/PRUEBAS_FORMATIVA.md). Las pruebas manuales todavía deben ejecutarse y registrarse.
 
 ## Plan, revisiones y entrega
 
 - [PLAN_MVP.md](PLAN_MVP.md): solo Hitos 0–4; marca como completadas únicamente las verificaciones que el estudiante confirmó.
-- [Hito 1: problemática, F1–F5 y herramientas](docs/HITO_1_DEFINICION.md): revisión docente PENDIENTE.
-- [Hito 2: medio, mensajes y diseño](docs/HITO_2_DISENO.md): revisión docente PENDIENTE.
+- [Hito 1: problemática, F1–F5 y herramientas](docs/HITO_1_DEFINICION.md): preparado y revisado.
+- [Hito 2: medio, mensajes y diseño](docs/HITO_2_DISENO.md): preparado y revisado.
 - [Git y entrega](docs/GIT_Y_ENTREGA.md): historial por hito y estado de publicación.
 - [entrega_aai.txt](entrega_aai.txt): contiene el enlace real al repositorio; subir ese TXT al AAI no equivale a que la Formativa esté terminada ni a que se haya enviado.
 
-El repositorio GitHub del proyecto es [Evaluación Formativa N°2 IoT](https://github.com/BLuMuun/evaluacion-formativa-n2-iot). Es privado: el profesor necesitará acceso autorizado para abrirlo. El contenido se organiza en commits separados para los Hitos 0, 1 y 2. No se ha entregado nada al AAI.
+El repositorio GitHub del proyecto es [Evaluación Formativa N°2 IoT](https://github.com/BLuMuun/evaluacion-formativa-n2-iot). Es privado: el profesor necesitará acceso autorizado para abrirlo. El historial conserva commits por hito. La actualización de Hitos 3–4 debe publicarse después de validar la compilación.
 
 ## Decisiones futuras de Sumativa
 
@@ -132,10 +132,10 @@ Por decisión del docente comunicada por el estudiante: **Firebase Authenticatio
 
 Herramienta: **OpenAI Codex / ChatGPT**.
 
-Se utilizó como apoyo para planificación, estructura del proyecto, generación inicial de código y revisión. El código generado en esta etapa corresponde a la base del Hito 0; la lógica IoT está documentada, no implementada. El estudiante revisa, prueba y corrige el código, y es responsable de poder explicarlo al profesor. No se atribuyen a la IA pruebas físicas ni revisiones docentes que no ocurrieron.
+Se utilizó como apoyo para planificación, estructura del proyecto, generación inicial de código y revisión. El estudiante debe revisar, probar y corregir el código, y es responsable de poder explicarlo al profesor. No se atribuyen a la IA pruebas físicas ni resultados P1–P7 que aún no se han realizado.
 
 ## Fuentes y límites del alcance
 
 Fuente principal: **Guía de desarrollo — Unidad 2 · App Android para IoT**, entregada por el estudiante: pp. 2–4 (alcance), 9–14 (Hitos 0–2 y revisiones), 15–26 (Hitos 3–4 y pruebas). **Desarrollo apoyado con IA** aporta planificación, decisiones explícitas y registro honesto; su enfoque de MVP Sumativa y pruebas con placas no amplía esta Formativa.
 
-La revisión del Paso 1 y la revisión de medio/mensajes/mockup antes de programar siguen pendientes. El estudiante autorizó preparar Hitos 0–2 y detenerse antes de Hito 3. La ventana fija documentada es una regla de este proyecto, definida por él. Esta preparación no sustituye el instrumento de evaluación del AAI ni constituye una Formativa funcional terminada.
+El estudiante compartió el comentario del profesor que aprueba la revisión previa a Hito 3. La ventana fija documentada es una regla específica del proyecto, definida por él. La compilación automática y las pruebas unitarias no sustituyen P1–P7 en teléfonos ni el instrumento de evaluación del AAI.

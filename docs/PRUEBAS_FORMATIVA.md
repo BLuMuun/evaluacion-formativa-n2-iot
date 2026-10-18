@@ -1,6 +1,6 @@
 # Pruebas — Unidad 2 Formativa
 
-**Todas PENDIENTES.** Hitos 3–4 no implementados: estos casos son el plan de pruebas para después de la aprobación docente. No hay capturas, teléfonos probados ni resultados de interconexión.
+**P1–P7 PENDIENTES.** Las pantallas, comunicación, cifrado y lógica están implementados, y la revisión docente previa se recibió según el estudiante. Falta probar la versión actualizada en dos teléfonos. No completar resultados ni evidencias hasta observar cada caso físicamente.
 
 ## Preparación futura de dos teléfonos
 
@@ -19,8 +19,8 @@
 | P2 | Monitoreo | Desde contador 0, pulsar Simular rasguño dos veces en A en menos de 5 s. Observar B antes de vencer la ventana. | B muestra 2/3 en menos de 2 s desde la segunda pulsación. | PENDIENTE | Por completar |
 | P3 | Alerta | Desde 0, realizar tres pulsaciones en A antes de que pasen 5 s desde la primera. Esperar más de 5 s y pulsar otra vez. | B muestra 3/3 y una sola notificación «El gato está solicitando comida». Permanece 3/3 y no dispensa ni renotifica por pulsaciones adicionales. | PENDIENTE | Por completar |
 | P4 | Control | Con solicitud 3/3, pulsar Dispensar comida en B. Observar A durante unos 1,5 s y luego B. | A muestra DISPENSANDO y notifica «Comando de alimentación recibido»; vuelve a CERRADO. B recibe ACK, muestra «Última entrega: confirmada» y el contador vuelve a 0. UI sin bloqueo. | PENDIENTE | Por completar |
-| P5 | Código diferente | Desconectar. A usa 111111 y B 222222. Conectar TCP; simular rasguños y enviar DISPENSAR desde B. | Puede existir TCP conectado; no se interpretan lecturas ni órdenes cifradas. A no dispensa ni notifica comando válido. | PENDIENTE | Por completar |
-| P6 | Pérdida / estado seguro | Conectar con mismo código. Primero alcanzar 3/3 y cortar Wi-Fi. Reconectar. Luego iniciar entrega y cortar Wi-Fi durante los 1,5 s. Repetir forzando detención de B desde Ajustes mientras A está conectado. | Ambos detectan pérdida cuando pueden ejecutarse, avisan visualmente/notifican si permitido; A queda CERRADO, cancela entrega y reinicia a 0. Sin caída ni ACK de entrega interrumpida. Al reconectar permanece seguro. Medir el tiempo real de detección. | PENDIENTE | Por completar |
+| P5 | Código diferente | Desconectar. A usa 111111 y B 222222. Conectar y observar durante 7 s. | Al inicio puede existir TCP, pero las tramas cifradas se descartan; al no recibir lecturas válidas, B cierra a los 6 s. No se interpreta una orden ni se dispensa. | PENDIENTE | Por completar |
+| P6 | Pérdida / estado seguro | Conectar con mismo código. Primero alcanzar 3/3 y cortar Wi-Fi. Reconectar. Luego iniciar entrega y cortar Wi-Fi durante los 1,5 s. Repetir forzando detención de B desde Ajustes mientras A está conectado. | La app observa pérdida de Wi-Fi; además B cierra tras 6 s sin lecturas válidas y A recibe cierre del socket. Ambas avisan visualmente/notifican si permitido; A queda CERRADO, cancela entrega y reinicia a 0. Sin caída ni ACK de entrega interrumpida. Registrar el tiempo medido. | PENDIENTE | Por completar |
 | P7 | Notificaciones denegadas | En Android 13+, negar POST_NOTIFICATIONS en A y B (instalación limpia o revocar en Ajustes). Repetir P1, P3 y P4. | La conexión, lecturas y control siguen funcionando, no hay cierre inesperado; no aparece notificación del sistema. Puede mostrarse aviso visual de notificaciones deshabilitadas. | PENDIENTE | Por completar |
 
 P7 adapta el caso de permiso Bluetooth del ejemplo de la guía a POST_NOTIFICATIONS, según el pedido del estudiante: Wi-Fi TCP no requiere Bluetooth ni un permiso de ubicación. En Android 8–12 no corresponde el diálogo POST_NOTIFICATIONS; registrar «no aplica por versión» para ese diálogo, sin declarar probado el caso Android 13+.
@@ -42,6 +42,6 @@ No son funciones adicionales ni pruebas de Sumativa.
 
 Copiar por caso: ID; fecha; versión/commit; teléfono A/Android; teléfono B/Android; tipo de red; pasos ejecutados; resultado observado; tiempo medido cuando aplique; captura/video; observación o error; corrección y repetición.
 
-## Verificaciones actuales del proyecto base
+## Verificaciones separadas de P1–P7
 
-La compilación y los controles estáticos se registran por separado en [VERIFICACION_BASE.md](VERIFICACION_BASE.md). No reemplazan P1–P7 ni la prueba de arranque en teléfono. No existen casos aprobados de dos teléfonos en esta entrega de preparación.
+La compilación, pruebas unitarias y controles estáticos se registran por separado en [VERIFICACION_BASE.md](VERIFICACION_BASE.md). No reemplazan P1–P7 ni la instalación de la versión actual en dos teléfonos. No se declara verificada la interconexión hasta ejecutar estos casos.
