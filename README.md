@@ -1,10 +1,10 @@
 # Comedero IoT — Unidad 2 Formativa
 
-**Estado: implementación de Hitos 3–4 compilada y probada en dos teléfonos; revisión docente de Hitos 1–2 aprobada según el comentario compartido por el estudiante. P1, P2 y P6 pasaron; P3, P4 y P7 son parciales; P5 sigue pendiente.**
+**Estado: Hitos 0–4 implementados; build y pruebas unitarias aprobados; P1–P7 ejecutadas en dos teléfonos físicos.** La revisión docente previa a Hito 3 fue aprobada según el comentario compartido por el estudiante.
 
 La app contiene las pantallas Conexión, Nodo IoT y Panel de control, comunicación Wi-Fi TCP, cifrado AES-GCM, lógica de rasguños y entrega, y notificaciones locales. La guía considera Hitos 0–4 parte de la Formativa. El profesor aprobó la revisión previa a Hito 3 con el comentario «está perfecto Marcelo», según la captura compartida por el estudiante. La aprobación se registra sin incluir su captura de WhatsApp ni datos personales.
 
-La app actual se instaló en un Moto G35 (Nodo) y un HONOR RBN-NX3 (Panel), ambos conectados a la misma red Wi-Fi local. Se verificaron conexión, monitoreo, entrega/ACK y recuperación segura al detener el Panel. Las notificaciones no pudieron comprobarse porque POST_NOTIFICATIONS no estaba concedido. Ver [verificación](docs/VERIFICACION_BASE.md), [resultados P1–P7](docs/PRUEBAS_FORMATIVA.md) y [capturas físicas](docs/evidencia/README.md).
+La app actual se instaló en un Moto G35 (Nodo) y un HONOR RBN-NX3 (Panel), ambos conectados a la misma red Wi-Fi local. Se verificaron conexión, monitoreo, alertas locales, entrega/ACK, código de vinculación distinto, pérdida del Panel y operación con notificaciones denegadas. P3 y P4 se repitieron después de P7; las dos capturas nuevas de notificación fueron entregadas por el estudiante y se guardan completas, sin recortar. Ver [verificación](docs/VERIFICACION_BASE.md), [resultados P1–P7](docs/PRUEBAS_FORMATIVA.md) y [capturas físicas](docs/evidencia/README.md).
 
 La versión actual compila con assembleDebug y pasan las 7 pruebas unitarias de ventana, protocolo y cifrado. La verificación automatizada complementa las pruebas físicas; sus resultados y límites se registran por separado.
 
@@ -54,8 +54,8 @@ No se implementará un segundo medio inalámbrico.
 |---|---|---|
 | F1 | Simular rasguños, aplicar ventana fija de 5 s y comunicar cada cambio. | Implementado; lecturas físicas verificadas en P2/P3 |
 | F2 | Monitorear X/3, enlace y comedero en Panel. | Implementado; P1/P2 pasaron |
-| F3 | Orden DISPENSAR, entrega no bloqueante de unos 1,5 s, cierre y ACK. | Implementado; entrega/ACK observados en P4; notificación pendiente |
-| F4 | Notificación única de solicitud en Panel y de comando recibido en Nodo. | Código implementado; notificaciones locales pendientes de verificar con permiso concedido |
+| F3 | Orden DISPENSAR, entrega no bloqueante de unos 1,5 s, cierre y ACK. | Implementado y verificado en P4 |
+| F4 | Notificación única de solicitud en Panel y de comando recibido en Nodo. | Implementado y observado con permiso concedido en P3/P4 |
 | F5 | Ante pérdida: aviso, CERRADO, cancelar dispensación y reiniciar contador/solicitud. | Verificado al detener el Panel; falta probar apagando Wi-Fi desde Ajustes |
 
 El primer rasguño inicia la ventana fija; si al vencer no hay tres, vuelve a cero. Al llegar a tres, permanece en 3/3, ignora nuevos rasguños y espera la decisión del Panel. Se reinicia tras entrega correcta y ACK; una desconexión también lo reinicia por seguridad. [Reglas completas e inalterables sin consulta](docs/HITO_2_DISENO.md).
@@ -98,21 +98,21 @@ El manifiesto declara `allowBackup="false"` y `usesCleartextTraffic="false"`. Es
 
 ## Pruebas
 
-Pruebas físicas realizadas en dos teléfonos. P1, P2 y P6 pasaron; P3, P4 y P7 son parciales por el permiso de notificaciones no concedido; P5 está pendiente de repetición controlada. La tabla completa, las limitaciones y los resultados están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md).
+Pruebas físicas realizadas en dos teléfonos. P1–P7 tienen resultado registrado; P6 se probó cerrando el Panel, sin apagar el Wi-Fi desde Ajustes. La tabla completa, el alcance y las limitaciones están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md).
 
 | ID | Caso | Resultado esperado | Resultado real | Evidencia |
 |---|---|---|---|---|
 | P1 | Conexión | Nodo y Panel muestran CONECTADO. | Pasó | [Capturas](docs/evidencia/README.md) |
 | P2 | Monitoreo | Panel muestra 2/3 en menos de 2 segundos. | Pasó | [Panel 2/3](docs/evidencia/P2-panel-honor.png) |
-| P3 | Alerta | Panel muestra 3/3 y una sola notificación. | Parcial: 3/3 sí; notificación no verificada | [Panel 3/3](docs/evidencia/P3-panel-honor.png) |
-| P4 | Control | DISPENSAR, cierre, ACK y contador 0. | Parcial: entrega/ACK sí; notificación no verificada | [Capturas Nodo](docs/evidencia/README.md) |
-| P5 | Código diferente | Datos cifrados se descartan. | Pendiente de repetición | Por completar |
+| P3 | Alerta | Panel muestra 3/3 y una sola notificación. | Pasó; se observó una notificación | [Panel 3/3 y captura de alerta](docs/evidencia/README.md) |
+| P4 | Control | DISPENSAR, cierre, ACK y contador 0. | Pasó; se observó la notificación del Nodo | [Capturas de entrega](docs/evidencia/README.md) |
+| P5 | Código diferente | Datos cifrados se descartan. | Pasó; no se interpretaron lecturas ni se procesó una orden | [Capturas de P5](docs/evidencia/README.md) |
 | P6 | Pérdida de enlace | Estado seguro y app sin caída. | Pasó al detener Panel durante solicitud y entrega | [Capturas P6](docs/evidencia/README.md) |
-| P7 | Notificaciones denegadas | Conexión y control funcionan con permiso denegado. | Parcial: operación verificada; diálogo no re-ejecutado | [Aviso de permiso](docs/evidencia/P1-panel-honor.png) |
+| P7 | Notificaciones denegadas | Conexión y control funcionan con permiso denegado. | Pasó; el permiso se negó en ambos teléfonos y conexión/control continuaron | [Capturas de P7](docs/evidencia/README.md) |
 
 ## Ejecutar en dos teléfonos
 
-Para repetir o completar las pruebas, seguir [INSTALACION.md](docs/INSTALACION.md) y las instrucciones de [Nodo/Panel y P1–P7](docs/PRUEBAS_FORMATIVA.md). P5, las notificaciones locales y los casos de borde pendientes aún requieren ejecución manual.
+Para repetir las pruebas, seguir [INSTALACION.md](docs/INSTALACION.md) y las instrucciones de [Nodo/Panel y P1–P7](docs/PRUEBAS_FORMATIVA.md). Algunos casos de borde de ventana y protocolo siguen pendientes y se identifican por separado de P1–P7.
 
 ## Plan, revisiones y entrega
 
@@ -122,7 +122,7 @@ Para repetir o completar las pruebas, seguir [INSTALACION.md](docs/INSTALACION.m
 - [Git y entrega](docs/GIT_Y_ENTREGA.md): historial por hito y estado de publicación.
 - [entrega_aai.txt](entrega_aai.txt): contiene el enlace real al repositorio; subir ese TXT al AAI no equivale a que la Formativa esté terminada ni a que se haya enviado.
 
-El repositorio GitHub del proyecto es [Evaluación Formativa N°2 IoT](https://github.com/BLuMuun/evaluacion-formativa-n2-iot). Es privado: el profesor necesitará acceso autorizado para abrirlo. El historial conserva commits por hito. La actualización de Hitos 3–4 debe publicarse después de validar la compilación.
+El repositorio GitHub del proyecto es [Evaluación Formativa N°2 IoT](https://github.com/BLuMuun/evaluacion-formativa-n2-iot). Si permanece privado, el profesor necesitará acceso autorizado para abrirlo. El historial conserva commits por hito.
 
 ## Decisiones futuras de Sumativa
 

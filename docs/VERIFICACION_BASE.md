@@ -22,7 +22,7 @@ Comando final:
 
 **Prueba física en dos teléfonos (18 de octubre de 2026):** APK instalada en un Moto G35 con Android 15 (API 35), rol Nodo, y un HONOR RBN-NX3 con Android 14 (API 34), rol Panel. En la misma red Wi-Fi local se verificaron conexión TCP, lecturas 2/3 y 3/3, retención de la solicitud, entrega DISPENSANDO → CERRADO, ACK confirmado y recuperación segura al detener el Panel con solicitud pendiente y durante la dispensación. Las capturas asociadas están en [docs/evidencia](evidencia/). No se guardaron el SSID, las direcciones IP ni el código temporal.
 
-POST_NOTIFICATIONS figuró como no concedido en ambos equipos. Por ese motivo no se pudieron verificar las notificaciones locales de P3/P4; la app siguió conectada y el control funcionó. P5 queda pendiente de repetición con evidencia; el corte de Wi-Fi desde Ajustes tampoco se probó. En la pérdida TCP causada al detener el Panel, el Nodo quedó en ESPERANDO CONEXIÓN, 0/3 y CERRADO, y mostró el aviso de enlace perdido. El proceso del Nodo permaneció activo y no hubo excepciones AndroidRuntime en los registros revisados.
+P7 se ejecutó con POST_NOTIFICATIONS denegado en ambos teléfonos; la conexión y el control siguieron funcionando. Después se concedió el permiso y se repitieron P3/P4: se observaron las dos notificaciones locales y se tomaron capturas completas. También se ejecutó P5 con códigos distintos; las tramas no se interpretaron y no se procesó ninguna orden. P6 se probó deteniendo el Panel tanto con solicitud pendiente como durante la dispensación; el Nodo quedó en ESPERANDO CONEXIÓN, 0/3 y CERRADO, con aviso de enlace perdido. No se probó apagar Wi-Fi desde Ajustes. No hubo excepciones AndroidRuntime en los registros revisados.
 
 ## Controles automatizados
 
@@ -36,11 +36,11 @@ POST_NOTIFICATIONS figuró como no concedido en ambos equipos. Por ese motivo no
 | IP dinámica y Nodo | IP apareció al activar Wi-Fi sin reiniciar; Nodo quedó en `ESPERANDO CONEXIÓN`, contador 0/3, comedero `CERRADO`; puerto 5050 en escucha |
 | P1 conexión | Pasó: ambos teléfonos mostraron CONECTADO |
 | P2 monitoreo | Pasó: el HONOR mostró 2/3 aproximadamente 1,2 s después de la segunda pulsación |
-| P3 alerta | Parcial: 3/3 y solicitud retenida verificados; notificación no visible porque POST_NOTIFICATIONS no estaba concedido |
-| P4 entrega | Parcial: DISPENSANDO, CERRADO, contador 0 y ACK confirmado observados; notificación del Nodo no verificable con permiso denegado |
-| P5 código distinto | Pendiente de repetición documentada |
-| P6 pérdida de Panel | Pasó para cierre forzado del Panel con solicitud pendiente y durante DISPENSANDO; Nodo reinició a 0/CERRADO y mostró el aviso |
-| P7 permiso denegado | Parcial: el sistema informa permiso no concedido en ambos; conexión y control siguieron funcionando |
+| P3 alerta | Pasó: 3/3, solicitud retenida, sin notificaciones repetidas y una notificación local observada |
+| P4 entrega | Pasó: DISPENSANDO, notificación local observada, CERRADO, contador 0 y ACK confirmado |
+| P5 código distinto | Pasó: no se interpretaron lecturas ni se procesó una orden |
+| P6 pérdida de Panel | Pasó al detener el Panel con solicitud pendiente y durante DISPENSANDO; Nodo reinició a 0/CERRADO y mostró el aviso. La variante de apagar Wi-Fi no se probó |
+| P7 permiso denegado | Pasó: se denegó el permiso en ambos; conexión y control siguieron funcionando |
 | `git diff --check` | Correcto; sin errores de whitespace |
 | `lintDebug` | No concluyente: el análisis `lintAnalyzeDebug` no terminó tras varios minutos y se interrumpió; no se dispone de informe Lint |
 | Emulador | No iniciado: API 37 exigió 4096 MiB; el sistema reportó 4007 MiB disponibles |
@@ -51,12 +51,10 @@ POST_NOTIFICATIONS figuró como no concedido en ambos equipos. Por ese motivo no
 
 El SDK Android emitió una advertencia de que el archivo de métricas `C:\Users\Warlo\.android\analytics.settings` no se puede escribir en este entorno; no impidió compilar, ejecutar los tests, instalar la APK ni abrir la app. El cambio de conexión hace que la pantalla actualice la IP local mientras permanece abierta en rol Nodo.
 
-## Pruebas físicas por completar
+## Casos físicos adicionales pendientes
 
-- Repetir P5 con códigos distintos y capturar el estado de conexión TCP inicial y la desconexión por falta de lecturas válidas.
-- Repetir P3/P4 con POST_NOTIFICATIONS concedido para verificar las notificaciones locales y que la alerta de solicitud no se duplique.
-- Probar P6 apagando Wi-Fi desde Ajustes durante una solicitud y durante la dispensación; hasta ahora se verificó la pérdida al detener el Panel.
-- Completar los casos de borde y el segundo ciclo registrados en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md).
+- Probar P6 apagando Wi-Fi desde Ajustes durante una solicitud y durante la dispensación; P6 ya pasó al detener el Panel.
+- Completar los casos de borde y el segundo ciclo registrados en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). Estos casos adicionales no cambian el resultado de P1–P7.
 
 ## Revisiones y publicación
 
