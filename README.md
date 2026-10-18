@@ -1,12 +1,12 @@
 # Comedero IoT — Unidad 2 Formativa
 
-**Estado: implementación de Hitos 3–4 preparada; revisión docente de Hitos 1–2 aprobada según el comentario compartido por el estudiante; pruebas físicas P1–P7 pendientes.**
+**Estado: implementación de Hitos 3–4 compilada y probada en dos teléfonos; revisión docente de Hitos 1–2 aprobada según el comentario compartido por el estudiante. P1, P2 y P6 pasaron; P3, P4 y P7 son parciales; P5 sigue pendiente.**
 
 La app contiene las pantallas Conexión, Nodo IoT y Panel de control, comunicación Wi-Fi TCP, cifrado AES-GCM, lógica de rasguños y entrega, y notificaciones locales. La guía considera Hitos 0–4 parte de la Formativa. El profesor aprobó la revisión previa a Hito 3 con el comentario «está perfecto Marcelo», según la captura compartida por el estudiante. La aprobación se registra sin incluir su captura de WhatsApp ni datos personales.
 
-La implementación aún requiere instalar y probar la versión actualizada en dos teléfonos. P1–P7 siguen pendientes y no se declara verificada la interconexión física. El arranque anterior del Hito 0 en el Moto G35 se conserva como antecedente, no como prueba de las funciones actuales. Ver [verificación](docs/VERIFICACION_BASE.md) y [pruebas pendientes](docs/PRUEBAS_FORMATIVA.md).
+La app actual se instaló en un Moto G35 (Nodo) y un HONOR RBN-NX3 (Panel), ambos conectados a la misma red Wi-Fi local. Se verificaron conexión, monitoreo, entrega/ACK y recuperación segura al detener el Panel. Las notificaciones no pudieron comprobarse porque POST_NOTIFICATIONS no estaba concedido. Ver [verificación](docs/VERIFICACION_BASE.md), [resultados P1–P7](docs/PRUEBAS_FORMATIVA.md) y [capturas físicas](docs/evidencia/README.md).
 
-La versión actual compila con `assembleDebug` y pasan las 7 pruebas unitarias de ventana, protocolo y cifrado. En esta sesión no había teléfonos conectados al PC; estas comprobaciones automáticas no sustituyen la ejecución física P1–P7.
+La versión actual compila con assembleDebug y pasan las 7 pruebas unitarias de ventana, protocolo y cifrado. La verificación automatizada complementa las pruebas físicas; sus resultados y límites se registran por separado.
 
 ## Problemática
 
@@ -52,11 +52,11 @@ No se implementará un segundo medio inalámbrico.
 
 | ID | Funcionalidad | Estado |
 |---|---|---|
-| F1 | Simular rasguños, aplicar ventana fija de 5 s y comunicar cada cambio. | Implementado; prueba física pendiente |
-| F2 | Monitorear X/3, enlace y comedero en Panel. | Implementado; prueba física pendiente |
-| F3 | Orden DISPENSAR, entrega no bloqueante de unos 1,5 s, cierre y ACK. | Implementado; prueba física pendiente |
-| F4 | Notificación única de solicitud en Panel y de comando recibido en Nodo. | Implementado; prueba física pendiente |
-| F5 | Ante pérdida: aviso, CERRADO, cancelar dispensación y reiniciar contador/solicitud. | Implementado; probar especialmente corte de Wi-Fi |
+| F1 | Simular rasguños, aplicar ventana fija de 5 s y comunicar cada cambio. | Implementado; lecturas físicas verificadas en P2/P3 |
+| F2 | Monitorear X/3, enlace y comedero en Panel. | Implementado; P1/P2 pasaron |
+| F3 | Orden DISPENSAR, entrega no bloqueante de unos 1,5 s, cierre y ACK. | Implementado; entrega/ACK observados en P4; notificación pendiente |
+| F4 | Notificación única de solicitud en Panel y de comando recibido en Nodo. | Código implementado; notificaciones locales pendientes de verificar con permiso concedido |
+| F5 | Ante pérdida: aviso, CERRADO, cancelar dispensación y reiniciar contador/solicitud. | Verificado al detener el Panel; falta probar apagando Wi-Fi desde Ajustes |
 
 El primer rasguño inicia la ventana fija; si al vencer no hay tres, vuelve a cero. Al llegar a tres, permanece en 3/3, ignora nuevos rasguños y espera la decisión del Panel. Se reinicia tras entrega correcta y ACK; una desconexión también lo reinicia por seguridad. [Reglas completas e inalterables sin consulta](docs/HITO_2_DISENO.md).
 
@@ -98,21 +98,21 @@ El manifiesto declara `allowBackup="false"` y `usesCleartextTraffic="false"`. Es
 
 ## Pruebas
 
-**P1–P7 PENDIENTES**. No se han probado en dos teléfonos. El arranque base en el Moto G35 corresponde a Hito 0 y no demuestra la conexión del Nodo con el Panel. Los [pasos exactos](docs/PRUEBAS_FORMATIVA.md) incluyen preparación, ventana fija y datos a registrar.
+Pruebas físicas realizadas en dos teléfonos. P1, P2 y P6 pasaron; P3, P4 y P7 son parciales por el permiso de notificaciones no concedido; P5 está pendiente de repetición controlada. La tabla completa, las limitaciones y los resultados están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md).
 
 | ID | Caso | Resultado esperado | Resultado real | Evidencia |
 |---|---|---|---|---|
-| P1 | Conexión | Nodo y Panel muestran CONECTADO. | PENDIENTE | Por completar |
-| P2 | Monitoreo | Panel muestra 2/3 en menos de 2 segundos. | PENDIENTE | Por completar |
-| P3 | Alerta | Panel muestra 3/3 y una sola notificación «El gato está solicitando comida». | PENDIENTE | Por completar |
-| P4 | Control | Nodo dispensa sin bloquear, notifica, cierra y confirma; Panel recibe ACK y contador vuelve a 0. | PENDIENTE | Por completar |
-| P5 | Código diferente | Puede existir TCP; datos cifrados se descartan y no se ejecuta una orden válida. | PENDIENTE | Por completar |
-| P6 | Pérdida de enlace | Aviso de pérdida, comedero CERRADO, entrega cancelada, contador a 0, app sin caída. | PENDIENTE | Por completar |
-| P7 | Notificaciones denegadas | Conexión y control funcionan, sin notificaciones del sistema ni caída. | PENDIENTE | Por completar |
+| P1 | Conexión | Nodo y Panel muestran CONECTADO. | Pasó | [Capturas](docs/evidencia/README.md) |
+| P2 | Monitoreo | Panel muestra 2/3 en menos de 2 segundos. | Pasó | [Panel 2/3](docs/evidencia/P2-panel-honor.png) |
+| P3 | Alerta | Panel muestra 3/3 y una sola notificación. | Parcial: 3/3 sí; notificación no verificada | [Panel 3/3](docs/evidencia/P3-panel-honor.png) |
+| P4 | Control | DISPENSAR, cierre, ACK y contador 0. | Parcial: entrega/ACK sí; notificación no verificada | [Capturas Nodo](docs/evidencia/README.md) |
+| P5 | Código diferente | Datos cifrados se descartan. | Pendiente de repetición | Por completar |
+| P6 | Pérdida de enlace | Estado seguro y app sin caída. | Pasó al detener Panel durante solicitud y entrega | [Capturas P6](docs/evidencia/README.md) |
+| P7 | Notificaciones denegadas | Conexión y control funcionan con permiso denegado. | Parcial: operación verificada; diálogo no re-ejecutado | [Aviso de permiso](docs/evidencia/P1-panel-honor.png) |
 
 ## Ejecutar en dos teléfonos
 
-Seguir [INSTALACION.md](docs/INSTALACION.md) para compilar e instalar el APK actualizado en ambos teléfonos. Luego seguir la preparación [Nodo/Panel y P1–P7](docs/PRUEBAS_FORMATIVA.md). Las pruebas manuales todavía deben ejecutarse y registrarse.
+Para repetir o completar las pruebas, seguir [INSTALACION.md](docs/INSTALACION.md) y las instrucciones de [Nodo/Panel y P1–P7](docs/PRUEBAS_FORMATIVA.md). P5, las notificaciones locales y los casos de borde pendientes aún requieren ejecución manual.
 
 ## Plan, revisiones y entrega
 
@@ -132,7 +132,7 @@ Por decisión del docente comunicada por el estudiante: **Firebase Authenticatio
 
 Herramienta: **OpenAI Codex / ChatGPT**.
 
-Se utilizó como apoyo para planificación, estructura del proyecto, generación inicial de código y revisión. El estudiante debe revisar, probar y corregir el código, y es responsable de poder explicarlo al profesor. No se atribuyen a la IA pruebas físicas ni resultados P1–P7 que aún no se han realizado.
+Se utilizó como apoyo para planificación, estructura del proyecto, generación inicial de código y revisión. El estudiante debe revisar, probar y corregir el código, y es responsable de poder explicarlo al profesor. Los resultados físicos registrados corresponden a las observaciones realizadas en los teléfonos; los casos pendientes y parciales se identifican como tales.
 
 ## Fuentes y límites del alcance
 

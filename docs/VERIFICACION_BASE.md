@@ -20,7 +20,9 @@ Comando final:
 .\gradlew.bat --no-daemon --max-workers=2 testDebugUnitTest assembleDebug
 ```
 
-**Prueba física de humo de esta implementación:** APK instalada por ADB y abierta en un Moto G35 con Android 15 (API 35). Primero el teléfono no tenía una interfaz Wi-Fi activa y la app informó que faltaba IP. Al activar Wi-Fi, la pantalla mostró la IP local sin reiniciar la app. Con un código temporal de seis dígitos se inició el Nodo: la interfaz mostró `ESPERANDO CONEXIÓN`, `0 / 3` y `CERRADO`; `ss -ltn` mostró el puerto TCP 5050 en escucha. El proceso permaneció activo y `logcat` no mostró excepciones `AndroidRuntime`. Esto verifica la actualización de IP y el arranque local del servidor en un teléfono real, pero no el intercambio con Panel ni reemplaza P1–P7.
+**Prueba física en dos teléfonos (18 de octubre de 2026):** APK instalada en un Moto G35 con Android 15 (API 35), rol Nodo, y un HONOR RBN-NX3 con Android 14 (API 34), rol Panel. En la misma red Wi-Fi local se verificaron conexión TCP, lecturas 2/3 y 3/3, retención de la solicitud, entrega DISPENSANDO → CERRADO, ACK confirmado y recuperación segura al detener el Panel con solicitud pendiente y durante la dispensación. Las capturas asociadas están en [docs/evidencia](evidencia/). No se guardaron el SSID, las direcciones IP ni el código temporal.
+
+POST_NOTIFICATIONS figuró como no concedido en ambos equipos. Por ese motivo no se pudieron verificar las notificaciones locales de P3/P4; la app siguió conectada y el control funcionó. P5 queda pendiente de repetición con evidencia; el corte de Wi-Fi desde Ajustes tampoco se probó. En la pérdida TCP causada al detener el Panel, el Nodo quedó en ESPERANDO CONEXIÓN, 0/3 y CERRADO, y mostró el aviso de enlace perdido. El proceso del Nodo permaneció activo y no hubo excepciones AndroidRuntime en los registros revisados.
 
 ## Controles automatizados
 
@@ -30,8 +32,15 @@ Comando final:
 | `testDebugUnitTest` de la implementación actual | Correcto: 7 pruebas, 0 errores y 0 fallos (parser, cifrado y ventana fija) |
 | `assembleDebug` después de refrescar la IP del Nodo en pantalla | `BUILD SUCCESSFUL`; APK en `app/build/outputs/apk/debug/app-debug.apk` (11.061.471 bytes) |
 | SHA-256 de la APK actual | `3F7A81C594962EF67133713CF809E87626904B4FA19B2C3820F44C9CBE36BBA4` |
-| Instalación y apertura en un teléfono | Correctas en Moto G35 / Android 15; proceso activo y sin excepciones `AndroidRuntime` en el registro revisado |
+| Instalación y apertura en dos teléfonos | Correctas en Moto G35 / Android 15 y HONOR RBN-NX3 / Android 14; sin excepciones AndroidRuntime en los registros revisados |
 | IP dinámica y Nodo | IP apareció al activar Wi-Fi sin reiniciar; Nodo quedó en `ESPERANDO CONEXIÓN`, contador 0/3, comedero `CERRADO`; puerto 5050 en escucha |
+| P1 conexión | Pasó: ambos teléfonos mostraron CONECTADO |
+| P2 monitoreo | Pasó: el HONOR mostró 2/3 aproximadamente 1,2 s después de la segunda pulsación |
+| P3 alerta | Parcial: 3/3 y solicitud retenida verificados; notificación no visible porque POST_NOTIFICATIONS no estaba concedido |
+| P4 entrega | Parcial: DISPENSANDO, CERRADO, contador 0 y ACK confirmado observados; notificación del Nodo no verificable con permiso denegado |
+| P5 código distinto | Pendiente de repetición documentada |
+| P6 pérdida de Panel | Pasó para cierre forzado del Panel con solicitud pendiente y durante DISPENSANDO; Nodo reinició a 0/CERRADO y mostró el aviso |
+| P7 permiso denegado | Parcial: el sistema informa permiso no concedido en ambos; conexión y control siguieron funcionando |
 | `git diff --check` | Correcto; sin errores de whitespace |
 | `lintDebug` | No concluyente: el análisis `lintAnalyzeDebug` no terminó tras varios minutos y se interrumpió; no se dispone de informe Lint |
 | Emulador | No iniciado: API 37 exigió 4096 MiB; el sistema reportó 4007 MiB disponibles |
@@ -42,14 +51,12 @@ Comando final:
 
 El SDK Android emitió una advertencia de que el archivo de métricas `C:\Users\Warlo\.android\analytics.settings` no se puede escribir en este entorno; no impidió compilar, ejecutar los tests, instalar la APK ni abrir la app. El cambio de conexión hace que la pantalla actualice la IP local mientras permanece abierta en rol Nodo.
 
-## Pruebas físicas pendientes
+## Pruebas físicas por completar
 
-- Conectar Nodo y Panel mediante Wi-Fi TCP 5050.
-- Probar ventana fija, notificación única, DISPENSAR, cierre, ACK y segundo ciclo.
-- Cambiar el código para verificar descarte criptográfico.
-- Cortar Wi-Fi o detener la app del Panel y observar el estado seguro CERRADO.
-- Negar POST_NOTIFICATIONS en Android 13+ y repetir conexión/control.
-- Registrar modelos, versiones Android, red, tiempo y evidencia en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md).
+- Repetir P5 con códigos distintos y capturar el estado de conexión TCP inicial y la desconexión por falta de lecturas válidas.
+- Repetir P3/P4 con POST_NOTIFICATIONS concedido para verificar las notificaciones locales y que la alerta de solicitud no se duplique.
+- Probar P6 apagando Wi-Fi desde Ajustes durante una solicitud y durante la dispensación; hasta ahora se verificó la pérdida al detener el Panel.
+- Completar los casos de borde y el segundo ciclo registrados en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md).
 
 ## Revisiones y publicación
 

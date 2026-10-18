@@ -1,8 +1,8 @@
 # PLAN_MVP — Comedero IoT · Unidad 2 Formativa
 
-Estado: Hitos 0–4 del alcance Formativo están documentados y el código de Hitos 3–4 está implementado. El profesor aprobó la revisión previa a Hito 3 con «está perfecto Marcelo», según la evidencia compartida por el estudiante. P1–P7 siguen pendientes de ejecutar en dos teléfonos. Repositorio privado: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
+Estado: Hitos 0–4 del alcance Formativo están documentados y el código está implementado. En dos teléfonos pasaron P1, P2 y P6; P3 y P4 quedaron parciales por el permiso de notificaciones no concedido; P5 sigue pendiente de repetición; P7 se comprobó parcialmente con el permiso denegado. El profesor aprobó la revisión previa a Hito 3 con «está perfecto Marcelo», según la evidencia compartida por el estudiante. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
 
-Las casillas de verificación física y aceptación final quedan pendientes hasta que el estudiante pruebe la app actualizada en los teléfonos. No se marca como completada ninguna prueba física no realizada.
+Las casillas de aceptación final permanecen pendientes cuando falta un resultado o evidencia. El detalle de cada prueba física está en docs/PRUEBAS_FORMATIVA.md.
 
 ## 1. Resumen y alcance
 
@@ -69,29 +69,29 @@ Cada mensaje de aplicación descifrado debe tener exactamente tres campos y una 
 
 ### Hito 3 — Prototipo conectado (2.1.2, 2.1.4)
 
-Código implementado; criterio del hito pendiente de comprobación en teléfonos físicos.
+Código implementado; comprobación física parcial, registrada en docs/PRUEBAS_FORMATIVA.md.
 
 - Implementado en código: pantallas, TCP, protocolo, ventana fija, notificaciones, entrega y cierre seguro. Esta descripción no marca pruebas como completadas.
-- [ ] Ejecutar P1 y P2 entre dos teléfonos; registrar resultado y evidencia.
-- [ ] Ejecutar la ventana fija, P3 y P4 entre los teléfonos; comprobar operación sin bloqueo.
-- [ ] Ejecutar P6, incluida pérdida durante solicitud pendiente y entrega; registrar el tiempo de detección.
-- [ ] Ejecutar P7 con notificaciones denegadas en Android 13+.
+- [x] Ejecutar P1 y P2 entre dos teléfonos; registrar resultado y evidencia.
+- [ ] Completar P3 y P4 verificando las notificaciones locales; contador, dispensación, cierre y ACK sí se observaron.
+- [x] Ejecutar pérdida del Panel con solicitud pendiente y durante DISPENSANDO; Nodo reinició a 0/CERRADO.
+- [x] Comprobar conexión y control con POST_NOTIFICATIONS no concedido; repetir la prueba del diálogo de permiso sigue pendiente.
 - [ ] Revisar y explicar el código con el profesor; cerrar criterios del hito solo tras evidencias reales.
 
 ### Hito 4 — Seguridad, pruebas y preentrega (2.1.3, 2.1.4)
 
-Cifrado, validación y casos unitarios implementados. Pruebas de dos teléfonos y aceptación final pendientes.
+Cifrado, validación y casos unitarios implementados. P5 y la aceptación completa permanecen pendientes.
 
 - Implementado en código: AES-256-GCM, clave derivada, validación por rol y descarte de trama inválida. La aceptación queda pendiente de prueba.
-- [ ] Ejecutar P5 con códigos distintos en dos teléfonos.
-- [ ] Ejecutar los casos P1–P7 y borde en teléfonos; completar resultado real y evidencia.
-- Compilación y 7 pruebas unitarias pasan en este entorno; las casillas de aceptación física P1–P7 siguen sin marcar.
+- [ ] Repetir P5 con códigos distintos y guardar evidencia del descarte y del timeout.
+- [ ] Probar mensajes alterados, parser estricto, ventana fija móvil/inmóvil y segundo ciclo.
+- Compilación y 7 pruebas unitarias pasan; resultados físicos, parciales y pendientes están diferenciados en docs/PRUEBAS_FORMATIVA.md.
 - [ ] Revisar README, seguridad y ausencia de secretos/datos personales antes de publicar.
 - [ ] Publicar los commits finales y actualizar la entrega AAI solo cuando corresponda.
 
 ## 5. Pruebas
 
-La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md). P1–P7 y los casos de borde aparecen **PENDIENTES** hasta realizarlos. Una compilación o prueba unitaria no sustituye las pruebas de interconexión física.
+La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md). Allí se separan los casos pasados, parciales y pendientes. Una compilación o prueba unitaria no sustituye las pruebas de interconexión física.
 
 ## 6. Trazabilidad
 
@@ -100,11 +100,11 @@ La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIV
 | Herramientas y proyecto | 0, 1 | Evidencia de arranque actual y versión Android |
 | Problemática, F1–F5 | 1 | Explicación del estudiante; revisión docente recibida |
 | Medio, mensajes y mockup | 2 | Explicación del estudiante; revisión docente recibida |
-| F1 sensor y F2 monitoreo | 3 | P1, P2 y ventana fija |
-| F3 entrega y ACK | 3 | P4 |
-| F4 notificaciones | 3 | P3, P4, P7 |
-| F5 estado seguro | 3, 4 | P6 |
-| Cifrado y validación | 3, 4 | P5 y mensajes inválidos/alterados |
+| F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron; ventana incompleta observada |
+| F3 entrega y ACK | 3 | P4 pasó en entrega/ACK; notificación local pendiente |
+| F4 notificaciones | 3 | P3/P4 parciales; permisos no concedidos |
+| F5 estado seguro | 3, 4 | P6 pasó al detener el Panel; falta apagar Wi-Fi desde Ajustes |
+| Cifrado y validación | 3, 4 | P5 pendiente; parser y mensajes alterados tienen pruebas unitarias, falta la prueba física |
 
 ## 7. Riesgos y límites pendientes
 
