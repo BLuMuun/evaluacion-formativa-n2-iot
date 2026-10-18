@@ -20,7 +20,7 @@ Comando final:
 .\gradlew.bat --no-daemon --max-workers=2 testDebugUnitTest assembleDebug
 ```
 
-**Prueba física de esta implementación:** `adb devices` no muestra teléfonos conectados durante esta revisión. No se han ejecutado P1–P7 ni se declara que la app actual funcione entre dos teléfonos.
+**Prueba física de humo de esta implementación:** APK instalada por ADB y pantalla `MainActivity` abierta en un Moto G35 con Android 15 (API 35). El proceso permaneció activo y `logcat` no mostró excepciones `AndroidRuntime`. La interfaz mostró Conexión, el rol Nodo y el mensaje «Sin IP Wi-Fi disponible»; por ello el botón de inicio quedó deshabilitado como corresponde. El teléfono no tenía una interfaz Wi-Fi activa durante la prueba. Esta ejecución confirma instalación y apertura, pero no prueba TCP ni reemplaza P1–P7.
 
 ## Controles automatizados
 
@@ -28,15 +28,19 @@ Comando final:
 |---|---|
 | Hito 0: compilación/arranque inicial | Confirmado por el estudiante en Moto G35; captura en el repositorio |
 | `testDebugUnitTest` de la implementación actual | Correcto: 7 pruebas, 0 errores y 0 fallos (parser, cifrado y ventana fija) |
-| `assembleDebug` de la implementación actual | `BUILD SUCCESSFUL`; APK generado en `app/build/outputs/apk/debug/app-debug.apk` (11.028.807 bytes) |
-| Repetición después del último cambio criptográfico | `BUILD SUCCESSFUL` en 1 min 1 s; 8 tareas ejecutadas y 35 UP-TO-DATE |
-| `git diff --check` | Ejecutado después de los últimos cambios; sin errores de whitespace |
+| `assembleDebug` después de refrescar la IP del Nodo en pantalla | `BUILD SUCCESSFUL`; APK en `app/build/outputs/apk/debug/app-debug.apk` (11.061.471 bytes) |
+| SHA-256 de la APK actual | `3F7A81C594962EF67133713CF809E87626904B4FA19B2C3820F44C9CBE36BBA4` |
+| Instalación y apertura en un teléfono | Correctas en Moto G35 / Android 15; proceso activo y sin excepciones `AndroidRuntime` en el registro revisado |
+| Estado de red durante la prueba de humo | Sin IP Wi-Fi disponible; no se intentó iniciar el servidor Nodo |
+| `git diff --check` | Correcto; sin errores de whitespace |
+| `lintDebug` | No concluyente: el análisis `lintAnalyzeDebug` no terminó tras varios minutos y se interrumpió; no se dispone de informe Lint |
+| Emulador | No iniciado: API 37 exigió 4096 MiB; el sistema reportó 4007 MiB disponibles |
 | `minSdk` | 26 en `app/build.gradle.kts` |
 | Permisos | INTERNET, ACCESS_NETWORK_STATE y POST_NOTIFICATIONS; los dos primeros son normales, el último se solicita desde Android 13 |
 | `allowBackup` / tráfico claro | `false` / `false` en AndroidManifest.xml |
 | Git ignore | Excluye `local.properties`, `.gradle/`, `app/build/`, secretos, configuración Firebase y volcados de JVM |
 
-El SDK Android emitió una advertencia de que el archivo de métricas `C:\Users\Warlo\.android\analytics.settings` no se puede escribir en este entorno; no impidió compilar, ejecutar los tests ni generar el APK. El SHA-256 del APK más reciente es `E06AAA81076E2851B87CD851D1B964638A02868F986AB15F0BE9F0EB8AC5FFE2`.
+El SDK Android emitió una advertencia de que el archivo de métricas `C:\Users\Warlo\.android\analytics.settings` no se puede escribir en este entorno; no impidió compilar, ejecutar los tests, instalar la APK ni abrir la app. El cambio de conexión hace que la pantalla actualice la IP local mientras permanece abierta en rol Nodo.
 
 ## Pruebas físicas pendientes
 
