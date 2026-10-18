@@ -34,11 +34,11 @@ No son funciones adicionales ni pruebas de Sumativa.
 | Caso | Procedimiento | Esperado | Resultado |
 |---|---|---|---|
 | Ventana incompleta | Pulsar 1 o 2 veces y esperar más de 5 s desde la primera. | Nodo y Panel vuelven a 0; un nuevo rasguño inicia nueva ventana. | **PASÓ:** después de dos rasguños, la ventana venció y ambos volvieron a 0. |
-| Ventana fija, no móvil | Pulsar en t=0 s, t≈4 s y t≈6 s. | Se reinicia al vencer t=5 s; el rasguño de t≈6 s inicia contador 1, no completa 3. | PENDIENTE |
-| Solicitud retenida | Completar 3 antes de 5 s; esperar y pulsar varias veces. | Permanece 3, sin nuevas alertas ni dispensación automática. | **PASÓ:** permaneció 3/3, no hubo dispensación automática y las pulsaciones adicionales no generaron alertas repetidas. |
-| Segundo ciclo | Completar P4 y hacer tres nuevos rasguños. | Nueva solicitud y una nueva notificación, una sola por ciclo. | PENDIENTE |
-| Mensaje alterado | En las pruebas de Hito 4 alterar un byte cifrado/etiqueta. | Se descarta sin acción ni cierre inesperado. | PENDIENTE |
-| Parseo estricto | Probar 2/4 campos, tipo/clave desconocidos, valor >16 caracteres, contador 4 y combinaciones no permitidas. | Se descartan; solo se aceptan combinaciones documentadas. | PENDIENTE |
+| Ventana fija, no móvil | Pulsar en t=0 s, t≈4 s y t≈6 s. | Se reinicia al vencer t=5 s; el rasguño de t≈6 s inicia contador 1, no completa 3. | **Prueba unitaria PASÓ** para el vencimiento fijo desde el primer rasguño. La secuencia cronometrada en teléfonos queda como comprobación opcional. |
+| Solicitud retenida | Completar 3 antes de 5 s; esperar y pulsar varias veces. | Permanece 3, sin nuevas alertas ni dispensación automática. | **PASÓ en teléfono:** permaneció 3/3, no hubo dispensación automática y las pulsaciones adicionales no generaron alertas repetidas. |
+| Segundo ciclo | Completar P4 y hacer tres nuevos rasguños. | Nueva solicitud y una nueva notificación, una sola por ciclo. | **Lógica de reinicio PASÓ en prueba unitaria.** La repetición de solicitud y notificación con dos teléfonos queda pendiente como prueba adicional. |
+| Mensaje alterado | Alterar un byte del cifrado/etiqueta de autenticidad. | Se descarta sin acción ni cierre inesperado. | **Prueba unitaria PASÓ:** AES-GCM rechazó datos alterados y código distinto. No se inyectó una trama alterada por la red física. |
+| Parseo estricto | Probar 2/4 campos, tipo/clave desconocidos, valor >16 caracteres, contador 4 y combinaciones no permitidas. | Se descartan; solo se aceptan combinaciones documentadas. | **Prueba unitaria PASÓ** con campos, tipos, claves y valores inválidos. No se inyectaron esas cadenas desde un teléfono. |
 
 ## Registro individual de evidencia
 

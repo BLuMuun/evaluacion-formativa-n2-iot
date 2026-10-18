@@ -58,4 +58,4 @@ El SDK Android emitió una advertencia de que el archivo de métricas `C:\Users\
 
 ## Revisiones y publicación
 
-El comentario docente «está perfecto Marcelo» fue compartido por el estudiante y se registra como aprobación previa a Hito 3. No se conserva la captura de mensajería en el repositorio porque incluye un teléfono personal. Los commits Hitos 0–2 están en el repositorio GitHub privado; no se afirma que la entrega se haya subido al AAI.
+El comentario docente «está perfecto Marcelo» fue compartido por el estudiante y se registra como aprobación previa a Hito 3. No se conserva la captura de mensajería en el repositorio porque incluye un teléfono personal. Los Hitos 0–4 y las actualizaciones de pruebas/evidencias están publicados en el repositorio GitHub privado; no se afirma que `entrega_aai.txt` se haya subido al AAI.

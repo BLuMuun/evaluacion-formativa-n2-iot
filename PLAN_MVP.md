@@ -1,8 +1,8 @@
 # PLAN_MVP — Comedero IoT · Unidad 2 Formativa
 
-Estado: Hitos 0–4 del alcance Formativo están documentados y el código está implementado. En dos teléfonos pasaron P1, P2 y P6; P3 y P4 quedaron parciales por el permiso de notificaciones no concedido; P5 sigue pendiente de repetición; P7 se comprobó parcialmente con el permiso denegado. El profesor aprobó la revisión previa a Hito 3 con «está perfecto Marcelo», según la evidencia compartida por el estudiante. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
+Estado: Hitos 0–4 del alcance Formativo están implementados y documentados. P1–P7 pasaron en dos teléfonos; P3/P4 se repitieron con notificaciones habilitadas y sus nuevas evidencias están en el repositorio. También pasan `assembleDebug` y las 7 pruebas unitarias. El profesor aprobó la revisión previa a Hito 3 con «está perfecto Marcelo», según la evidencia compartida por el estudiante. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
 
-Las casillas de aceptación final permanecen pendientes cuando falta un resultado o evidencia. El detalle de cada prueba física está en docs/PRUEBAS_FORMATIVA.md.
+Los pendientes que permanecen son preparación oral del estudiante, revisión final del código con el profesor si la solicita, carga manual del TXT al AAI y una repetición física opcional del segundo ciclo. No hay pruebas obligatorias P1–P7 pendientes. El detalle está en docs/PRUEBAS_FORMATIVA.md.
 
 ## 1. Resumen y alcance
 
@@ -69,47 +69,49 @@ Cada mensaje de aplicación descifrado debe tener exactamente tres campos y una 
 
 ### Hito 3 — Prototipo conectado (2.1.2, 2.1.4)
 
-Código implementado; comprobación física parcial, registrada en docs/PRUEBAS_FORMATIVA.md.
+Código implementado; comprobación física P1–P7 aprobada y registrada en docs/PRUEBAS_FORMATIVA.md.
 
 - Implementado en código: pantallas, TCP, protocolo, ventana fija, notificaciones, entrega y cierre seguro. Esta descripción no marca pruebas como completadas.
 - [x] Ejecutar P1 y P2 entre dos teléfonos; registrar resultado y evidencia.
-- [ ] Completar P3 y P4 verificando las notificaciones locales; contador, dispensación, cierre y ACK sí se observaron.
+- [x] Completar P3 y P4 verificando las notificaciones locales; contador, dispensación, cierre y ACK se observaron.
 - [x] Ejecutar pérdida del Panel con solicitud pendiente y durante DISPENSANDO; Nodo reinició a 0/CERRADO.
-- [x] Comprobar conexión y control con POST_NOTIFICATIONS no concedido; repetir la prueba del diálogo de permiso sigue pendiente.
+- [x] Ejecutar P7: denegar POST_NOTIFICATIONS en ambos teléfonos y comprobar que conexión y control continúan funcionando.
 - [ ] Revisar y explicar el código con el profesor; cerrar criterios del hito solo tras evidencias reales.
 
 ### Hito 4 — Seguridad, pruebas y preentrega (2.1.3, 2.1.4)
 
-Cifrado, validación y casos unitarios implementados. P5 y la aceptación completa permanecen pendientes.
+Cifrado, validación y P1–P7 verificados. Los casos unitarios comprueban mensajes alterados, parseo estricto y ventana fija.
 
-- Implementado en código: AES-256-GCM, clave derivada, validación por rol y descarte de trama inválida. La aceptación queda pendiente de prueba.
-- [ ] Repetir P5 con códigos distintos y guardar evidencia del descarte y del timeout.
-- [ ] Probar mensajes alterados, parser estricto, ventana fija móvil/inmóvil y segundo ciclo.
-- Compilación y 7 pruebas unitarias pasan; resultados físicos, parciales y pendientes están diferenciados en docs/PRUEBAS_FORMATIVA.md.
-- [ ] Revisar README, seguridad y ausencia de secretos/datos personales antes de publicar.
-- [ ] Publicar los commits finales y actualizar la entrega AAI solo cuando corresponda.
+- Implementado en código: AES-256-GCM, clave derivada, validación por rol y descarte de trama inválida. P5 pasó en teléfonos y el cifrado/parser también cuentan con pruebas unitarias.
+- [x] Ejecutar P5 con códigos distintos y guardar evidencia del descarte y del timeout.
+- [x] Probar con tests unitarios mensajes alterados, parser estricto, ventana fija y reinicio de la solicitud.
+- [ ] Repetir físicamente en dos teléfonos el segundo ciclo de solicitud/notificación; es una comprobación adicional, fuera de P1–P7.
+- Compilación y 7 pruebas unitarias pasan; P1–P7 pasaron en teléfonos. Las comprobaciones físicas adicionales se distinguen en docs/PRUEBAS_FORMATIVA.md.
+- [x] Revisar README, seguridad y evidencias antes de publicar; no se subió la captura secundaria P5 que exponía ubicación del teléfono.
+- [x] Publicar los commits finales en GitHub.
+- [ ] Subir `entrega_aai.txt` al AAI manualmente si la entrega aún está pendiente.
 
 ## 5. Pruebas
 
-La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md). Allí se separan los casos pasados, parciales y pendientes. Una compilación o prueba unitaria no sustituye las pruebas de interconexión física.
+La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md). P1–P7 pasaron en teléfonos físicos; los casos opcionales pendientes están separados. Una compilación o prueba unitaria no sustituye las pruebas de interconexión física.
 
 ## 6. Trazabilidad
 
 | Requisito | Hito | Verificación pendiente |
 |---|---|---|
-| Herramientas y proyecto | 0, 1 | Evidencia de arranque actual y versión Android |
-| Problemática, F1–F5 | 1 | Explicación del estudiante; revisión docente recibida |
-| Medio, mensajes y mockup | 2 | Explicación del estudiante; revisión docente recibida |
-| F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron; ventana incompleta observada |
-| F3 entrega y ACK | 3 | P4 pasó en entrega/ACK; notificación local pendiente |
-| F4 notificaciones | 3 | P3/P4 parciales; permisos no concedidos |
-| F5 estado seguro | 3, 4 | P6 pasó al detener el Panel; falta apagar Wi-Fi desde Ajustes |
-| Cifrado y validación | 3, 4 | P5 pendiente; parser y mensajes alterados tienen pruebas unitarias, falta la prueba física |
+| Herramientas y proyecto | 0, 1 | Hito 0 confirmado; versión Android de esa primera captura no registrada |
+| Problemática, F1–F5 | 1 | Revisión docente recibida; explicación oral del estudiante pendiente |
+| Medio, mensajes y mockup | 2 | Revisión docente recibida; explicación oral del estudiante pendiente |
+| F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron; ventana fija también tiene prueba unitaria |
+| F3 entrega y ACK | 3 | P4 pasó; notificación local observada |
+| F4 notificaciones | 3 | P3/P4 pasaron con permiso concedido; P7 pasó con permiso denegado |
+| F5 estado seguro | 3, 4 | P6 pasó al cerrar el Panel; no se apagó el Wi-Fi desde Ajustes |
+| Cifrado y validación | 3, 4 | P5 pasó; mensajes alterados y parser estricto pasan pruebas unitarias |
 
 ## 7. Riesgos y límites pendientes
 
-- Red institucional puede aislar clientes; probar router/hotspot propio en P1.
-- El tiempo para detectar una pérdida depende de la notificación que Android/red entregue al socket; medir en P6.
+- Red institucional puede aislar clientes; P1 se probó en una red Wi-Fi local compartida.
+- El tiempo para detectar una pérdida depende de la notificación que Android/red entregue al socket; P6 se observó al detener el Panel.
 - El código de seis dígitos tiene entropía limitada y AES-GCM no equivale a certificación ISO/IEC.
 - La app debe permanecer ejecutándose en primer plano; no se implementa servicio en segundo plano.
 - La app usa una sal de contexto fija definida en código y PBKDF2-HMAC-SHA256; esto es una protección académica básica, no una autenticación robusta de dispositivos.

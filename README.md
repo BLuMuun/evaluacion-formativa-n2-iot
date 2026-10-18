@@ -112,7 +112,7 @@ Pruebas físicas realizadas en dos teléfonos. P1–P7 tienen resultado registra
 
 ## Ejecutar en dos teléfonos
 
-Para repetir las pruebas, seguir [INSTALACION.md](docs/INSTALACION.md) y las instrucciones de [Nodo/Panel y P1–P7](docs/PRUEBAS_FORMATIVA.md). Algunos casos de borde de ventana y protocolo siguen pendientes y se identifican por separado de P1–P7.
+Para repetir las pruebas, seguir [INSTALACION.md](docs/INSTALACION.md) y las instrucciones de [Nodo/Panel y P1–P7](docs/PRUEBAS_FORMATIVA.md). P1–P7 están completos; algunos casos físicos adicionales de borde están identificados por separado.
 
 ## Plan, revisiones y entrega
 
@@ -132,7 +132,7 @@ Por decisión del docente comunicada por el estudiante: **Firebase Authenticatio
 
 Herramienta: **OpenAI Codex / ChatGPT**.
 
-Se utilizó como apoyo para planificación, estructura del proyecto, generación inicial de código y revisión. El estudiante debe revisar, probar y corregir el código, y es responsable de poder explicarlo al profesor. Los resultados físicos registrados corresponden a las observaciones realizadas en los teléfonos; los casos pendientes y parciales se identifican como tales.
+Se utilizó como apoyo para planificación, estructura del proyecto, generación inicial de código y revisión. El estudiante debe revisar, probar y corregir el código, y es responsable de poder explicarlo al profesor. Los resultados físicos registrados corresponden a las observaciones realizadas en los teléfonos; las comprobaciones físicas adicionales pendientes se identifican como tales.
 
 ## Fuentes y límites del alcance
 

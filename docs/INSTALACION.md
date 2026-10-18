@@ -35,7 +35,7 @@ También puedes instalar el APK directamente:
 2. En A abre **Comedero IoT**, deja el rol **Nodo**, ingresa un código de seis dígitos y pulsa **Iniciar Nodo**. A muestra la IP local y queda esperando.
 3. En B elige **Panel**, escribe la IP mostrada por A y el mismo código de seis dígitos. Pulsa **Conectar**.
 4. Espera a que ambos indiquen **CONECTADO**. ACCESS_NETWORK_STATE se concede automáticamente como permiso normal y no muestra diálogo. Si Android 13 o superior muestra las notificaciones deshabilitadas, pulsa **Permitir notificaciones** y acepta para probar alertas; si lo niegas, la conexión debe seguir funcionando.
-5. Consulta el estado de cada caso P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md); allí se indican las pruebas pasadas, parciales y pendientes, con sus evidencias.
+5. Consulta los resultados y evidencias de P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). Las comprobaciones físicas adicionales pendientes están separadas de esos casos.
 
 ## 4. Ejecutar P1–P7
 
