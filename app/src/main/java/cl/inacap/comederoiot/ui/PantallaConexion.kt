@@ -32,6 +32,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import cl.inacap.comederoiot.EstadoSesion
 import cl.inacap.comederoiot.RolApp
@@ -52,7 +53,11 @@ fun PantallaConexion(
     var ipLocal by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(rol) {
         if (rol == RolApp.NODO) {
-            ipLocal = withContext(Dispatchers.IO) { WifiEnlace.ipLocal() }
+            // Actualiza la IP si el usuario conecta el Wi-Fi con esta pantalla abierta.
+            while (true) {
+                ipLocal = withContext(Dispatchers.IO) { WifiEnlace.ipLocal() }
+                delay(2_000)
+            }
         }
     }
 
