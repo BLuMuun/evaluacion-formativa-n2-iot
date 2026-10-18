@@ -96,6 +96,13 @@ class MainActivity : ComponentActivity() {
         Sesion.actualizarPermisoNotificaciones(this)
     }
 
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        // El usuario puede cambiar el permiso desde Ajustes o el panel rápido
+        // mientras esta Activity sigue abierta; actualizamos el aviso al volver.
+        if (hasFocus) Sesion.actualizarPermisoNotificaciones(this)
+    }
+
     private fun solicitarPermisoNotificaciones() {
         if (Build.VERSION.SDK_INT < 33) {
             Sesion.actualizarPermisoNotificaciones(this)
