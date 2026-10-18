@@ -1,6 +1,6 @@
 # Mockup — Hito 2 · Comedero IoT
 
-**Diseño, no pantallas implementadas. Revisión docente PENDIENTE.**
+**Referencia visual del diseño aprobado por el docente.** Las pantallas funcionales ya están implementadas; el SVG es un mockup y no una captura de la aplicación.
 
 Material 3, interfaz clara, títulos legibles, botones amplios y estados escritos en texto; no depender solo del color. [Versión SVG](mockup.svg).
 

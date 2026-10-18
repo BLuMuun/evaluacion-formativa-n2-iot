@@ -20,6 +20,7 @@ captures/
 key.properties
 keystore.properties
 google-services.json
+hs_err_pid*.log
 service-account*.json
 .env
 .env.*

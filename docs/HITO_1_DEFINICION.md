@@ -1,6 +1,6 @@
-# Hito 1 — Definición para revisión docente
+# Hito 1 — Definición revisada
 
-Estado: DOCUMENTACIÓN PREPARADA. Revisión docente: **PENDIENTE**.
+Estado: DOCUMENTACIÓN REVISADA Y APROBADA POR EL DOCENTE, según respuesta compartida por el estudiante.
 Evaluación: únicamente Formativa, Unidad 2, TI3042, INACAP. Trabajo individual.
 
 ## Problemática
@@ -45,14 +45,12 @@ No hay credenciales reales ni datos personales. Las versiones fijadas de las dep
 
 ## Revisión con el docente
 
-Debe presentarse este documento antes de continuar con la validación del diseño. La preparación anticipada del Hito 2 fue autorizada por el estudiante; no sustituye esta revisión.
-
 | Registro | Valor |
 |---|---|
-| Estado | PENDIENTE |
-| Fecha | Por completar |
-| Retroalimentación | Por completar |
-| Ajustes solicitados | Por completar |
-| Evidencia de revisión / aprobación | Por completar |
+| Estado | APROBADO, según el mensaje confirmado por el estudiante |
+| Fecha | No visible en la captura compartida |
+| Retroalimentación | «Está perfecto, Marcelo» |
+| Ajustes solicitados | Ninguno informado |
+| Evidencia de revisión / aprobación | Confirmación recibida por mensajería. No se copia la captura al repositorio porque contiene un número telefónico personal. |
 
 Fuente principal: *Guía de desarrollo — Unidad 2 · App Android para IoT*, pp. 11–12.

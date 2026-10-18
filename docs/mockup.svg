@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="860" viewBox="0 0 1200 860" role="img" aria-labelledby="title desc">
   <title id="title">Comedero IoT — mockup de tres pantallas</title>
-  <desc id="desc">Diseño pendiente de revisión docente. Conexión con alternativas Nodo y Panel, Nodo con simulación de rasguños y Panel con control de comida. No son pantallas implementadas.</desc>
+  <desc id="desc">Mockup del diseño revisado. Conexión con roles Nodo y Panel, Nodo con simulación de rasguños y Panel con control de comida. Las pantallas están implementadas; este SVG sigue siendo una referencia visual, no una captura.</desc>
   <style>
     text { font-family: Arial, sans-serif; fill: #263a32; }
     .title { font-size: 23px; font-weight: 700; }
@@ -12,7 +12,7 @@
   </style>
   <rect width="1200" height="860" fill="#edf2ee"/>
   <text x="40" y="44" class="title">Comedero IoT · Unidad 2 Formativa</text>
-  <text x="40" y="72" class="label">Hito 2 · Diseño preparado · Revisión docente PENDIENTE · Sin implementar</text>
+  <text x="40" y="72" class="label">Hito 2 · Diseño revisado · Pantallas implementadas</text>
 
   <rect x="40" y="106" width="352" height="668" rx="28" fill="#fcfdf9" stroke="#c3d0c7"/>
   <text x="64" y="148" class="title">Conexión</text>

@@ -1,45 +1,54 @@
-# Abrir y probar el proyecto base
+# Compilar, instalar y probar en dos teléfonos
 
-Estado actual: el estudiante instaló Android Studio y el SDK, y confirmó que la base abrió en un Moto G35 el 14-10-2026. Falta registrar captura/versión Android y repetir el arranque en un segundo teléfono. P1–P7 no se han ejecutado.
+La app Formativa usa un teléfono A como Nodo servidor y un teléfono B como Panel cliente. Instala el mismo APK de depuración en ambos. Se necesita Android 8.0/API 26 o superior y que los dos teléfonos compartan una red Wi-Fi local o hotspot que permita comunicación entre clientes.
 
-## Instalar las herramientas
+## 1. Abrir y compilar en Android Studio
 
-1. Descargar Android Studio estable desde [Android Developers](https://developer.android.com/studio) y ejecutar su instalador.
-2. Abrir Android Studio y completar el Setup Wizard. Revisar y aceptar personalmente las licencias que correspondan.
-3. En SDK Manager instalar **Android SDK Platform 36**, **Android SDK Build-Tools 35.0.0** y **Android SDK Platform-Tools**. No se necesita emulador para usar teléfonos reales.
-4. Abrir la carpeta raíz de este repositorio con **Open**. No crear otro proyecto encima ni abrir solo `app/`.
-5. En Settings → Build, Execution, Deployment → Build Tools → Gradle, usar un JDK compatible (por ejemplo JDK 21 de Android Studio). El bytecode del proyecto es Java 17. No usar Java 8.
-6. Si el IDE pregunta por Android SDK, seleccionar la ubicación que muestre SDK Manager. Android Studio crea `local.properties`; ese archivo se excluye de Git porque contiene una ruta local.
-7. Ejecutar **Sync Project with Gradle Files**. Requiere Internet para descargar Gradle y dependencias la primera vez.
-8. Ejecutar la tarea Gradle `:app:assembleDebug`, desde la ventana Gradle o la terminal configurada con JDK 17/21: `./gradlew.bat :app:assembleDebug` en Windows.
-9. Exigir `BUILD SUCCESSFUL`. El APK resultante estará en `app/build/outputs/apk/debug/app-debug.apk`. Si falla, conservar el error completo; todavía no se ha confirmado la compilación en este entorno.
+1. Abre la carpeta raíz del repositorio con **Open** en Android Studio; no crees otro proyecto ni abras solo `app/`.
+2. En **Settings → Build, Execution, Deployment → Build Tools → Gradle**, selecciona el JDK integrado de Android Studio (JDK 21 funciona con esta configuración). El proyecto genera bytecode Java 17.
+3. En SDK Manager instala Android SDK Platform 36 y Android SDK Build-Tools. La ruta del SDK se guarda en `local.properties`, archivo local que no se publica.
+4. Pulsa **Sync Project with Gradle Files** y espera `BUILD SUCCESSFUL`.
+5. Selecciona **Build → Make Project** o, en la terminal de Android Studio, ejecuta:
 
-## Instalar la base en Teléfono A
+   ```powershell
+   .\gradlew.bat testDebugUnitTest assembleDebug
+   ```
 
-1. Usar un teléfono Android 8.0/API 26 o superior.
-2. En Ajustes → Acerca del teléfono, tocar siete veces Número de compilación; en algunos modelos está dentro de Información de software.
-3. En Opciones de desarrollador habilitar Depuración USB.
-4. Conectar A al PC con cable de datos; aceptar la autorización de depuración en el teléfono.
-5. En Android Studio seleccionar A en la lista de dispositivos y ejecutar **Run app**.
-6. Verificar que se muestran «Comedero IoT», «Unidad 2 · Formativa» y el mensaje de revisión docente pendiente. Registrar captura y versión Android. Esto prueba solo el Hito 0.
+   La primera vez se descargan Gradle y dependencias. El APK aparece en `app/build/outputs/apk/debug/app-debug.apk`.
 
-## Instalar la base en Teléfono B
+## 2. Instalar el mismo APK en A y B
 
-1. Repetir habilitación de depuración y autorización en B.
-2. Conectar B, seleccionarlo por su nombre en Android Studio y ejecutar el mismo módulo **app**.
-3. Verificar la misma bienvenida y registrar evidencia. Actualmente ninguno de los dos teléfonos puede elegir Nodo o Panel: esas pantallas aún no se implementan.
+Con USB y Android Studio:
 
-Alternativa una vez compilado: copiar el APK debug a cada teléfono, abrirlo y permitir la instalación desde esa fuente cuando Android lo solicite. No confundir ese permiso del instalador con permisos solicitados por la app.
+1. En cada teléfono habilita Opciones de desarrollador y **Depuración USB** (Ajustes → Acerca del teléfono → toca siete veces Número de compilación).
+2. Conecta A al PC, acepta la autorización en el teléfono, selecciónalo en Android Studio y pulsa **Run app**. Repite con B.
 
-## Después de la revisión docente
+También puedes instalar el APK directamente:
 
-Primero implementar y verificar Hitos 3–4. Reinstalar la app actualizada en ambos equipos siguiendo los mismos pasos. Después seguir exactamente la preparación y los casos [P1–P7](PRUEBAS_FORMATIVA.md). No intentar validar conexión, cifrado o alimentación con la bienvenida del Hito 0.
+1. Copia `app-debug.apk` a cada teléfono por cable o transferencia local.
+2. Abre el APK desde Archivos. Si Android lo solicita, habilita **Permitir desde esta fuente** para esa aplicación instaladora y confirma instalar.
+3. Esa autorización corresponde solo a la instalación manual; la app solicita únicamente sus permisos de funcionamiento.
 
-## Si algo no aparece
+## 3. Iniciar la conexión
 
-- Teléfono no listado: revisar cable de datos, autorización USB y controlador del fabricante en Windows.
-- Error de SDK: verificar la ruta en SDK Manager; no copiar la ruta del computador de otra persona.
-- Error de Java: comprobar el Gradle JDK del IDE; el Java 8 de PATH no sirve para este proyecto.
-- Error de descarga: comprobar Internet/proxy y conservar la salida completa de Gradle.
+1. Conecta ambos teléfonos al mismo router Wi-Fi o conecta ambos al hotspot de uno de ellos. Evita redes con aislamiento de clientes. Mantén Comedero IoT visible en primer plano.
+2. En A abre **Comedero IoT**, deja el rol **Nodo**, ingresa un código de seis dígitos y pulsa **Iniciar Nodo**. A muestra la IP local y queda esperando.
+3. En B elige **Panel**, escribe la IP mostrada por A y el mismo código de seis dígitos. Pulsa **Conectar**.
+4. Espera a que ambos indiquen **CONECTADO**. ACCESS_NETWORK_STATE se concede automáticamente como permiso normal y no muestra diálogo. Si Android 13 o superior muestra las notificaciones deshabilitadas, pulsa **Permitir notificaciones** y acepta para probar alertas; si lo niegas, la conexión debe seguir funcionando.
+5. Ejecuta los pasos de P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). Las pruebas están pendientes hasta que las realices y registres resultados/evidencia.
 
-Compatibilidad de AGP/Gradle/JDK: [documentación oficial de AGP 8.13](https://developer.android.com/build/releases/agp-8-13-0-release-notes). Compose se configura con su plugin de compilador del mismo número que Kotlin; [documentación oficial](https://developer.android.com/develop/ui/compose/compiler).
+## 4. Ejecutar P1–P7
+
+En P1–P7 conserva A como Nodo y B como Panel. Reinicia la conexión antes de pruebas que especifican códigos distintos o pérdida del enlace. Para P5 usa códigos de prueba `111111` y `222222`, nunca un secreto personal. En P6 corta el Wi-Fi del Panel o fuerza la detención de la app desde Ajustes; registra cuánto tarda en reflejarse la pérdida. En P7 deniega la notificación en Android 13+ y repite conexión, alerta y control.
+
+Completa manualmente teléfono/modelo, versión Android, red, fecha, resultado observado y evidencia. No marques una prueba como aprobada si no se ejecutó en los teléfonos.
+
+## Si Android Studio o el teléfono informa un error
+
+- Teléfono no listado: verifica cable de datos, autorización de depuración y controlador del fabricante en Windows.
+- `SDK location not found`: selecciona la ruta desde SDK Manager y sincroniza Gradle; no publiques tu `local.properties`.
+- Error de Java/Gradle: usa el JDK de Android Studio y revisa la salida completa de Build.
+- Conexión rechazada/esperando: confirma que ambos están en la misma red, que el router no aísla los equipos, que la IP del Nodo no cambió y que el puerto TCP 5050 está permitido en la red.
+- Código diferente: el socket puede conectar, pero los mensajes cifrados se descartan; vuelve a Conexión y utiliza el mismo código de prueba en ambos.
+
+Las pruebas físicas P1–P7 no se consideran realizadas por compilar, instalar o ejecutar pruebas unitarias.
