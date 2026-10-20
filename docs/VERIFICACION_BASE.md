@@ -4,9 +4,9 @@ Actualizado: 20 de octubre de 2026 (hora de Santiago).
 
 ## Login añadido después de las pruebas físicas
 
-Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. El proyecto Android está registrado y `app/google-services.json` se encuentra localmente, excluido de Git. `testDebugUnitTest assembleDebug` pasó con esta configuración. El proveedor Email/Password ya está habilitado, pero falta crear y autenticar una cuenta de prueba; por ello el acceso real no se ha validado. Las pruebas físicas IoT descritas abajo se ejecutaron en el build anterior al Login. Después de iniciar sesión en ambos teléfonos, repetir L1–L3 y P1–P7. Ver [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
+Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. El proyecto Android está registrado y `app/google-services.json` se encuentra localmente, excluido de Git. `testDebugUnitTest assembleDebug` pasó con esta configuración. **El 20 de octubre de 2026, L1 pasó en el Moto G35:** Firebase autenticó la cuenta de prueba, Conexión apareció en pantalla y el proceso permaneció activo sin excepciones de la app en los registros revisados. La prueba de acceso rechazado y sesión/cierre sigue pendiente. En la captura de comprobación el teléfono estaba en 5G, no Wi-Fi; la aplicación mostraba notificaciones deshabilitadas. Las pruebas físicas IoT descritas abajo se ejecutaron en el build anterior al Login; repetir L2/L3 y P1–P7 con el build actual. Ver [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
 
-El build con la configuración Firebase local se compiló correctamente y pasó `testDebugUnitTest`; no se inició sesión porque aún no hay cuenta de prueba.
+El build con la configuración Firebase local se compiló correctamente y pasó `testDebugUnitTest`. Luego se validó el inicio de sesión correcto L1 en el Moto G35; L2, L3 y la regresión P1–P7 con Login siguen pendientes.
 
 ## Hito 0: antecedente confirmado por el estudiante
 
@@ -36,7 +36,8 @@ P7 se ejecutó con POST_NOTIFICATIONS denegado en ambos teléfonos; la conexión
 |---|---|
 | Hito 0: compilación/arranque inicial | Confirmado por el estudiante en Moto G35; captura en el repositorio |
 | `testDebugUnitTest` de la implementación IoT anterior al Login | Correcto: 7 pruebas, 0 errores y 0 fallos (parser, cifrado y ventana fija) |
-| `testDebugUnitTest assembleDebug` con Login y configuración Firebase local (20-oct-2026) | `BUILD SUCCESSFUL`; siete pruebas unitarias pasaron. Auth real no se probó |
+| `testDebugUnitTest assembleDebug` con Login y configuración Firebase local (20-oct-2026) | `BUILD SUCCESSFUL`; siete pruebas unitarias pasaron |
+| L1 — Autenticación Firebase válida en Moto G35 (20-oct-2026) | Pasó: Firebase emitió el evento de sesión y la app abrió Conexión; sin excepción de la app en los registros revisados |
 | `assembleDebug` después de refrescar la IP del Nodo, versión IoT anterior | `BUILD SUCCESSFUL`; APK anterior de 11.061.471 bytes |
 | SHA-256 de la APK IoT anterior al Login | `3F7A81C594962EF67133713CF809E87626904B4FA19B2C3820F44C9CBE36BBA4` |
 | APK de Login integrada sin Firebase | 13.593.601 bytes; SHA-256 `15994A8F6A3F58776E25C5E2CD5C8225CF845EC34273D80F0ECB4B271F21194B` |

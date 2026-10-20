@@ -1,8 +1,8 @@
 # PLAN_MVP — Comedero IoT · Unidad 2 Formativa
 
-Estado: Hitos 0–4 de la aplicación IoT están implementados; P1–P7 se probaron en dos teléfonos con el build anterior al Login. Por retroalimentación del profesor se añadió Login con Firebase Authentication. El proyecto y la app Android están registrados; Email/Password quedó habilitado; `app/google-services.json` funciona localmente y no se publica. La compilación con Firebase y las siete pruebas unitarias pasaron. Falta crear una cuenta de prueba y probar Login y regresión en teléfonos. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
+Estado: Hitos 0–4 de la aplicación IoT están implementados; P1–P7 se probaron en dos teléfonos con el build anterior al Login. Por retroalimentación del profesor se añadió Login con Firebase Authentication. El proyecto y la app Android están registrados; Email/Password quedó habilitado; `app/google-services.json` funciona localmente y no se publica. La compilación con Firebase y las siete pruebas unitarias pasaron. El 20-oct-2026 se validó en el Moto G35 el acceso con credenciales válidas y la llegada a Conexión. Quedan las pruebas negativas/de sesión y repetir P1–P7 con Login. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
 
-El Login aún no puede autenticar hasta crear una cuenta Firebase de prueba. P1–P7 también deben repetirse con la versión que ya exige Login. El detalle está en docs/FIREBASE_LOGIN.md y el registro en docs/PRUEBAS_FORMATIVA.md.
+El Login válido ya se comprobó en el Moto G35; la prueba de credenciales inválidas, cierre/persistencia de sesión y P1–P7 deben repetirse con la versión que ya exige Login. Al verificar el acceso, el teléfono estaba en 5G sin IP Wi-Fi y las notificaciones aparecían deshabilitadas. El detalle está en docs/FIREBASE_LOGIN.md y el registro en docs/PRUEBAS_FORMATIVA.md.
 
 ## 1. Resumen y alcance
 
@@ -99,9 +99,10 @@ Cifrado, validación y P1–P7 verificados. Los casos unitarios comprueban mensa
 - [x] Mantener `google-services.json` y contraseñas fuera del repositorio.
 - [x] Crear proyecto Firebase, registrar Android package `cl.inacap.comederoiot` y guardar `google-services.json` en `app/` localmente (ignorado por Git).
 - [x] Habilitar Email/Password en Firebase Console.
-- [ ] Crear una cuenta de prueba desde Firebase Console; la contraseña la ingresa y administra el estudiante.
+- [x] Crear una cuenta de prueba desde Firebase Console; la contraseña la ingresa y administra el estudiante.
 - [x] Compilar con la configuración Firebase local: `testDebugUnitTest assembleDebug`, 7 pruebas unitarias aprobadas.
-- [ ] Instalar, probar acceso correcto/incorrecto y cerrar sesión en teléfonos.
+- [x] Instalar y probar acceso correcto en el Moto G35; Firebase autenticó la sesión y la app abrió Conexión.
+- [ ] Probar credenciales incorrectas y verificar cierre/persistencia de sesión en teléfono.
 - [ ] Repetir P1–P7 con el APK que incluye Login.
 
 ## 5. Pruebas
@@ -115,7 +116,7 @@ La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIV
 | Herramientas y proyecto | 0, 1 | Hito 0 confirmado; versión Android de esa primera captura no registrada |
 | Problemática, F1–F5 | 1 | Revisión docente recibida; explicación oral del estudiante pendiente |
 | Medio, mensajes y mockup | 2 | Revisión docente recibida; explicación oral del estudiante pendiente |
-| Login | Ajuste profesor | Proveedor habilitado; falta crear cuenta y probar acceso |
+| Login | Ajuste profesor | Acceso válido pasó en Moto G35; L2, L3 y regresión P1–P7 con Login pendientes |
 | F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron en versión anterior; repetir en APK con Login |
 | F3 entrega y ACK | 3 | P4 pasó; notificación local observada |
 | F4 notificaciones | 3 | P3/P4 pasaron con permiso concedido; P7 pasó con permiso denegado |

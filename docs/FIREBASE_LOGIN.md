@@ -4,9 +4,9 @@ El Login se añadió a la Formativa por solicitud del profesor. Usa Firebase Aut
 
 ## Estado actual
 
-El proyecto Firebase y su aplicación Android `cl.inacap.comederoiot` ya están registrados. El archivo `app/google-services.json` se encuentra en el equipo local y fue reconocido al compilar. `.gitignore` lo excluye del repositorio. Se agregó el plugin Google Services y Firebase Authentication al proyecto; `testDebugUnitTest assembleDebug` terminó correctamente con siete pruebas unitarias aprobadas. El proveedor **Correo electrónico/Contraseña quedó habilitado** en Firebase Console.
+El proyecto Firebase y su aplicación Android `cl.inacap.comederoiot` ya están registrados. El archivo `app/google-services.json` se encuentra en el equipo local y fue reconocido al compilar. `.gitignore` lo excluye del repositorio. Se agregó el plugin Google Services y Firebase Authentication al proyecto; `testDebugUnitTest assembleDebug` terminó correctamente con siete pruebas unitarias aprobadas. El proveedor **Correo electrónico/Contraseña quedó habilitado** en Firebase Console. El 20 de octubre de 2026, el acceso válido se comprobó en el Moto G35 y abrió la pantalla Conexión.
 
-**Pendiente:** crear una cuenta de prueba y validar el Login en un teléfono. La cuenta y su contraseña las administra el estudiante; no compartas la contraseña con Codex ni la incluyas en GitHub.
+La cuenta de prueba ya se creó y el acceso válido pasó en el Moto G35. No se registran la cuenta ni la contraseña en este documento; la contraseña la administra el estudiante y no se incluye en GitHub.
 
 ## 1. Registro de proyecto y configuración Android (completado)
 
@@ -22,7 +22,7 @@ El JSON ya está instalado en `app/google-services.json`. Mantén esa copia loca
 
 1. En Firebase Console abre **Authentication → Método de acceso**.
 2. **Correo electrónico/Contraseña ya está habilitado** en este proyecto.
-3. Abre la pestaña **Usuarios**, selecciona **Agregar usuario** y crea una cuenta de prueba con un correo tuyo y una contraseña segura. Este paso está pendiente; ingrésala directamente en Firebase Console y no la compartas con Codex.
+3. Abre la pestaña **Usuarios**, selecciona **Agregar usuario** y crea una cuenta de prueba con un correo tuyo y una contraseña segura. La cuenta ya está creada; ingrésala directamente en Firebase Console y no la compartas con Codex.
 4. La pantalla pide “Usuario (correo electrónico)” porque Firebase Authentication Email/Password inicia sesión con una dirección de correo. No existe un usuario separado del correo en este flujo.
 
 No compartas la contraseña con Codex ni la incluyas en GitHub. El usuario de prueba se administra desde Firebase Console.
@@ -39,6 +39,6 @@ El Login deja entrar solo después de una autenticación exitosa. Si no existe l
 
 ## Alcance y validación
 
-La integración compiló correctamente con la configuración Firebase local y Email/Password está habilitado, pero todavía no se ha autenticado una cuenta. Las pruebas L1–L3 y la repetición de P1–P7 quedan pendientes hasta crear la cuenta de prueba y probar en teléfonos. No se afirma que Login haya sido validado físicamente mientras eso no ocurra.
+La integración compiló correctamente con la configuración Firebase local y Email/Password está habilitado. L1 (credenciales válidas → Conexión) pasó en un Moto G35 el 20 de octubre de 2026. L2 (credenciales inválidas) y L3 (persistencia y cierre de sesión) siguen pendientes. P1–P7 también deben repetirse en dos teléfonos con este build, porque los resultados físicos anteriores son de la versión previa al Login.
 
 Referencias oficiales: [Configurar Firebase en Android](https://firebase.google.com/docs/android/setup) y [autenticación con correo y contraseña](https://firebase.google.com/docs/auth/android/password-auth).

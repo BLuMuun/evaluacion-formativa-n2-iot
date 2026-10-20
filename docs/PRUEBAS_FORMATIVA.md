@@ -1,16 +1,16 @@
 # Pruebas — Unidad 2 Formativa
 
-**Registro físico actualizado: 18 de octubre de 2026.** Se probó la app instalada en dos teléfonos reales: A = Moto G35, Android 15/API 35 (Nodo); B = HONOR RBN-NX3, Android 14/API 34 (Panel). Ambos estaban conectados a la misma red Wi-Fi local. No se guardan en este documento el SSID, las IP locales ni el código temporal.
+**P1–P7 físicos: 18 de octubre de 2026.** Se probó la app instalada en dos teléfonos reales: A = Moto G35, Android 15/API 35 (Nodo); B = HONOR RBN-NX3, Android 14/API 34 (Panel). Ambos estaban conectados a la misma red Wi-Fi local. **Login Firebase L1: 20 de octubre de 2026**, comprobado en el Moto G35 con la cuenta de prueba. No se guardan en este documento el SSID, las IP locales, el código temporal ni las credenciales.
 
 ### Login Formativo (retroalimentación posterior del profesor)
 
-Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. El proyecto Android Firebase y `app/google-services.json` están configurados localmente; Email/Password está habilitado y la compilación con esa configuración y las siete pruebas unitarias pasaron. **Pendiente de validación:** crear una cuenta de prueba y probar acceso válido/inválido en dispositivo. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). P1–P7 de abajo se ejecutaron con el build IoT anterior al Login; deben repetirse después de probar el Login, que ahora protege la entrada a Conexión.
+Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. El proyecto Android Firebase y `app/google-services.json` están configurados localmente; Email/Password está habilitado y la compilación con esa configuración y las siete pruebas unitarias pasaron. **L1 pasó en el Moto G35:** Firebase aceptó la cuenta de prueba y se abrió Conexión; el registro del dispositivo confirmó el evento de autenticación y no mostró excepciones de la app. No se guardó una captura de esta prueba. En ese momento el teléfono estaba conectado a 5G, sin IP Wi-Fi, y la app indicaba notificaciones deshabilitadas. L2 y L3 siguen pendientes. P1–P7 de abajo se ejecutaron con el build IoT anterior al Login y deben repetirse con la versión actual. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
 
 | Caso | Resultado esperado | Resultado real | Evidencia |
 |---|---|---|---|
-| L1 — Login con credenciales válidas | Firebase autentica al usuario y abre Conexión. | **PENDIENTE:** falta crear la cuenta de prueba. | Registrar después de probar en teléfono. |
-| L2 — Credenciales inválidas | Mostrar error legible, permanecer en Login y no cerrar la app. | **PENDIENTE:** falta una cuenta configurada para probar el rechazo. | Registrar después de probar en teléfono. |
-| L3 — Sesión y cierre | Una sesión válida abre Conexión al volver a abrir; Cerrar sesión retorna a Login. | **PENDIENTE:** requiere una cuenta Firebase de prueba. | Registrar después de probar en teléfono. |
+| L1 — Login con credenciales válidas | Firebase autentica al usuario y abre Conexión. | **PASÓ, 20-oct-2026:** en Moto G35 Firebase autenticó la cuenta de prueba y la app mostró Conexión; el proceso siguió activo sin excepciones. | Comprobación directa de pantalla y registro FirebaseAuth del dispositivo; no se archivó captura. |
+| L2 — Credenciales inválidas | Mostrar error legible, permanecer en Login y no cerrar la app. | **PENDIENTE:** no se probó un acceso rechazado. | Registrar después de probar en teléfono. |
+| L3 — Sesión y cierre | Una sesión válida abre Conexión al volver a abrir; Cerrar sesión retorna a Login. | **PENDIENTE:** no se probó persistencia al reabrir ni el botón Cerrar sesión. | Registrar después de probar en teléfono. |
 
 No registrar ni subir contraseñas, tokens de sesión ni archivos de configuración.
 
