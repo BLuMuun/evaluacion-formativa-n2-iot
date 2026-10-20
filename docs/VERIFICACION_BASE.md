@@ -2,11 +2,11 @@
 
 Actualizado: 20 de octubre de 2026 (hora de Santiago).
 
-## Login añadido después de las pruebas físicas
+## Login y regresión física actual
 
-Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. El proyecto Android está registrado y `app/google-services.json` se encuentra localmente, excluido de Git. `testDebugUnitTest assembleDebug` pasó con esta configuración. **El 20 de octubre de 2026, L1 pasó en el Moto G35:** Firebase autenticó la cuenta de prueba, Conexión apareció en pantalla y el proceso permaneció activo sin excepciones de la app en los registros revisados. La prueba de acceso rechazado y sesión/cierre sigue pendiente. En la captura de comprobación el teléfono estaba en 5G, no Wi-Fi; la aplicación mostraba notificaciones deshabilitadas. Las pruebas físicas IoT descritas abajo se ejecutaron en el build anterior al Login; repetir L2/L3 y P1–P7 con el build actual. Ver [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
+Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. El proyecto Android está registrado y `app/google-services.json` se encuentra localmente, excluido de Git. `testDebugUnitTest assembleDebug` pasó con esta configuración. **El 20 de octubre de 2026, L1 pasó en el Moto G35:** Firebase autenticó la cuenta de prueba, Conexión apareció en pantalla y el proceso permaneció activo sin excepciones de la app en los registros revisados. L2 y L3 siguen pendientes. **P1–P7 se repitieron en los dos teléfonos con el build actual con Login el 20 de octubre de 2026**; los resultados están en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). No se guardaron capturas nuevas de esa regresión.
 
-El build con la configuración Firebase local se compiló correctamente y pasó `testDebugUnitTest`. Luego se validó el inicio de sesión correcto L1 en el Moto G35; L2, L3 y la regresión P1–P7 con Login siguen pendientes.
+El build con la configuración Firebase local se compiló correctamente y pasó `testDebugUnitTest`. Luego se validó L1 en el Moto G35 y la regresión P1–P7 en Moto G35 y HONOR; L2 y L3 siguen pendientes.
 
 ## Hito 0: antecedente confirmado por el estudiante
 
@@ -26,9 +26,11 @@ Comando final:
 .\gradlew.bat --no-daemon --max-workers=2 testDebugUnitTest assembleDebug
 ```
 
-**Prueba física en dos teléfonos (18 de octubre de 2026):** APK instalada en un Moto G35 con Android 15 (API 35), rol Nodo, y un HONOR RBN-NX3 con Android 14 (API 34), rol Panel. En la misma red Wi-Fi local se verificaron conexión TCP, lecturas 2/3 y 3/3, retención de la solicitud, entrega DISPENSANDO → CERRADO, ACK confirmado y recuperación segura al detener el Panel con solicitud pendiente y durante la dispensación. Las capturas asociadas están en [docs/evidencia](evidencia/). No se guardaron el SSID, las direcciones IP ni el código temporal.
+**Prueba física inicial en dos teléfonos (18 de octubre de 2026):** APK instalada en un Moto G35 con Android 15 (API 35), rol Nodo, y un HONOR RBN-NX3 con Android 14 (API 34), rol Panel. En la misma red Wi-Fi local se verificaron conexión TCP, lecturas 2/3 y 3/3, retención de la solicitud, entrega DISPENSANDO → CERRADO, ACK confirmado y recuperación segura al detener el Panel con solicitud pendiente y durante la dispensación. Las capturas asociadas están en [docs/evidencia](evidencia/). No se guardaron el SSID, las direcciones IP ni el código temporal.
 
-P7 se ejecutó con POST_NOTIFICATIONS denegado en ambos teléfonos; la conexión y el control siguieron funcionando. Después se concedió el permiso y se repitieron P3/P4: se observaron las dos notificaciones locales y se tomaron capturas completas. También se ejecutó P5 con códigos distintos; las tramas no se interpretaron y no se procesó ninguna orden. P6 se probó deteniendo el Panel tanto con solicitud pendiente como durante la dispensación; el Nodo quedó en ESPERANDO CONEXIÓN, 0/3 y CERRADO, con aviso de enlace perdido. No se probó apagar Wi-Fi desde Ajustes. No hubo excepciones AndroidRuntime en los registros revisados.
+**Regresión con Login (20 de octubre de 2026):** se repitieron P1–P7 en los dos teléfonos con sesión Firebase iniciada. P1–P5 y P7 pasaron; en P6 se detuvo el Panel con una solicitud pendiente y el Nodo volvió a ESPERANDO CONEXIÓN, 0/3 y CERRADO. No se apagó el Wi-Fi desde Ajustes en esta regresión. No se guardaron capturas nuevas; se observaron pantallas y estado de permisos Android. No se detectaron cierres de la app durante estas pruebas.
+
+En la prueba inicial del 18 de octubre, P7 se ejecutó con POST_NOTIFICATIONS denegado en ambos teléfonos; la conexión y el control siguieron funcionando. Después se concedió el permiso y se repitieron P3/P4: se observaron las dos notificaciones locales y se tomaron capturas completas. También se ejecutó P5 con códigos distintos; las tramas no se interpretaron y no se procesó ninguna orden. P6 se probó deteniendo el Panel tanto con solicitud pendiente como durante la dispensación; el Nodo quedó en ESPERANDO CONEXIÓN, 0/3 y CERRADO, con aviso de enlace perdido. No se probó apagar Wi-Fi desde Ajustes en esa ronda. No hubo excepciones AndroidRuntime en los registros revisados.
 
 ## Controles automatizados
 
@@ -42,6 +44,7 @@ P7 se ejecutó con POST_NOTIFICATIONS denegado en ambos teléfonos; la conexión
 | SHA-256 de la APK IoT anterior al Login | `3F7A81C594962EF67133713CF809E87626904B4FA19B2C3820F44C9CBE36BBA4` |
 | APK de Login integrada sin Firebase | 13.593.601 bytes; SHA-256 `15994A8F6A3F58776E25C5E2CD5C8225CF845EC34273D80F0ECB4B271F21194B` |
 | Instalación y apertura en dos teléfonos | Correctas en Moto G35 / Android 15 y HONOR RBN-NX3 / Android 14; sin excepciones AndroidRuntime en los registros revisados |
+| Regresión física P1–P7 del build con Login (20-oct-2026) | Pasó en los dos teléfonos; detalle de cada caso en docs/PRUEBAS_FORMATIVA.md; sin capturas nuevas archivadas |
 | IP dinámica y Nodo | IP apareció al activar Wi-Fi sin reiniciar; Nodo quedó en `ESPERANDO CONEXIÓN`, contador 0/3, comedero `CERRADO`; puerto 5050 en escucha |
 | P1 conexión | Pasó: ambos teléfonos mostraron CONECTADO |
 | P2 monitoreo | Pasó: el HONOR mostró 2/3 aproximadamente 1,2 s después de la segunda pulsación |

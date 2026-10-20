@@ -1,8 +1,8 @@
 # PLAN_MVP — Comedero IoT · Unidad 2 Formativa
 
-Estado: Hitos 0–4 de la aplicación IoT están implementados; P1–P7 se probaron en dos teléfonos con el build anterior al Login. Por retroalimentación del profesor se añadió Login con Firebase Authentication. El proyecto y la app Android están registrados; Email/Password quedó habilitado; `app/google-services.json` funciona localmente y no se publica. La compilación con Firebase y las siete pruebas unitarias pasaron. El 20-oct-2026 se validó en el Moto G35 el acceso con credenciales válidas y la llegada a Conexión. Quedan las pruebas negativas/de sesión y repetir P1–P7 con Login. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
+Estado: Hitos 0–4 de la aplicación IoT están implementados; P1–P7 pasaron en dos teléfonos el 20-oct-2026 con el build que incluye Login. Por retroalimentación del profesor se añadió Firebase Authentication. El proyecto y la app Android están registrados; Email/Password quedó habilitado; `app/google-services.json` funciona localmente y no se publica. La compilación con Firebase y las siete pruebas unitarias pasaron. El acceso válido se comprobó en el Moto G35. L2 (credenciales inválidas) y L3 (persistencia/cierre de sesión) siguen pendientes. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
 
-El Login válido ya se comprobó en el Moto G35; la prueba de credenciales inválidas, cierre/persistencia de sesión y P1–P7 deben repetirse con la versión que ya exige Login. Al verificar el acceso, el teléfono estaba en 5G sin IP Wi-Fi y las notificaciones aparecían deshabilitadas. El detalle está en docs/FIREBASE_LOGIN.md y el registro en docs/PRUEBAS_FORMATIVA.md.
+El Login válido se comprobó en el Moto G35; siguen pendientes las pruebas de credenciales inválidas y cierre/persistencia. P1–P7 ya se repitieron con Login. El detalle está en docs/FIREBASE_LOGIN.md y el registro en docs/PRUEBAS_FORMATIVA.md.
 
 ## 1. Resumen y alcance
 
@@ -24,7 +24,7 @@ Una app en dos teléfonos representa el Nodo (sensor y compuerta) y el Panel (mo
 | Permisos | INTERNET, ACCESS_NETWORK_STATE y POST_NOTIFICATIONS (solicitado desde API 33) |
 | Estado seguro | CERRADO, cancelar entrega y solicitud/contador a 0 al perder enlace |
 | Rasguños | Ventana fija de 5 s, tres confirma; extras ignorados hasta entrega correcta |
-| Login Formativo (pedido del profesor) | Firebase Authentication con Email/Password habilitado; falta cuenta y validación física |
+| Login Formativo (pedido del profesor) | Firebase Authentication con Email/Password; acceso válido probado, L2 y L3 pendientes |
 | Sumativa futura | Cloud Firestore para lecturas; no implementado |
 
 Construcción fijada: AGP 8.13.2, Gradle 8.13, Kotlin/Compose compiler 2.4.20, Firebase BoM 35.0.2, Compose BOM 2025.12.00, Activity Compose 1.12.2, compileSdk/targetSdk 36 y bytecode Java/Kotlin 17. Kotlin se actualizó para ser compatible con los metadatos de Firebase Authentication. El mínimo continúa en 26.
@@ -103,7 +103,7 @@ Cifrado, validación y P1–P7 verificados. Los casos unitarios comprueban mensa
 - [x] Compilar con la configuración Firebase local: `testDebugUnitTest assembleDebug`, 7 pruebas unitarias aprobadas.
 - [x] Instalar y probar acceso correcto en el Moto G35; Firebase autenticó la sesión y la app abrió Conexión.
 - [ ] Probar credenciales incorrectas y verificar cierre/persistencia de sesión en teléfono.
-- [ ] Repetir P1–P7 con el APK que incluye Login.
+- [x] Repetir P1–P7 con el APK que incluye Login en Moto G35 y HONOR; resultados registrados en docs/PRUEBAS_FORMATIVA.md.
 
 ## 5. Pruebas
 
@@ -116,12 +116,12 @@ La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIV
 | Herramientas y proyecto | 0, 1 | Hito 0 confirmado; versión Android de esa primera captura no registrada |
 | Problemática, F1–F5 | 1 | Revisión docente recibida; explicación oral del estudiante pendiente |
 | Medio, mensajes y mockup | 2 | Revisión docente recibida; explicación oral del estudiante pendiente |
-| Login | Ajuste profesor | Acceso válido pasó en Moto G35; L2, L3 y regresión P1–P7 con Login pendientes |
-| F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron en versión anterior; repetir en APK con Login |
-| F3 entrega y ACK | 3 | P4 pasó; notificación local observada |
-| F4 notificaciones | 3 | P3/P4 pasaron con permiso concedido; P7 pasó con permiso denegado |
-| F5 estado seguro | 3, 4 | P6 pasó al cerrar el Panel; no se apagó el Wi-Fi desde Ajustes |
-| Cifrado y validación | 3, 4 | P5 pasó; mensajes alterados y parser estricto pasan pruebas unitarias |
+| Login | Ajuste profesor | Acceso válido pasó en Moto G35; L2 y L3 pendientes |
+| F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron de nuevo con Login en los dos teléfonos |
+| F3 entrega y ACK | 3 | P4 pasó de nuevo con Login; notificación local y ACK observados |
+| F4 notificaciones | 3 | P3/P4 pasaron con permiso concedido; P7 pasó de nuevo con permiso denegado |
+| F5 estado seguro | 3, 4 | P6 pasó de nuevo al cerrar el Panel con solicitud pendiente; Wi-Fi no se apagó desde Ajustes |
+| Cifrado y validación | 3, 4 | P5 pasó de nuevo; mensajes alterados y parser estricto también pasan pruebas unitarias |
 
 ## 7. Riesgos y límites pendientes
 

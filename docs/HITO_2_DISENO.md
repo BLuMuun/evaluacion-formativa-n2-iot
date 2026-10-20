@@ -12,7 +12,7 @@ La cama y el comedero pueden estar en habitaciones distintas: Wi-Fi permite cubr
 
 El diseño de las pantallas IoT está en [mockup.md](mockup.md) y [mockup.svg](mockup.svg). Después de la aprobación se añadió Login como requisito Formativo por retroalimentación del profesor: Login → Conexión → Nodo o Panel; cerrar sesión retorna al Login.
 
-El diseño original aprobado comenzaba en Conexión. La corrección posterior del profesor requiere que Login se muestre antes de entrar a la app. El Login usa Firebase Authentication Email/Password; no incorpora Firestore ni registro dentro de la app. El proyecto Android y `google-services.json` ya están configurados localmente y la app compila con ellos. El proveedor está habilitado; crear una cuenta y probar el acceso real siguen pendientes.
+El diseño original aprobado comenzaba en Conexión. La corrección posterior del profesor requiere que Login se muestre antes de entrar a la app. El Login usa Firebase Authentication Email/Password; no incorpora Firestore ni registro dentro de la app. El proyecto Android y `google-services.json` ya están configurados localmente y la app compila con ellos. El proveedor está habilitado y el acceso válido pasó en Moto G35; las pruebas de credenciales inválidas y persistencia/cierre de sesión siguen pendientes.
 
 ## Protocolo de aplicación
 
@@ -75,7 +75,7 @@ Los parámetros de derivación usan una sal fija de contexto no secreta. Un cód
 | ui/PantallaNodo.kt | Contador y simulación | Implementado |
 | ui/PantallaPanel.kt | Monitoreo, orden y confirmación | Implementado |
 
-La implementación necesita compilación y pruebas físicas para cerrar la aceptación de Hitos 3–4. Los resultados P1–P7 no se presuponen.
+La implementación de Hitos 3–4 se compiló y se probó físicamente en dos teléfonos. P1–P7 pasaron tanto en el ciclo inicial como en la regresión del build con Login; los resultados y límites se registran en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md) y [VERIFICACION_BASE.md](VERIFICACION_BASE.md).
 
 ## Revisión con el docente antes de programar Hito 3
 

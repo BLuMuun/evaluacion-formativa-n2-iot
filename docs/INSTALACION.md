@@ -40,7 +40,7 @@ También puedes instalar el APK directamente:
 4. En A deja el rol **Nodo**, ingresa un código de seis dígitos y pulsa **Iniciar Nodo**. A muestra la IP local y queda esperando.
 5. En B elige **Panel**, escribe la IP mostrada por A y el mismo código de seis dígitos. Pulsa **Conectar**.
 6. Espera a que ambos indiquen **CONECTADO**. ACCESS_NETWORK_STATE se concede automáticamente como permiso normal y no muestra diálogo. Si Android 13 o superior muestra las notificaciones deshabilitadas, pulsa **Permitir notificaciones** y acepta para probar alertas; si lo niegas, la conexión debe seguir funcionando.
-7. Consulta los resultados y evidencias de P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). Esas pruebas se registraron en el build anterior al Login; repítelas con esta versión después de validar el Login.
+7. Consulta los resultados y las evidencias históricas de P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). P1–P7 ya se repitieron con el build que incluye Login; para reproducirlos, sigue la tabla de esa guía.
 
 ## 4. Ejecutar P1–P7
 

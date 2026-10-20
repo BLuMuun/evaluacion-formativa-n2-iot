@@ -4,7 +4,7 @@
 
 ### Login Formativo (retroalimentación posterior del profesor)
 
-Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. El proyecto Android Firebase y `app/google-services.json` están configurados localmente; Email/Password está habilitado y la compilación con esa configuración y las siete pruebas unitarias pasaron. **L1 pasó en el Moto G35:** Firebase aceptó la cuenta de prueba y se abrió Conexión; el registro del dispositivo confirmó el evento de autenticación y no mostró excepciones de la app. No se guardó una captura de esta prueba. En ese momento el teléfono estaba conectado a 5G, sin IP Wi-Fi, y la app indicaba notificaciones deshabilitadas. L2 y L3 siguen pendientes. P1–P7 de abajo se ejecutaron con el build IoT anterior al Login y deben repetirse con la versión actual. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
+Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. El proyecto Android Firebase y `app/google-services.json` están configurados localmente; Email/Password está habilitado y la compilación con esa configuración y las siete pruebas unitarias pasaron. **L1 pasó en el Moto G35:** Firebase aceptó la cuenta de prueba y se abrió Conexión; el registro del dispositivo confirmó el evento de autenticación y no mostró excepciones de la app. No se guardó una captura de esta prueba. L2 y L3 siguen pendientes. **P1–P7 se repitieron el 20 de octubre de 2026 con el build que incluye Login** en los mismos dos teléfonos; los resultados de esa regresión están en la tabla siguiente. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
 
 | Caso | Resultado esperado | Resultado real | Evidencia |
 |---|---|---|---|
@@ -12,9 +12,23 @@ Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenti
 | L2 — Credenciales inválidas | Mostrar error legible, permanecer en Login y no cerrar la app. | **PENDIENTE:** no se probó un acceso rechazado. | Registrar después de probar en teléfono. |
 | L3 — Sesión y cierre | Una sesión válida abre Conexión al volver a abrir; Cerrar sesión retorna a Login. | **PENDIENTE:** no se probó persistencia al reabrir ni el botón Cerrar sesión. | Registrar después de probar en teléfono. |
 
+### Regresión física P1–P7 con Login — 20 de octubre de 2026
+
+Se volvió a instalar y probar el build actual en el Moto G35 (Nodo) y el HONOR RBN-NX3 (Panel), ambos con sesión Firebase iniciada y conectados a la misma Wi-Fi local. Los siete casos pasaron. Esta regresión se verificó directamente en las pantallas y, para los permisos/notificaciones, en el estado del sistema Android. No se guardaron capturas nuevas de esta sesión; los enlaces de evidencia de la tabla histórica más abajo corresponden al ciclo anterior y no deben presentarse como capturas del build con Login.
+
+| ID | Resultado observado en el build con Login |
+|---|---|
+| P1 | **PASÓ.** Nodo y Panel mostraron CONECTADO; el comedero estaba CERRADO y el contador en 0/3. |
+| P2 | **PASÓ.** Tras dos rasguños, el Panel mostró 2/3 en menos de 2 s. |
+| P3 | **PASÓ.** El Panel mostró 3/3 y se generó una sola notificación local con el texto esperado. |
+| P4 | **PASÓ.** La orden produjo DISPENSANDO, la notificación local del Nodo, regreso a CERRADO, ACK y confirmación en Panel. |
+| P5 | **PASÓ.** Con 111111 en Nodo y 222222 en Panel se abrió TCP brevemente, pero no se aceptaron lecturas cifradas; tras 6 s sin mensajes válidos el Panel se desconectó y ambos teléfonos quedaron en estado seguro, 0/3 y CERRADO. No se procesó una orden. |
+| P6 | **PASÓ.** Al forzar la detención del Panel con una solicitud pendiente, el Nodo volvió a ESPERANDO CONEXIÓN, 0/3 y CERRADO, y mostró el aviso de enlace perdido. No se probó apagar Wi-Fi desde Ajustes en esta regresión. |
+| P7 | **PASÓ.** Con POST_NOTIFICATIONS denegado en ambos teléfonos, conexión y dispensación siguieron funcionando; el Panel recibió el ACK y ambas apps permanecieron abiertas mostrando el aviso visual de permiso deshabilitado. |
+
 No registrar ni subir contraseñas, tokens de sesión ni archivos de configuración.
 
-P1–P7 se ejecutaron en los dos teléfonos. P3 y P4 se repitieron después de P7 con notificaciones habilitadas; las alertas se observaron y se guardaron capturas completas. Se corrigió la actualización del aviso de permiso al volver a la app y las capturas de interfaz de esta repetición ya reflejan el permiso habilitado. Las dos capturas nuevas de notificación fueron proporcionadas por el estudiante.
+En el ciclo anterior del 18 de octubre se guardaron las capturas enlazadas en la tabla histórica P1–P7. P3 y P4 se repitieron entonces después de P7 con notificaciones habilitadas; las dos capturas completas de notificación fueron proporcionadas por el estudiante. Esas imágenes son evidencia del ciclo anterior, no del build actual con Login.
 
 ## Preparación futura de dos teléfonos
 
@@ -25,7 +39,7 @@ P1–P7 se ejecutaron en los dos teléfonos. P3 y P4 se repitieron después de P
 5. Para P3/P4 permitir notificaciones en ambos; para P7 denegarlas desde el diálogo del sistema. Después de P7, restaurar el permiso antes de repetir P3/P4.
 6. Para registrar cada caso, anotar modelos, versión Android, versión/commit de la app, red utilizada, fecha, resultado y ruta de captura/video. No publicar códigos, direcciones de red o información personal real sin revisar las evidencias.
 
-## P1–P7
+## Registro inicial P1–P7 — ciclo del 18 de octubre de 2026
 
 | ID | Caso | Pasos exactos | Resultado esperado | Resultado real | Evidencia |
 |---|---|---|---|---|---|
@@ -58,4 +72,4 @@ Copiar por caso: ID; fecha; versión/commit; teléfono A/Android; teléfono B/An
 
 ## Verificaciones separadas de P1–P7
 
-La compilación, pruebas unitarias y controles estáticos se registran por separado en [VERIFICACION_BASE.md](VERIFICACION_BASE.md). P1–P7 se observaron en teléfonos reales. Las evidencias nuevas de P3/P4 se conservaron completas y sin recortar; las capturas anteriores permanecen en su formato original. Los casos de borde pendientes se mantienen separados de las pruebas obligatorias P1–P7.
+La compilación, pruebas unitarias y controles estáticos se registran por separado en [VERIFICACION_BASE.md](VERIFICACION_BASE.md). P1–P7 se observaron en teléfonos reales tanto en el ciclo inicial como en la regresión del build con Login. Las capturas enlazadas pertenecen al ciclo inicial; no se guardaron imágenes nuevas en la regresión. Los casos de borde pendientes se mantienen separados de las pruebas obligatorias P1–P7.
