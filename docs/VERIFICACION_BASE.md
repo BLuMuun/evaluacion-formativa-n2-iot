@@ -4,9 +4,9 @@ Actualizado: 20 de octubre de 2026 (hora de Santiago).
 
 ## Login añadido después de las pruebas físicas
 
-Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. El proyecto Android está registrado y `app/google-services.json` se encuentra localmente, excluido de Git. `testDebugUnitTest assembleDebug` pasó con esta configuración. El proveedor Email/Password aún no está habilitado y no se ha creado ni autenticado una cuenta de prueba; por ello el acceso real no se ha validado. Las pruebas físicas IoT descritas abajo se ejecutaron en el build anterior al Login. Después de habilitar el proveedor, iniciar sesión en ambos teléfonos y repetir L1–L3 y P1–P7. Ver [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
+Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. El proyecto Android está registrado y `app/google-services.json` se encuentra localmente, excluido de Git. `testDebugUnitTest assembleDebug` pasó con esta configuración. El proveedor Email/Password ya está habilitado, pero falta crear y autenticar una cuenta de prueba; por ello el acceso real no se ha validado. Las pruebas físicas IoT descritas abajo se ejecutaron en el build anterior al Login. Después de iniciar sesión en ambos teléfonos, repetir L1–L3 y P1–P7. Ver [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
 
-El build con la configuración Firebase local se compiló correctamente y pasó `testDebugUnitTest`; la autenticación del proveedor no se ejercitó porque Email/Password aún está pendiente y no hay cuenta de prueba.
+El build con la configuración Firebase local se compiló correctamente y pasó `testDebugUnitTest`; no se inició sesión porque aún no hay cuenta de prueba.
 
 ## Hito 0: antecedente confirmado por el estudiante
 

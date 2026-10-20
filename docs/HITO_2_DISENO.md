@@ -12,7 +12,7 @@ La cama y el comedero pueden estar en habitaciones distintas: Wi-Fi permite cubr
 
 El diseño de las pantallas IoT está en [mockup.md](mockup.md) y [mockup.svg](mockup.svg). Después de la aprobación se añadió Login como requisito Formativo por retroalimentación del profesor: Login → Conexión → Nodo o Panel; cerrar sesión retorna al Login.
 
-El diseño original aprobado comenzaba en Conexión. La corrección posterior del profesor requiere que Login se muestre antes de entrar a la app. El Login usa Firebase Authentication Email/Password; no incorpora Firestore ni registro dentro de la app. El proyecto Android y `google-services.json` ya están configurados localmente y la app compila con ellos. Habilitar el proveedor, crear una cuenta y probar el acceso real siguen pendientes.
+El diseño original aprobado comenzaba en Conexión. La corrección posterior del profesor requiere que Login se muestre antes de entrar a la app. El Login usa Firebase Authentication Email/Password; no incorpora Firestore ni registro dentro de la app. El proyecto Android y `google-services.json` ya están configurados localmente y la app compila con ellos. El proveedor está habilitado; crear una cuenta y probar el acceso real siguen pendientes.
 
 ## Protocolo de aplicación
 
@@ -69,7 +69,7 @@ Los parámetros de derivación usan una sal fija de contexto no secreta. Un cód
 | enlace/Enlace.kt | Contrato de conexión y mensajes | Implementado |
 | enlace/WifiEnlace.kt | Servidor/cliente TCP 5050, trabajo de red fuera de UI | Implementado |
 | seguridad/Cripto.kt | Derivación, AES-GCM y descifrado | Implementado |
-| seguridad/AutenticacionFirebase.kt | Inicio/cierre de sesión por Email/Password | Integrado; proyecto configurado, proveedor y cuenta de prueba pendientes |
+| seguridad/AutenticacionFirebase.kt | Inicio/cierre de sesión por Email/Password | Integrado; proveedor habilitado, cuenta de prueba pendiente |
 | ui/PantallaLogin.kt | Usuario/correo, contraseña y estados de acceso | Implementado |
 | ui/PantallaConexion.kt | Rol, código e IP | Implementado |
 | ui/PantallaNodo.kt | Contador y simulación | Implementado |

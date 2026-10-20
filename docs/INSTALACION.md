@@ -2,14 +2,14 @@
 
 La app Formativa usa un teléfono A como Nodo servidor y un teléfono B como Panel cliente. Instala el mismo APK de depuración en ambos. Se necesita Android 8.0/API 26 o superior y que los dos teléfonos compartan una red Wi-Fi local o hotspot que permita comunicación entre clientes.
 
-La aplicación ahora muestra Login antes de Conexión. El proyecto Android Firebase y `app/google-services.json` ya están configurados en el equipo del estudiante; el JSON se ignora en Git. Antes de iniciar sesión, habilita Email/Password y crea una cuenta de prueba siguiendo [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
+La aplicación ahora muestra Login antes de Conexión. El proyecto Android Firebase y `app/google-services.json` ya están configurados en el equipo del estudiante; el JSON se ignora en Git. Email/Password ya está habilitado. Antes de iniciar sesión, crea una cuenta de prueba siguiendo [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
 
 ## 1. Abrir y compilar en Android Studio
 
 1. Abre la carpeta raíz del repositorio con **Open** en Android Studio; no crees otro proyecto ni abras solo `app/`.
 2. En **Settings → Build, Execution, Deployment → Build Tools → Gradle**, selecciona el JDK integrado de Android Studio (JDK 21 funciona con esta configuración). El proyecto genera bytecode Java 17.
 3. En SDK Manager instala Android SDK Platform 36 y Android SDK Build-Tools. La ruta del SDK se guarda en `local.properties`, archivo local que no se publica.
-4. Conserva `app/google-services.json` localmente y completa el proveedor y la cuenta indicados en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). Sin el JSON local el Login no podrá autenticar ni entrar a Conexión.
+4. Conserva `app/google-services.json` localmente y crea la cuenta de prueba indicada en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). Sin el JSON local el Login no podrá autenticar ni entrar a Conexión.
 5. Pulsa **Sync Project with Gradle Files** y espera `BUILD SUCCESSFUL`.
 6. Selecciona **Build → Make Project** o, en la terminal de Android Studio, ejecuta:
 

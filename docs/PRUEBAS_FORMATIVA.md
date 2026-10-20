@@ -4,12 +4,12 @@
 
 ### Login Formativo (retroalimentación posterior del profesor)
 
-Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. El proyecto Android Firebase y `app/google-services.json` están configurados localmente; la compilación con esa configuración y las siete pruebas unitarias pasaron. **Pendiente de validación:** habilitar el proveedor Email/Password, crear una cuenta de prueba y probar acceso válido/inválido en dispositivo. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). P1–P7 de abajo se ejecutaron con el build IoT anterior al Login; deben repetirse después de probar el Login, que ahora protege la entrada a Conexión.
+Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. El proyecto Android Firebase y `app/google-services.json` están configurados localmente; Email/Password está habilitado y la compilación con esa configuración y las siete pruebas unitarias pasaron. **Pendiente de validación:** crear una cuenta de prueba y probar acceso válido/inválido en dispositivo. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). P1–P7 de abajo se ejecutaron con el build IoT anterior al Login; deben repetirse después de probar el Login, que ahora protege la entrada a Conexión.
 
 | Caso | Resultado esperado | Resultado real | Evidencia |
 |---|---|---|---|
-| L1 — Login con credenciales válidas | Firebase autentica al usuario y abre Conexión. | **PENDIENTE:** falta habilitar Email/Password y crear la cuenta de prueba. | Registrar después de probar en teléfono. |
-| L2 — Credenciales inválidas | Mostrar error legible, permanecer en Login y no cerrar la app. | **PENDIENTE:** requiere proveedor habilitado y cuenta configurada para probar el rechazo. | Registrar después de probar en teléfono. |
+| L1 — Login con credenciales válidas | Firebase autentica al usuario y abre Conexión. | **PENDIENTE:** falta crear la cuenta de prueba. | Registrar después de probar en teléfono. |
+| L2 — Credenciales inválidas | Mostrar error legible, permanecer en Login y no cerrar la app. | **PENDIENTE:** falta una cuenta configurada para probar el rechazo. | Registrar después de probar en teléfono. |
 | L3 — Sesión y cierre | Una sesión válida abre Conexión al volver a abrir; Cerrar sesión retorna a Login. | **PENDIENTE:** requiere una cuenta Firebase de prueba. | Registrar después de probar en teléfono. |
 
 No registrar ni subir contraseñas, tokens de sesión ni archivos de configuración.
