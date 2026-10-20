@@ -1,6 +1,7 @@
 # Gradle / Android Studio
 .gradle/
 .gradle-user-home/
+.android-user-home/
 **/build/
 local.properties
 .idea/

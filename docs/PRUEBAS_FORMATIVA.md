@@ -2,6 +2,18 @@
 
 **Registro físico actualizado: 18 de octubre de 2026.** Se probó la app instalada en dos teléfonos reales: A = Moto G35, Android 15/API 35 (Nodo); B = HONOR RBN-NX3, Android 14/API 34 (Panel). Ambos estaban conectados a la misma red Wi-Fi local. No se guardan en este documento el SSID, las IP locales ni el código temporal.
 
+### Login Formativo (retroalimentación posterior del profesor)
+
+Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. **Pendiente de validación:** el estudiante todavía no tiene proyecto Firebase ni `app/google-services.json`; por tanto no se ha podido comprobar un acceso válido/ inválido en dispositivo. La app muestra instrucciones y bloquea el botón hasta contar con configuración. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). P1–P7 de abajo se ejecutaron con el build IoT anterior al Login; deben repetirse después de configurar Firebase, porque el Login ahora protege la entrada a Conexión.
+
+| Caso | Resultado esperado | Resultado real | Evidencia |
+|---|---|---|---|
+| L1 — Login con credenciales válidas | Firebase autentica al usuario y abre Conexión. | **PENDIENTE:** falta proyecto, configuración y cuenta Firebase. | Se completará después de configurar Firebase. |
+| L2 — Credenciales inválidas | Mostrar error legible, permanecer en Login y no cerrar la app. | **PENDIENTE:** falta proyecto y cuenta para validar el comportamiento del proveedor. | Se completará después de configurar Firebase. |
+| L3 — Sesión y cierre | Una sesión válida abre Conexión al volver a abrir; Cerrar sesión retorna a Login. | **PENDIENTE:** requiere credenciales Firebase. | Se completará después de configurar Firebase. |
+
+No registrar ni subir contraseñas, tokens de sesión ni archivos de configuración.
+
 P1–P7 se ejecutaron en los dos teléfonos. P3 y P4 se repitieron después de P7 con notificaciones habilitadas; las alertas se observaron y se guardaron capturas completas. Se corrigió la actualización del aviso de permiso al volver a la app y las capturas de interfaz de esta repetición ya reflejan el permiso habilitado. Las dos capturas nuevas de notificación fueron proporcionadas por el estudiante.
 
 ## Preparación futura de dos teléfonos

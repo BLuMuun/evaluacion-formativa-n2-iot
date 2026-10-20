@@ -1,6 +1,12 @@
 # Verificación de la app — Hitos 0–4
 
-Actualizado: 18 de octubre de 2026 (hora de Santiago).
+Actualizado: 20 de octubre de 2026 (hora de Santiago).
+
+## Login añadido después de las pruebas físicas
+
+Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. Al momento de esta actualización, el estudiante no dispone de proyecto Firebase ni de `app/google-services.json`. La implementación está preparada, pero el acceso real y el flujo posterior no se han probado ni se afirma que estén completos. Las pruebas físicas IoT descritas abajo se ejecutaron en el build anterior a esta barrera de Login. Después de configurar Firebase, se debe compilar, iniciar sesión en ambos teléfonos y repetir L1–L3 y P1–P7. Ver [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
+
+El build sin configuración Firebase se compiló correctamente y pasó `testDebugUnitTest`; en esta variante la pantalla de Login informa que falta configuración y no permite entrar. La autenticación del proveedor no se ejercitó porque no hay proyecto ni cuenta de prueba.
 
 ## Hito 0: antecedente confirmado por el estudiante
 
@@ -29,9 +35,12 @@ P7 se ejecutó con POST_NOTIFICATIONS denegado en ambos teléfonos; la conexión
 | Control | Resultado |
 |---|---|
 | Hito 0: compilación/arranque inicial | Confirmado por el estudiante en Moto G35; captura en el repositorio |
-| `testDebugUnitTest` de la implementación actual | Correcto: 7 pruebas, 0 errores y 0 fallos (parser, cifrado y ventana fija) |
-| `assembleDebug` después de refrescar la IP del Nodo en pantalla | `BUILD SUCCESSFUL`; APK en `app/build/outputs/apk/debug/app-debug.apk` (11.061.471 bytes) |
-| SHA-256 de la APK actual | `3F7A81C594962EF67133713CF809E87626904B4FA19B2C3820F44C9CBE36BBA4` |
+| `testDebugUnitTest` de la implementación IoT anterior al Login | Correcto: 7 pruebas, 0 errores y 0 fallos (parser, cifrado y ventana fija) |
+| `testDebugUnitTest` con pantalla de Login integrada y sin `google-services.json` | `BUILD SUCCESSFUL`; las pruebas unitarias existentes pasaron. Firebase real no se probó |
+| `assembleDebug` con pantalla de Login integrada y sin `google-services.json` | `BUILD SUCCESSFUL`; variante útil para verificar compilación y aviso de configuración, no permite entrar a Conexión |
+| `assembleDebug` después de refrescar la IP del Nodo, versión IoT anterior | `BUILD SUCCESSFUL`; APK anterior de 11.061.471 bytes |
+| SHA-256 de la APK IoT anterior al Login | `3F7A81C594962EF67133713CF809E87626904B4FA19B2C3820F44C9CBE36BBA4` |
+| APK de Login integrada sin Firebase | 13.593.601 bytes; SHA-256 `15994A8F6A3F58776E25C5E2CD5C8225CF845EC34273D80F0ECB4B271F21194B` |
 | Instalación y apertura en dos teléfonos | Correctas en Moto G35 / Android 15 y HONOR RBN-NX3 / Android 14; sin excepciones AndroidRuntime en los registros revisados |
 | IP dinámica y Nodo | IP apareció al activar Wi-Fi sin reiniciar; Nodo quedó en `ESPERANDO CONEXIÓN`, contador 0/3, comedero `CERRADO`; puerto 5050 en escucha |
 | P1 conexión | Pasó: ambos teléfonos mostraron CONECTADO |

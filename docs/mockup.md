@@ -1,10 +1,24 @@
 # Mockup — Hito 2 · Comedero IoT
 
-**Referencia visual del diseño aprobado por el docente.** Las pantallas funcionales ya están implementadas; el SVG es un mockup y no una captura de la aplicación.
+**Referencia visual del diseño IoT aprobado por el docente.** El Login se añadió después como requisito Formativo indicado por el profesor y se incluyó en el SVG. El mockup no es una captura de la aplicación.
 
 Material 3, interfaz clara, títulos legibles, botones amplios y estados escritos en texto; no depender solo del color. [Versión SVG](mockup.svg).
 
-## 1. Conexión
+## 1. Login (requisito posterior del profesor)
+
+```text
+Comedero IoT
+Iniciar sesión
+
+Usuario (correo electrónico): [________________]
+Contraseña:                   [________________]
+
+[ INICIAR SESIÓN ]
+```
+
+Firebase Authentication valida correo y contraseña. Si la configuración local aún no existe, se indica cómo agregarla y no se permite entrar a Conexión. No hay registro de usuarios desde la aplicación.
+
+## 2. Conexión
 
 ```text
 Comedero IoT
@@ -29,7 +43,7 @@ Estado / error en texto
 
 Solo se mostrará el bloque del rol elegido. Código exactamente de seis dígitos; IP no vacía para Panel. Los errores no cerrarán la aplicación. Mostrar «Esperando conexión» o «Conectando» según corresponda. TCP conectado con código distinto no garantiza que los datos puedan descifrarse.
 
-## 2. Nodo IoT
+## 3. Nodo IoT
 
 ```text
 Nodo IoT
@@ -48,7 +62,7 @@ CERRADO
 
 El primer rasguño abre una ventana fija de 5 s. En 3/3 se ignorarán nuevas pulsaciones mientras haya solicitud pendiente. No se abrirá automáticamente. Al recibir el comando: DISPENSANDO durante aproximadamente 1,5 s; luego CERRADO, ACK y contador 0. Si se pierde el enlace: cancelar, cerrar y reiniciar.
 
-## 3. Panel de control
+## 4. Panel de control
 
 ```text
 Panel de control
@@ -72,6 +86,6 @@ Recibir 3 después de menos de 3 genera una sola notificación «El gato está s
 
 ## Navegación y avisos
 
-Conexión → Nodo o Panel → Desconectar → Conexión. No hay login ni historial. Los avisos incluyen código inválido, IP faltante, error de conexión, enlace perdido y notificaciones deshabilitadas. Negar notificaciones no impedirá conexión/control.
+Login → Conexión → Nodo o Panel → Desconectar → Conexión. Cerrar sesión retorna al Login. No hay historial. Los avisos incluyen error de autenticación, configuración Firebase pendiente, código inválido, IP faltante, error de conexión, enlace perdido y notificaciones deshabilitadas. Negar notificaciones no impedirá conexión/control.
 
 El SVG representa las tres pantallas y muestra los bloques condicionales de Conexión como alternativas de diseño. El texto xxx.xxx.xxx.xxx es un marcador de IP, no un valor real.

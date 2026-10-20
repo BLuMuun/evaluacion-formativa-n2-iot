@@ -23,15 +23,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import cl.inacap.comederoiot.ui.PantallaConexion
+import cl.inacap.comederoiot.ui.PantallaLogin
 import cl.inacap.comederoiot.ui.PantallaNodo
 import cl.inacap.comederoiot.ui.PantallaPanel
+import cl.inacap.comederoiot.seguridad.AutenticacionFirebase
 
 class MainActivity : ComponentActivity() {
     private lateinit var pedirNotificaciones: ActivityResultLauncher<String>
+    private lateinit var autenticacion: AutenticacionFirebase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        autenticacion = AutenticacionFirebase(this)
         pedirNotificaciones = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) {
@@ -41,10 +45,12 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val estado by Sesion.estado.collectAsState()
-            var pantalla by rememberSaveable { mutableStateOf("conexion") }
+            var pantalla by rememberSaveable {
+                mutableStateOf(if (autenticacion.haySesionActiva) "conexion" else "login")
+            }
 
             MaterialTheme(colorScheme = lightColorScheme()) {
-                BackHandler(enabled = pantalla != "conexion") {
+                BackHandler(enabled = pantalla == "nodo" || pantalla == "panel") {
                     Sesion.desconectar()
                     pantalla = "conexion"
                 }
@@ -52,6 +58,12 @@ class MainActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { relleno ->
                     val contenido = Modifier.padding(relleno)
                     when (pantalla) {
+                        "login" -> PantallaLogin(
+                            firebaseConfigurado = autenticacion.estaConfigurada,
+                            onIniciarSesion = autenticacion::iniciarSesion,
+                            onLoginCorrecto = { pantalla = "conexion" },
+                            modifier = contenido
+                        )
                         "nodo" -> PantallaNodo(
                             estado = estado,
                             onSimularRasgun = Sesion::simularRasgun,
@@ -70,7 +82,7 @@ class MainActivity : ComponentActivity() {
                             },
                             modifier = contenido
                         )
-                        else -> PantallaConexion(
+                        "conexion" -> PantallaConexion(
                             estado = estado,
                             onIniciarNodo = { codigo ->
                                 val error = Sesion.iniciarNodo(this, codigo)
@@ -83,6 +95,17 @@ class MainActivity : ComponentActivity() {
                                 error
                             },
                             onSolicitarNotificaciones = ::solicitarPermisoNotificaciones,
+                            onCerrarSesion = {
+                                Sesion.desconectar()
+                                autenticacion.cerrarSesion()
+                                pantalla = "login"
+                            },
+                            modifier = contenido
+                        )
+                        else -> PantallaLogin(
+                            firebaseConfigurado = autenticacion.estaConfigurada,
+                            onIniciarSesion = autenticacion::iniciarSesion,
+                            onLoginCorrecto = { pantalla = "conexion" },
                             modifier = contenido
                         )
                     }

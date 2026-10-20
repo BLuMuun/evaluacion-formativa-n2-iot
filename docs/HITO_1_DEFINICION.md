@@ -25,7 +25,7 @@ En esta Formativa: teléfono Nodo ↔ Wi-Fi local TCP ↔ teléfono Panel. La si
 | F4 | Notificación única al pasar a 3 en Panel y notificación al recibir el comando en Nodo. | Ambos | P3, P4, P7 |
 | F5 | Ante pérdida del enlace: aviso en ambos, compuerta CERRADO, cancelar dispensación y reiniciar solicitud/contador. | Ambos | P6 |
 
-Todas corresponden a la Formativa. F6 (login) y F7 (almacenamiento/historial) del ejemplo de la guía no se implementarán.
+El alcance inicial se definió con F1–F5 para la Formativa y dejó fuera F6 (login) y F7 (almacenamiento/historial) del ejemplo de la guía. Después, el profesor indicó que la pantalla de Login era el único criterio que faltaba para llegar al puntaje completo; por esa retroalimentación y autorización del estudiante, se agregó Firebase Authentication Email/Password como excepción Formativa. F7 y el almacenamiento permanecen fuera de alcance.
 
 ## Herramientas justificadas
 

@@ -2,13 +2,16 @@
 
 La app Formativa usa un teléfono A como Nodo servidor y un teléfono B como Panel cliente. Instala el mismo APK de depuración en ambos. Se necesita Android 8.0/API 26 o superior y que los dos teléfonos compartan una red Wi-Fi local o hotspot que permita comunicación entre clientes.
 
+La aplicación ahora muestra Login antes de Conexión. Para entrar, primero configura Firebase siguiendo [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). Sin `app/google-services.json` válido, la app muestra instrucciones y mantiene deshabilitado el inicio de sesión.
+
 ## 1. Abrir y compilar en Android Studio
 
 1. Abre la carpeta raíz del repositorio con **Open** en Android Studio; no crees otro proyecto ni abras solo `app/`.
 2. En **Settings → Build, Execution, Deployment → Build Tools → Gradle**, selecciona el JDK integrado de Android Studio (JDK 21 funciona con esta configuración). El proyecto genera bytecode Java 17.
 3. En SDK Manager instala Android SDK Platform 36 y Android SDK Build-Tools. La ruta del SDK se guarda en `local.properties`, archivo local que no se publica.
-4. Pulsa **Sync Project with Gradle Files** y espera `BUILD SUCCESSFUL`.
-5. Selecciona **Build → Make Project** o, en la terminal de Android Studio, ejecuta:
+4. Configura Firebase según [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md), si vas a probar el Login. Sin el JSON, el proyecto aún puede compilar para revisar la interfaz, pero no podrá iniciar sesión ni entrar a Conexión.
+5. Pulsa **Sync Project with Gradle Files** y espera `BUILD SUCCESSFUL`.
+6. Selecciona **Build → Make Project** o, en la terminal de Android Studio, ejecuta:
 
    ```powershell
    .\gradlew.bat testDebugUnitTest assembleDebug
@@ -31,11 +34,13 @@ También puedes instalar el APK directamente:
 
 ## 3. Iniciar la conexión
 
-1. Conecta ambos teléfonos al mismo router Wi-Fi o conecta ambos al hotspot de uno de ellos. Evita redes con aislamiento de clientes. Mantén Comedero IoT visible en primer plano.
-2. En A abre **Comedero IoT**, deja el rol **Nodo**, ingresa un código de seis dígitos y pulsa **Iniciar Nodo**. A muestra la IP local y queda esperando.
-3. En B elige **Panel**, escribe la IP mostrada por A y el mismo código de seis dígitos. Pulsa **Conectar**.
-4. Espera a que ambos indiquen **CONECTADO**. ACCESS_NETWORK_STATE se concede automáticamente como permiso normal y no muestra diálogo. Si Android 13 o superior muestra las notificaciones deshabilitadas, pulsa **Permitir notificaciones** y acepta para probar alertas; si lo niegas, la conexión debe seguir funcionando.
-5. Consulta los resultados y evidencias de P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). Las comprobaciones físicas adicionales pendientes están separadas de esos casos.
+1. Configura Firebase y crea una cuenta siguiendo [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md); el mismo usuario puede iniciar sesión en los dos teléfonos.
+2. Conecta ambos teléfonos al mismo router Wi-Fi o conecta ambos al hotspot de uno de ellos. Evita redes con aislamiento de clientes. Mantén Comedero IoT visible en primer plano.
+3. Abre Comedero IoT en ambos teléfonos e inicia sesión con la cuenta Firebase.
+4. En A deja el rol **Nodo**, ingresa un código de seis dígitos y pulsa **Iniciar Nodo**. A muestra la IP local y queda esperando.
+5. En B elige **Panel**, escribe la IP mostrada por A y el mismo código de seis dígitos. Pulsa **Conectar**.
+6. Espera a que ambos indiquen **CONECTADO**. ACCESS_NETWORK_STATE se concede automáticamente como permiso normal y no muestra diálogo. Si Android 13 o superior muestra las notificaciones deshabilitadas, pulsa **Permitir notificaciones** y acepta para probar alertas; si lo niegas, la conexión debe seguir funcionando.
+7. Consulta los resultados y evidencias de P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). Esas pruebas se registraron en el build anterior al Login; repítelas con esta versión después de habilitar Firebase.
 
 ## 4. Ejecutar P1–P7
 

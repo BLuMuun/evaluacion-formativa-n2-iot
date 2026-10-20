@@ -1,8 +1,8 @@
 # PLAN_MVP — Comedero IoT · Unidad 2 Formativa
 
-Estado: Hitos 0–4 del alcance Formativo están implementados y documentados. P1–P7 pasaron en dos teléfonos; P3/P4 se repitieron con notificaciones habilitadas y sus nuevas evidencias están en el repositorio. También pasan `assembleDebug` y las 7 pruebas unitarias. El profesor aprobó la revisión previa a Hito 3 con «está perfecto Marcelo», según la evidencia compartida por el estudiante. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
+Estado: Hitos 0–4 de la aplicación IoT están implementados; P1–P7 se probaron en dos teléfonos con el build anterior al Login. Por retroalimentación del profesor, se agregó a la Formativa una pantalla de Login integrada con Firebase Authentication. Falta que el estudiante cree/configure el proyecto Firebase, agregue `app/google-services.json` localmente y ejecute pruebas de acceso y regresión en teléfonos. El archivo de configuración no se publica. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
 
-Los pendientes que permanecen son preparación oral del estudiante, revisión final del código con el profesor si la solicita, carga manual del TXT al AAI y una repetición física opcional del segundo ciclo. No hay pruebas obligatorias P1–P7 pendientes. El detalle está en docs/PRUEBAS_FORMATIVA.md.
+El Login aún no puede autenticar hasta que exista configuración y una cuenta Firebase; además se deben repetir P1–P7 con la versión que ya exige Login. El detalle de preparación está en docs/FIREBASE_LOGIN.md y el registro de pruebas en docs/PRUEBAS_FORMATIVA.md.
 
 ## 1. Resumen y alcance
 
@@ -24,7 +24,8 @@ Una app en dos teléfonos representa el Nodo (sensor y compuerta) y el Panel (mo
 | Permisos | INTERNET, ACCESS_NETWORK_STATE y POST_NOTIFICATIONS (solicitado desde API 33) |
 | Estado seguro | CERRADO, cancelar entrega y solicitud/contador a 0 al perder enlace |
 | Rasguños | Ventana fija de 5 s, tres confirma; extras ignorados hasta entrega correcta |
-| Sumativa futura | Firebase Authentication + Cloud Firestore, solo declarados en documentación |
+| Login Formativo (pedido del profesor) | Firebase Authentication con proveedor Email/Password; requiere configuración local pendiente |
+| Sumativa futura | Cloud Firestore para lecturas; no implementado |
 
 Construcción fijada: AGP 8.13.2, Gradle 8.13, Kotlin/Compose compiler 2.2.21, Compose BOM 2025.12.00, Activity Compose 1.12.2, compileSdk/targetSdk 36 y bytecode Java/Kotlin 17. El mínimo continúa en 26.
 
@@ -91,6 +92,16 @@ Cifrado, validación y P1–P7 verificados. Los casos unitarios comprueban mensa
 - [x] Publicar los commits finales en GitHub.
 - [ ] Subir `entrega_aai.txt` al AAI manualmente si la entrega aún está pendiente.
 
+### Ajuste posterior solicitado por el profesor — Login Formativo
+
+- [x] Crear pantalla de usuario (correo) y contraseña como primera pantalla.
+- [x] Integrar el acceso con Firebase Authentication; sin registro automático ni credenciales de prueba.
+- [x] Mantener `google-services.json` y contraseñas fuera del repositorio.
+- [ ] Crear proyecto Firebase y registrar Android package `cl.inacap.comederoiot`.
+- [ ] Habilitar Email/Password, crear cuenta de prueba y guardar `google-services.json` en `app/`.
+- [ ] Compilar e instalar con configuración Firebase, probar acceso correcto/incorrecto y cerrar sesión.
+- [ ] Repetir P1–P7 con el APK que incluye Login.
+
 ## 5. Pruebas
 
 La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md). P1–P7 pasaron en teléfonos físicos; los casos opcionales pendientes están separados. Una compilación o prueba unitaria no sustituye las pruebas de interconexión física.
@@ -102,7 +113,8 @@ La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIV
 | Herramientas y proyecto | 0, 1 | Hito 0 confirmado; versión Android de esa primera captura no registrada |
 | Problemática, F1–F5 | 1 | Revisión docente recibida; explicación oral del estudiante pendiente |
 | Medio, mensajes y mockup | 2 | Revisión docente recibida; explicación oral del estudiante pendiente |
-| F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron; ventana fija también tiene prueba unitaria |
+| Login | Ajuste profesor | Pantalla y puente Firebase implementados; configuración y prueba real pendientes |
+| F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron en versión anterior; repetir en APK con Login |
 | F3 entrega y ACK | 3 | P4 pasó; notificación local observada |
 | F4 notificaciones | 3 | P3/P4 pasaron con permiso concedido; P7 pasó con permiso denegado |
 | F5 estado seguro | 3, 4 | P6 pasó al cerrar el Panel; no se apagó el Wi-Fi desde Ajustes |
@@ -118,4 +130,4 @@ La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIV
 
 ## 8. Fuera de alcance
 
-Login, usuarios, SQLite, Firestore, Firebase Authentication implementado, historial, MQTT, HiveMQ, FCM, ESP32 real, varios nodos y funciones opcionales. Firebase Authentication + Cloud Firestore son decisiones futuras de Sumativa y solo se documentan.
+Firestore, almacenamiento de lecturas, registro de cuentas dentro de la app, historial, MQTT, HiveMQ, FCM, ESP32 real, varios nodos y funciones opcionales. Firebase Authentication se limita al Login solicitado por el profesor; no se agrega base de datos.

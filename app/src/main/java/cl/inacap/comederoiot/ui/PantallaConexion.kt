@@ -44,6 +44,7 @@ fun PantallaConexion(
     onIniciarNodo: (String) -> String?,
     onConectarPanel: (String, String) -> String?,
     onSolicitarNotificaciones: () -> Unit,
+    onCerrarSesion: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var rol by rememberSaveable { mutableStateOf(RolApp.NODO) }
@@ -155,6 +156,9 @@ fun PantallaConexion(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(if (rol == RolApp.NODO) "Iniciar Nodo" else "Conectar")
+        }
+        OutlinedButton(onClick = onCerrarSesion, modifier = Modifier.fillMaxWidth()) {
+            Text("Cerrar sesión")
         }
     }
 }

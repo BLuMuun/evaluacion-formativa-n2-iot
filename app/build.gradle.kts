@@ -4,6 +4,12 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+// El plugin procesa la configuración local cuando existe.
+// Así Gradle también puede compilar antes de que el estudiante cree Firebase.
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
 android {
     namespace = "cl.inacap.comederoiot"
     compileSdk = 36
@@ -29,6 +35,9 @@ android {
 }
 
 dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:34.19.0"))
+    implementation("com.google.firebase:firebase-auth")
+
     implementation(platform("androidx.compose:compose-bom:2025.12.00"))
     implementation("androidx.activity:activity-compose:1.12.2")
     implementation("androidx.core:core-ktx:1.17.0")
