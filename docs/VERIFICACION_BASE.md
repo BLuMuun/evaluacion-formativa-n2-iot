@@ -4,9 +4,9 @@ Actualizado: 20 de octubre de 2026 (hora de Santiago).
 
 ## Login y regresión física actual
 
-Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. El proyecto Android está registrado y `app/google-services.json` se encuentra localmente, excluido de Git. `testDebugUnitTest assembleDebug` pasó con esta configuración. **El 20 de octubre de 2026, L1 pasó en el Moto G35:** Firebase autenticó la cuenta de prueba, Conexión apareció en pantalla y el proceso permaneció activo sin excepciones de la app en los registros revisados. L2 y L3 siguen pendientes. **P1–P7 se repitieron en los dos teléfonos con el build actual con Login el 20 de octubre de 2026**; los resultados están en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). No se guardaron capturas nuevas de esa regresión.
+Por retroalimentación del profesor se integraron la pantalla inicial de Login y Firebase Authentication Email/Password. El proyecto Android está registrado y `app/google-services.json` se encuentra localmente, excluido de Git. `testDebugUnitTest assembleDebug` pasó con esta configuración. **L1, L2 y L3 pasaron el 20 de octubre de 2026:** acceso correcto en el Moto G35; rechazo de credenciales ficticias, persistencia al reabrir y retorno a Login al cerrar sesión en el HONOR. **P1–P7 se repitieron en los dos teléfonos con el build actual con Login el mismo día**; los resultados están en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). No se guardaron capturas nuevas de esas verificaciones.
 
-El build con la configuración Firebase local se compiló correctamente y pasó `testDebugUnitTest`. Luego se validó L1 en el Moto G35 y la regresión P1–P7 en Moto G35 y HONOR; L2 y L3 siguen pendientes.
+El build con la configuración Firebase local se compiló correctamente y pasó `testDebugUnitTest`. Luego se validaron L1–L3 y la regresión P1–P7 en Moto G35 y HONOR.
 
 ## Hito 0: antecedente confirmado por el estudiante
 
@@ -40,6 +40,7 @@ En la prueba inicial del 18 de octubre, P7 se ejecutó con POST_NOTIFICATIONS de
 | `testDebugUnitTest` de la implementación IoT anterior al Login | Correcto: 7 pruebas, 0 errores y 0 fallos (parser, cifrado y ventana fija) |
 | `testDebugUnitTest assembleDebug` con Login y configuración Firebase local (20-oct-2026) | `BUILD SUCCESSFUL`; siete pruebas unitarias pasaron |
 | L1 — Autenticación Firebase válida en Moto G35 (20-oct-2026) | Pasó: Firebase emitió el evento de sesión y la app abrió Conexión; sin excepción de la app en los registros revisados |
+| L2/L3 — Rechazo de credenciales, persistencia y cierre de sesión en HONOR (20-oct-2026) | Pasaron: mensaje de error visible sin cierre; sesión persistió tras reabrir; Cerrar sesión retornó a Login |
 | `assembleDebug` después de refrescar la IP del Nodo, versión IoT anterior | `BUILD SUCCESSFUL`; APK anterior de 11.061.471 bytes |
 | SHA-256 de la APK IoT anterior al Login | `3F7A81C594962EF67133713CF809E87626904B4FA19B2C3820F44C9CBE36BBA4` |
 | APK de Login integrada sin Firebase | 13.593.601 bytes; SHA-256 `15994A8F6A3F58776E25C5E2CD5C8225CF845EC34273D80F0ECB4B271F21194B` |

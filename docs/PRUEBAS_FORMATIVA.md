@@ -4,13 +4,13 @@
 
 ### Login Formativo (retroalimentación posterior del profesor)
 
-Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. El proyecto Android Firebase y `app/google-services.json` están configurados localmente; Email/Password está habilitado y la compilación con esa configuración y las siete pruebas unitarias pasaron. **L1 pasó en el Moto G35:** Firebase aceptó la cuenta de prueba y se abrió Conexión; el registro del dispositivo confirmó el evento de autenticación y no mostró excepciones de la app. No se guardó una captura de esta prueba. L2 y L3 siguen pendientes. **P1–P7 se repitieron el 20 de octubre de 2026 con el build que incluye Login** en los mismos dos teléfonos; los resultados de esa regresión están en la tabla siguiente. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
+Se incorporó la pantalla de Login con usuario/correo y contraseña y la autenticación mediante Firebase Authentication Email/Password. El proyecto Android Firebase y `app/google-services.json` están configurados localmente; Email/Password está habilitado y la compilación con esa configuración y las siete pruebas unitarias pasaron. **L1 pasó en el Moto G35; L2 y L3 pasaron en el HONOR** y están detallados en la tabla siguiente. No se guardaron capturas nuevas de estas comprobaciones. **P1–P7 se repitieron el 20 de octubre de 2026 con el build que incluye Login** en los mismos dos teléfonos. Pasos en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
 
 | Caso | Resultado esperado | Resultado real | Evidencia |
 |---|---|---|---|
 | L1 — Login con credenciales válidas | Firebase autentica al usuario y abre Conexión. | **PASÓ, 20-oct-2026:** en Moto G35 Firebase autenticó la cuenta de prueba y la app mostró Conexión; el proceso siguió activo sin excepciones. | Comprobación directa de pantalla y registro FirebaseAuth del dispositivo; no se archivó captura. |
-| L2 — Credenciales inválidas | Mostrar error legible, permanecer en Login y no cerrar la app. | **PENDIENTE:** no se probó un acceso rechazado. | Registrar después de probar en teléfono. |
-| L3 — Sesión y cierre | Una sesión válida abre Conexión al volver a abrir; Cerrar sesión retorna a Login. | **PENDIENTE:** no se probó persistencia al reabrir ni el botón Cerrar sesión. | Registrar después de probar en teléfono. |
+| L2 — Credenciales inválidas | Mostrar error legible, permanecer en Login y no cerrar la app. | **PASÓ, 20-oct-2026:** con un correo ficticio y una contraseña de prueba no válida, Firebase rechazó el acceso y la app mostró “Usuario o contraseña incorrectos” sin cerrarse. No se usaron ni registraron las credenciales reales. | Observado en el HONOR; no se guardó captura. |
+| L3 — Sesión y cierre | Una sesión válida abre Conexión al volver a abrir; Cerrar sesión retorna a Login. | **PASÓ, 20-oct-2026:** después de forzar el cierre y volver a abrir, la sesión Firebase ya iniciada siguió activa y mostró Conexión. Luego, “Cerrar sesión” retornó correctamente a Login. | Observado en el HONOR; no se guardó captura. |
 
 ### Regresión física P1–P7 con Login — 20 de octubre de 2026
 

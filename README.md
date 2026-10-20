@@ -1,12 +1,12 @@
 # Comedero IoT — Unidad 2 Formativa
 
-**Estado: implementación IoT de Hitos 0–4 verificada en dos teléfonos; Login Firebase integrado y probado con credenciales válidas en un Moto G35.** `app/google-services.json` está configurado localmente y se excluye de GitHub. La compilación con esa configuración y las siete pruebas unitarias pasaron. P1–P7 se repitieron el 20 de octubre de 2026 con el build que incluye Login; L2 (credenciales inválidas) y L3 (persistencia/cierre de sesión) siguen pendientes.
+**Estado: implementación IoT de Hitos 0–4 y Login Firebase verificados en dos teléfonos.** `app/google-services.json` está configurado localmente y se excluye de GitHub. La compilación con esa configuración y las siete pruebas unitarias pasaron. L1–L3 y P1–P7 se probaron el 20 de octubre de 2026; resultados y límites están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md).
 
 La app contiene Login con Firebase Authentication, Conexión, Nodo IoT y Panel de control, comunicación Wi-Fi TCP, cifrado AES-GCM, lógica de rasguños y entrega, y notificaciones locales. La guía considera Hitos 0–4 parte de la Formativa. El profesor aprobó la revisión previa a Hito 3 con el comentario «está perfecto Marcelo», según la captura compartida por el estudiante. La aprobación se registra sin incluir su captura de WhatsApp ni datos personales.
 
 En el ciclo inicial se probó la versión IoT en un Moto G35 (Nodo) y un HONOR RBN-NX3 (Panel), ambos conectados a la misma Wi-Fi local. Las capturas de ese ciclo permanecen en el repositorio. El 20 de octubre se repitieron P1–P7 con el build actual que incluye Login; esa regresión se observó en ambos teléfonos, pero no se guardaron capturas nuevas. Ver [verificación](docs/VERIFICACION_BASE.md), [resultados P1–P7 y Login](docs/PRUEBAS_FORMATIVA.md) y [capturas físicas históricas](docs/evidencia/README.md).
 
-La variante actual con `google-services.json` local compila con `testDebugUnitTest assembleDebug` y pasan las 7 pruebas unitarias. El Login autenticó correctamente la cuenta de prueba en el Moto G35 y abrió Conexión. L2 y L3 siguen pendientes; los resultados y límites de la regresión física actual están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIVA.md).
+La variante actual con `google-services.json` local compila con `testDebugUnitTest assembleDebug` y pasan las 7 pruebas unitarias. L1–L3 se comprobaron físicamente: acceso válido, rechazo con error legible, persistencia de sesión y cierre de sesión.
 
 ## Problemática
 
@@ -126,7 +126,7 @@ El repositorio GitHub del proyecto es [Evaluación Formativa N°2 IoT](https://g
 
 ## Login Formativo y decisiones futuras de Sumativa
 
-Por la retroalimentación del profesor, el Login con **Firebase Authentication (correo y contraseña)** se incorpora como excepción solicitada para la Formativa. La app Android está registrada, Email/Password está habilitado y `app/google-services.json` está configurado localmente. El 20 de octubre de 2026 se probó el acceso válido en un Moto G35 y se abrió Conexión. P1–P7 se repitieron con Login en dos teléfonos; siguen pendientes la prueba de credenciales inválidas y el cierre/persistencia de sesión. El archivo JSON y las contraseñas no se suben a GitHub.
+Por la retroalimentación del profesor, el Login con **Firebase Authentication (correo y contraseña)** se incorpora como excepción solicitada para la Formativa. La app Android está registrada, Email/Password está habilitado y `app/google-services.json` está configurado localmente. El 20 de octubre de 2026 pasaron L1–L3 y P1–P7 en los dos teléfonos. El archivo JSON y las contraseñas no se suben a GitHub.
 
 **Cloud Firestore** para almacenar lecturas, el registro de usuarios dentro de la app, historial y las mejoras indicadas por el profesor permanecen para la Sumativa. No se implementan en esta versión. También quedan para Sumativa el latido en ambas direcciones, la protección anti-repetición con secuencia, un código/sal más robusto y la trazabilidad explícita de controles ISO/OT.
 

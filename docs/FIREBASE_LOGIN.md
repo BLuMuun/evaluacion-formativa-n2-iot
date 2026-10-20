@@ -39,6 +39,6 @@ El Login deja entrar solo después de una autenticación exitosa. Si no existe l
 
 ## Alcance y validación
 
-La integración compiló correctamente con la configuración Firebase local y Email/Password está habilitado. L1 (credenciales válidas → Conexión) pasó en un Moto G35 el 20 de octubre de 2026. L2 (credenciales inválidas) y L3 (persistencia y cierre de sesión) siguen pendientes. P1–P7 se repitieron en dos teléfonos con el build que incluye Login el 20 de octubre de 2026; resultados y límites están en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md).
+La integración compiló correctamente con la configuración Firebase local y Email/Password está habilitado. L1 (credenciales válidas → Conexión) pasó en un Moto G35 el 20 de octubre de 2026. L2 pasó en el HONOR con credenciales ficticias: Firebase rechazó el acceso, mostró un error legible y la app permaneció en Login. L3 también pasó en el HONOR: la sesión persistió al cerrar/reabrir la app y el botón Cerrar sesión volvió a Login. P1–P7 se repitieron en dos teléfonos con el build que incluye Login el 20 de octubre de 2026; resultados y límites están en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). No se guardaron credenciales ni capturas nuevas de estas verificaciones.
 
 Referencias oficiales: [Configurar Firebase en Android](https://firebase.google.com/docs/android/setup) y [autenticación con correo y contraseña](https://firebase.google.com/docs/auth/android/password-auth).

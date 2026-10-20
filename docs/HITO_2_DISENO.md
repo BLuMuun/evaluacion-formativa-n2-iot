@@ -12,7 +12,7 @@ La cama y el comedero pueden estar en habitaciones distintas: Wi-Fi permite cubr
 
 El diseño de las pantallas IoT está en [mockup.md](mockup.md) y [mockup.svg](mockup.svg). Después de la aprobación se añadió Login como requisito Formativo por retroalimentación del profesor: Login → Conexión → Nodo o Panel; cerrar sesión retorna al Login.
 
-El diseño original aprobado comenzaba en Conexión. La corrección posterior del profesor requiere que Login se muestre antes de entrar a la app. El Login usa Firebase Authentication Email/Password; no incorpora Firestore ni registro dentro de la app. El proyecto Android y `google-services.json` ya están configurados localmente y la app compila con ellos. El proveedor está habilitado y el acceso válido pasó en Moto G35; las pruebas de credenciales inválidas y persistencia/cierre de sesión siguen pendientes.
+El diseño original aprobado comenzaba en Conexión. La corrección posterior del profesor requiere que Login se muestre antes de entrar a la app. El Login usa Firebase Authentication Email/Password; no incorpora Firestore ni registro dentro de la app. El proyecto Android y `google-services.json` ya están configurados localmente y la app compila con ellos. El proveedor está habilitado y L1–L3 pasaron en teléfonos: acceso válido, rechazo con error visible, persistencia y cierre de sesión.
 
 ## Protocolo de aplicación
 
