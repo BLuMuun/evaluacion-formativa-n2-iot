@@ -1,8 +1,8 @@
 # PLAN_MVP — Comedero IoT · Unidad 2 Formativa
 
-Estado: Hitos 0–4 de la aplicación IoT están implementados; P1–P7 se probaron en dos teléfonos con el build anterior al Login. Por retroalimentación del profesor, se agregó a la Formativa una pantalla de Login integrada con Firebase Authentication. Falta que el estudiante cree/configure el proyecto Firebase, agregue `app/google-services.json` localmente y ejecute pruebas de acceso y regresión en teléfonos. El archivo de configuración no se publica. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
+Estado: Hitos 0–4 de la aplicación IoT están implementados; P1–P7 se probaron en dos teléfonos con el build anterior al Login. Por retroalimentación del profesor se añadió Login con Firebase Authentication. El proyecto y la app Android están registrados; `app/google-services.json` funciona localmente y no se publica. La compilación con Firebase y las siete pruebas unitarias pasaron. Falta habilitar Email/Password, crear una cuenta de prueba y probar Login y regresión en teléfonos. Repositorio: https://github.com/BLuMuun/evaluacion-formativa-n2-iot.
 
-El Login aún no puede autenticar hasta que exista configuración y una cuenta Firebase; además se deben repetir P1–P7 con la versión que ya exige Login. El detalle de preparación está en docs/FIREBASE_LOGIN.md y el registro de pruebas en docs/PRUEBAS_FORMATIVA.md.
+El Login aún no puede autenticar hasta habilitar el proveedor y crear una cuenta Firebase. P1–P7 también deben repetirse con la versión que ya exige Login. El detalle está en docs/FIREBASE_LOGIN.md y el registro en docs/PRUEBAS_FORMATIVA.md.
 
 ## 1. Resumen y alcance
 
@@ -24,10 +24,10 @@ Una app en dos teléfonos representa el Nodo (sensor y compuerta) y el Panel (mo
 | Permisos | INTERNET, ACCESS_NETWORK_STATE y POST_NOTIFICATIONS (solicitado desde API 33) |
 | Estado seguro | CERRADO, cancelar entrega y solicitud/contador a 0 al perder enlace |
 | Rasguños | Ventana fija de 5 s, tres confirma; extras ignorados hasta entrega correcta |
-| Login Formativo (pedido del profesor) | Firebase Authentication con proveedor Email/Password; requiere configuración local pendiente |
+| Login Formativo (pedido del profesor) | Firebase Authentication con Email/Password; proyecto y JSON local listos, proveedor/cuenta pendientes |
 | Sumativa futura | Cloud Firestore para lecturas; no implementado |
 
-Construcción fijada: AGP 8.13.2, Gradle 8.13, Kotlin/Compose compiler 2.2.21, Compose BOM 2025.12.00, Activity Compose 1.12.2, compileSdk/targetSdk 36 y bytecode Java/Kotlin 17. El mínimo continúa en 26.
+Construcción fijada: AGP 8.13.2, Gradle 8.13, Kotlin/Compose compiler 2.4.20, Firebase BoM 35.0.2, Compose BOM 2025.12.00, Activity Compose 1.12.2, compileSdk/targetSdk 36 y bytecode Java/Kotlin 17. Kotlin se actualizó para ser compatible con los metadatos de Firebase Authentication. El mínimo continúa en 26.
 
 ## 3. Arquitectura y protocolo
 
@@ -97,9 +97,10 @@ Cifrado, validación y P1–P7 verificados. Los casos unitarios comprueban mensa
 - [x] Crear pantalla de usuario (correo) y contraseña como primera pantalla.
 - [x] Integrar el acceso con Firebase Authentication; sin registro automático ni credenciales de prueba.
 - [x] Mantener `google-services.json` y contraseñas fuera del repositorio.
-- [ ] Crear proyecto Firebase y registrar Android package `cl.inacap.comederoiot`.
-- [ ] Habilitar Email/Password, crear cuenta de prueba y guardar `google-services.json` en `app/`.
-- [ ] Compilar e instalar con configuración Firebase, probar acceso correcto/incorrecto y cerrar sesión.
+- [x] Crear proyecto Firebase, registrar Android package `cl.inacap.comederoiot` y guardar `google-services.json` en `app/` localmente (ignorado por Git).
+- [ ] Habilitar Email/Password y crear una cuenta de prueba desde Firebase Console.
+- [x] Compilar con la configuración Firebase local: `testDebugUnitTest assembleDebug`, 7 pruebas unitarias aprobadas.
+- [ ] Instalar, probar acceso correcto/incorrecto y cerrar sesión en teléfonos.
 - [ ] Repetir P1–P7 con el APK que incluye Login.
 
 ## 5. Pruebas
@@ -113,7 +114,7 @@ La tabla y los pasos están en [docs/PRUEBAS_FORMATIVA.md](docs/PRUEBAS_FORMATIV
 | Herramientas y proyecto | 0, 1 | Hito 0 confirmado; versión Android de esa primera captura no registrada |
 | Problemática, F1–F5 | 1 | Revisión docente recibida; explicación oral del estudiante pendiente |
 | Medio, mensajes y mockup | 2 | Revisión docente recibida; explicación oral del estudiante pendiente |
-| Login | Ajuste profesor | Pantalla y puente Firebase implementados; configuración y prueba real pendientes |
+| Login | Ajuste profesor | Pantalla y puente implementados; falta habilitar proveedor y probar cuenta |
 | F1 sensor y F2 monitoreo | 3 | P1/P2 pasaron en versión anterior; repetir en APK con Login |
 | F3 entrega y ACK | 3 | P4 pasó; notificación local observada |
 | F4 notificaciones | 3 | P3/P4 pasaron con permiso concedido; P7 pasó con permiso denegado |

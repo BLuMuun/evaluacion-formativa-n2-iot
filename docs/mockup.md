@@ -86,6 +86,6 @@ Recibir 3 después de menos de 3 genera una sola notificación «El gato está s
 
 ## Navegación y avisos
 
-Login → Conexión → Nodo o Panel → Desconectar → Conexión. Cerrar sesión retorna al Login. No hay historial. Los avisos incluyen error de autenticación, configuración Firebase pendiente, código inválido, IP faltante, error de conexión, enlace perdido y notificaciones deshabilitadas. Negar notificaciones no impedirá conexión/control.
+Login → Conexión → Nodo o Panel → Desconectar → Conexión. Cerrar sesión retorna al Login. No hay historial. Los avisos incluyen error de autenticación, cuenta/proveedor Firebase pendiente, código inválido, IP faltante, error de conexión, enlace perdido y notificaciones deshabilitadas. Negar notificaciones no impedirá conexión/control.
 
 El SVG representa las tres pantallas y muestra los bloques condicionales de Conexión como alternativas de diseño. El texto xxx.xxx.xxx.xxx es un marcador de IP, no un valor real.

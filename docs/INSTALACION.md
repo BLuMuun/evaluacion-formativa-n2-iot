@@ -2,14 +2,14 @@
 
 La app Formativa usa un teléfono A como Nodo servidor y un teléfono B como Panel cliente. Instala el mismo APK de depuración en ambos. Se necesita Android 8.0/API 26 o superior y que los dos teléfonos compartan una red Wi-Fi local o hotspot que permita comunicación entre clientes.
 
-La aplicación ahora muestra Login antes de Conexión. Para entrar, primero configura Firebase siguiendo [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). Sin `app/google-services.json` válido, la app muestra instrucciones y mantiene deshabilitado el inicio de sesión.
+La aplicación ahora muestra Login antes de Conexión. El proyecto Android Firebase y `app/google-services.json` ya están configurados en el equipo del estudiante; el JSON se ignora en Git. Antes de iniciar sesión, habilita Email/Password y crea una cuenta de prueba siguiendo [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md).
 
 ## 1. Abrir y compilar en Android Studio
 
 1. Abre la carpeta raíz del repositorio con **Open** en Android Studio; no crees otro proyecto ni abras solo `app/`.
 2. En **Settings → Build, Execution, Deployment → Build Tools → Gradle**, selecciona el JDK integrado de Android Studio (JDK 21 funciona con esta configuración). El proyecto genera bytecode Java 17.
 3. En SDK Manager instala Android SDK Platform 36 y Android SDK Build-Tools. La ruta del SDK se guarda en `local.properties`, archivo local que no se publica.
-4. Configura Firebase según [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md), si vas a probar el Login. Sin el JSON, el proyecto aún puede compilar para revisar la interfaz, pero no podrá iniciar sesión ni entrar a Conexión.
+4. Conserva `app/google-services.json` localmente y completa el proveedor y la cuenta indicados en [FIREBASE_LOGIN.md](FIREBASE_LOGIN.md). Sin el JSON local el Login no podrá autenticar ni entrar a Conexión.
 5. Pulsa **Sync Project with Gradle Files** y espera `BUILD SUCCESSFUL`.
 6. Selecciona **Build → Make Project** o, en la terminal de Android Studio, ejecuta:
 
@@ -40,7 +40,7 @@ También puedes instalar el APK directamente:
 4. En A deja el rol **Nodo**, ingresa un código de seis dígitos y pulsa **Iniciar Nodo**. A muestra la IP local y queda esperando.
 5. En B elige **Panel**, escribe la IP mostrada por A y el mismo código de seis dígitos. Pulsa **Conectar**.
 6. Espera a que ambos indiquen **CONECTADO**. ACCESS_NETWORK_STATE se concede automáticamente como permiso normal y no muestra diálogo. Si Android 13 o superior muestra las notificaciones deshabilitadas, pulsa **Permitir notificaciones** y acepta para probar alertas; si lo niegas, la conexión debe seguir funcionando.
-7. Consulta los resultados y evidencias de P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). Esas pruebas se registraron en el build anterior al Login; repítelas con esta versión después de habilitar Firebase.
+7. Consulta los resultados y evidencias de P1–P7 en [PRUEBAS_FORMATIVA.md](PRUEBAS_FORMATIVA.md). Esas pruebas se registraron en el build anterior al Login; repítelas con esta versión después de validar el Login.
 
 ## 4. Ejecutar P1–P7
 

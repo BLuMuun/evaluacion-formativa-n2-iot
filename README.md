@@ -1,12 +1,12 @@
 # Comedero IoT — Unidad 2 Formativa
 
-**Estado: implementación IoT de Hitos 0–4 verificada; pantalla y acceso Firebase del Login incorporados según la retroalimentación docente.** El proyecto Firebase y `google-services.json` todavía no están configurados, por lo que el inicio de sesión real y la repetición de pruebas en el APK con Login quedan pendientes. Las P1–P7 se realizaron en dos teléfonos con la versión IoT anterior a esta integración.
+**Estado: implementación IoT de Hitos 0–4 verificada; Login Firebase integrado y proyecto Android registrado.** `app/google-services.json` está configurado localmente y se excluye de GitHub. La compilación con esa configuración y las siete pruebas unitarias pasaron. Falta habilitar Email/Password en Firebase Console, crear una cuenta de prueba y validar el acceso real; las P1–P7 se realizaron en dos teléfonos con la versión IoT anterior al Login.
 
 La app contiene Login con Firebase Authentication, Conexión, Nodo IoT y Panel de control, comunicación Wi-Fi TCP, cifrado AES-GCM, lógica de rasguños y entrega, y notificaciones locales. La guía considera Hitos 0–4 parte de la Formativa. El profesor aprobó la revisión previa a Hito 3 con el comentario «está perfecto Marcelo», según la captura compartida por el estudiante. La aprobación se registra sin incluir su captura de WhatsApp ni datos personales.
 
 La versión IoT anterior se instaló en un Moto G35 (Nodo) y un HONOR RBN-NX3 (Panel), ambos conectados a la misma red Wi-Fi local. Se verificaron conexión, monitoreo, alertas locales, entrega/ACK, código de vinculación distinto, pérdida del Panel y operación con notificaciones denegadas. P3 y P4 se repitieron después de P7; las capturas completas entregadas por el estudiante están en el repositorio. Ver [verificación](docs/VERIFICACION_BASE.md), [resultados P1–P7 y Login](docs/PRUEBAS_FORMATIVA.md) y [capturas físicas](docs/evidencia/README.md).
 
-La variante actual sin `google-services.json` compila y pasan las 7 pruebas unitarias existentes; permite revisar la pantalla de Login, pero muestra el aviso de configuración y no deja entrar a Conexión. Firebase real no está configurado. Las P1–P7 físicas registradas corresponden a la versión IoT anterior al Login; deben repetirse después de configurar Firebase.
+La variante actual con `google-services.json` local compila con `testDebugUnitTest assembleDebug` y pasan las 7 pruebas unitarias. Aún no se ha autenticado una cuenta en Firebase; por eso el Login y la regresión P1–P7 deben probarse en teléfonos después de habilitar el proveedor y crear una cuenta. Las P1–P7 físicas registradas corresponden a la versión IoT anterior al Login.
 
 ## Problemática
 
@@ -32,7 +32,7 @@ Unidad 2 Formativa: **Teléfono Nodo ↔ Wi-Fi TCP ↔ Teléfono Panel**. El Nod
 | Material 3 | Componentes, espaciado y tipografía coherentes con Android. |
 | Gradle Kotlin DSL | Configuración de construcción en Kotlin con versiones fijadas. |
 
-Base: package `cl.inacap.comederoiot`, minSdk 26, compileSdk/targetSdk 36, AGP 8.13.2, Gradle 8.13, Kotlin 2.2.21, Compose BOM 2025.12.00 y Activity Compose 1.12.2. Se utiliza el plugin Compose de la misma versión que Kotlin. La elección de API 36 sigue el ejemplo de la guía; el mínimo permanece en 26. [Compatibilidad oficial de AGP](https://developer.android.com/build/releases/agp-8-13-0-release-notes).
+Base: package `cl.inacap.comederoiot`, minSdk 26, compileSdk/targetSdk 36, AGP 8.13.2, Gradle 8.13, Kotlin 2.4.20, Compose BOM 2025.12.00 y Activity Compose 1.12.2. Se utiliza el plugin Compose de la misma versión que Kotlin. Kotlin se actualizó para leer los metadatos requeridos por la versión de Firebase Authentication recomendada actualmente. La elección de API 36 sigue el ejemplo de la guía; el mínimo permanece en 26. [Compatibilidad oficial de AGP](https://developer.android.com/build/releases/agp-8-13-0-release-notes).
 
 La conexión usa sockets nativos `java.net`; corrutinas mantienen la interfaz disponible durante lectura y entrega; `javax.crypto` implementa el cifrado; NotificationCompat entrega avisos locales.
 
@@ -81,7 +81,7 @@ LECTURA y ACK viajan del Nodo al Panel; CMD del Panel al Nodo. El Nodo reutiliza
 
 [Mockup textual y navegación](docs/mockup.md) · [Mockup SVG](docs/mockup.svg).
 
-Login con usuario/correo y contraseña se muestra primero. Firebase Authentication valida las credenciales; al iniciar sesión, Conexión permite elegir Nodo/Panel, muestra Wi-Fi y pide código de seis dígitos. Nodo muestra su IP; Panel pide la IP del Nodo. Nodo y Panel muestran enlace, contador y comedero. El Login requiere crear un proyecto Firebase y colocar `app/google-services.json` localmente; hasta entonces se presenta el aviso de configuración y no se permite entrar.
+Login con usuario/correo y contraseña se muestra primero. Firebase Authentication valida las credenciales; al iniciar sesión, Conexión permite elegir Nodo/Panel, muestra Wi-Fi y pide código de seis dígitos. Nodo muestra su IP; Panel pide la IP del Nodo. Nodo y Panel muestran enlace, contador y comedero. El proyecto Firebase y la app Android ya están registrados y el archivo `app/google-services.json` debe permanecer solo en el equipo local. Para usar el Login todavía falta habilitar Email/Password y crear una cuenta desde Firebase Console; las instrucciones están en [docs/FIREBASE_LOGIN.md](docs/FIREBASE_LOGIN.md).
 
 ## Seguridad
 
@@ -126,7 +126,7 @@ El repositorio GitHub del proyecto es [Evaluación Formativa N°2 IoT](https://g
 
 ## Login Formativo y decisiones futuras de Sumativa
 
-Por la retroalimentación del profesor, el Login con **Firebase Authentication (correo y contraseña)** se incorpora como excepción solicitada para la Formativa. El código está integrado, pero requiere un proyecto Firebase, habilitar el proveedor Email/Password, registrar al menos una cuenta y agregar `app/google-services.json` localmente. La guía paso a paso está en [docs/FIREBASE_LOGIN.md](docs/FIREBASE_LOGIN.md). No se sube ese archivo ni se incluyen contraseñas en GitHub. El inicio de sesión real y la regresión en teléfonos siguen pendientes hasta completar esa configuración.
+Por la retroalimentación del profesor, el Login con **Firebase Authentication (correo y contraseña)** se incorpora como excepción solicitada para la Formativa. La app Android está registrada, `app/google-services.json` está configurado localmente y la compilación funciona. Falta habilitar Email/Password, crear una cuenta de prueba y probar el acceso y la regresión en teléfonos. La guía está en [docs/FIREBASE_LOGIN.md](docs/FIREBASE_LOGIN.md). El archivo JSON y las contraseñas no se suben a GitHub.
 
 **Cloud Firestore** para almacenar lecturas, el registro de usuarios dentro de la app, historial y las mejoras indicadas por el profesor permanecen para la Sumativa. No se implementan en esta versión. También quedan para Sumativa el latido en ambas direcciones, la protección anti-repetición con secuencia, un código/sal más robusto y la trazabilidad explícita de controles ISO/OT.
 
